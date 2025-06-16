@@ -283,7 +283,7 @@ addLayer("p", {
 			},
 			43: {
 				title: "unicode器分裂vnicode",
-				description: "NET 加成增幅器效果。",
+				description: "NET 加成unicode器效果。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e11467":"e8888888").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && hasUpgrade("p", 33) },
 				pseudoReq: "需要: e10,000,000 字符",
@@ -333,13 +333,13 @@ b::::::b
                     
 */
 addLayer("b", {
-        name: "booster", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "B", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "unicode", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: U+", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#6e64c4",
+        color: "#4a4266",
         requires() { return new Decimal(200).times((player.b.unlockOrder&&!player.b.unlocked)?5000:1) }, // Can be a function that takes requirement increases into account
-        resource: "增幅器", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "unicode器", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
 		branches: ["p"],
@@ -354,7 +354,7 @@ addLayer("b", {
 		canBuyMax() { return hasMilestone("b", 1) },
         row: 1, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "b", description: "按 B 进行增幅器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "u", description: "按 U 进行unicode器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return player.p.unlocked},
 		automate() {},
@@ -421,27 +421,27 @@ addLayer("b", {
 			pseudoUpgs: [],
 			first: 0,
 			auto: false,
-		}},
+ Q		}},
 		autoPrestige() { return (hasMilestone("t", 3) && player.b.auto)&&player.ma.current!="b" },
 		increaseUnlockOrder: ["g"],
 		milestones: {
 			0: {
-				requirementDescription: "8 增幅器",
+				requirementDescription: "子串级福音--8 unicode器",
 				done() { return player.b.best.gte(8) || hasAchievement("a", 41) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留声望升级。",
+				effectDescription: "重置时保留子串级升级。",
 			},
 			1: {
-				requirementDescription: "15 增幅器",
+				requirementDescription: "破除UN硬上限--15 unicode器",
 				done() { return player.b.best.gte(15) || hasAchievement("a", 71) },
-				effectDescription: "允许最大购买增幅器。",
+				effectDescription: "允许最大购买unicode器。",
 			},
 		},
 		upgrades: {
 			rows: 3,
 			cols: 4,
 			11: {
-				title: "BP 连击",
-				description: "最多增幅器加成声望获取。",
+				title: "UT是一款U+T_",
+				description: "最多UN器加成子串级获取。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:3) },
 				effect() { 
 					let ret = player.b.best.sqrt().plus(1);
@@ -465,8 +465,8 @@ addLayer("b", {
 				},
 			},
 			12: {
-				title: "交叉污染",
-				description: "生成器加成增幅器底数。",
+				title: "现已加入键盘字符查找",
+				description: "键盘软垫加成UN器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1250:7) },
 				effect() {
 					let ret = player.g.points.add(1).log10().sqrt().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1);
@@ -484,8 +484,8 @@ addLayer("b", {
 				},
 			},
 			13: {
-				title: "PB 反转",
-				description: "总声望加成增幅器底数。",
+				title: "是TU不是UT",
+				description: "总子串级加成UN器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1436:8) },
 				effect() { 
 					let ret = player.p.total.add(1).log10().add(1).log10().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1) 
@@ -503,11 +503,11 @@ addLayer("b", {
 				},
 			},
 			14: {
-				title: "元连击",
-				description: "超级增幅器加成前三个增幅器升级，<b>BP 连击</b> 直接加成点数获取。",
+				title: "链条增幅",
+				description: "ACD器加成前三个UN器升级，<b>UT是一款U+T_</b> 直接加成点数获取。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2088:2250) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 13) },
-				pseudoReq: "需要: 30 超级增幅器。",
+				pseudoReq: "需要: 30 ACD器。",
 				pseudoCan() { return player.sb.points.gte(30) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.sb.points.plus(1) },
@@ -516,20 +516,20 @@ addLayer("b", {
 				style: {"font-size": "9px"},
 			},
 			21: {
-				title: "生成 Z^2",
-				description: "平方 GP 增益。",
+				title: "生成 K^2",
+				description: "平方 KBD 增益。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2000:9) },
 				unlocked() { return hasUpgrade("b", 11) && hasUpgrade("b", 12) },
 			},
 			22: {
-				title: "上到五楼",
-				description: "GP 效果提升至 1.2 次幂。",
+				title: "不再加成键盘了",
+				description: "KBD 效果提升至 1.2 次幂。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2075:15) },
 				unlocked() { return hasUpgrade("b", 12) && hasUpgrade("b", 13) },
 			},
 			23: {
-				title: "一折",
-				description: "点数降低增幅器价格。",
+				title: "降温",
+				description: "字符降低UN器价格。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2088:18) },
 				effect() { 
 					let ret = player.points.add(1).log10().add(1).pow(3.2);
@@ -542,11 +542,11 @@ addLayer("b", {
 				formula() { return "(log(x+1)+1)^"+(player.s.unlocked?format(buyableEffect("s", 14).times(3.2).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.5:1)):"3.2") },
 			},
 			24: {
-				title: "增幅递归",
-				description: "增幅器加成增幅器底数。",
+				title: "UN标志在UN库里",
+				description: "UN器加成UN器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:2225) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 23) },
-				pseudoReq: "需要: 无妖术下获得 2,150 增幅器",
+				pseudoReq: "需要: 无功率下获得 2,150 UN器",
 				pseudoCan() { return player.b.points.gte(2150) && player.m.hexes.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.b.points.plus(1).pow(500) },
@@ -554,8 +554,8 @@ addLayer("b", {
 				formula: "(x+1)^500",
 			},
 			31: {
-				title: "差的 BP 连击",
-				description: "超级增幅器加成声望获取。",
+				title: "削弱UN库",
+				description: "ACD器加成子串级获取。",
 				cost() { return tmp.h.costMult11b.times(103) },
 				unlocked() { return hasAchievement("a", 41) },
 				effect() { 
@@ -569,14 +569,14 @@ addLayer("b", {
 				},
 			},
 			32: {
-				title: "好的 BP 连击",
-				description() { return "<b>BP 连击</b> 使用更好的公式"+(tmp.nerdMode?" (sqrt(x+1) -> (1.125^x)*sqrt(x+1))":"")+"." },
+				title: "UN库膨胀",
+				description() { return "<b>UT是一款U+T_</b> 使用更好的公式"+(tmp.nerdMode?" (sqrt(x+1) -> (1.125^x)*sqrt(x+1))":"")+"." },
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:111) },
 				unlocked() { return hasAchievement("a", 41) },
 			},
 			33: {
-				title: "更更多添加物",
-				description: "超级增幅器加成 <b>更多添加物</b>。",
+				title: "加入IS的UN",
+				description: "ACD器加成 <b>数学的力量</b>。",
 				cost() { return tmp.h.costMult11b.times(118) },
 				unlocked() { return hasAchievement("a", 41) },
 				effect() { return player.sb.points.times(player.sb.points.gte(4)?2.6:2).plus(1).pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?3:1) },
@@ -589,11 +589,11 @@ addLayer("b", {
 				},
 			},
 			34: {
-				title: "不可度量",
-				description: "夸张地加成 <b>声望增益</b> 至指数（不受软上限影响）。",
+				title: "好大",
+				description: "夸张地加成 <b>子串级增益</b> 至指数（不受软上限影响）。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2021:2275) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 33) },
-				pseudoReq: "需要: 1e15,000,000 声望在 <b>减产</b> 障碍中.",
+				pseudoReq: "需要: 1e15,000,000 子串级在 <b>字符丢失</b> 障碍中.",
 				pseudoCan() { return player.p.points.gte("e1.5e7") && inChallenge("h", 42) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.i.points.plus(1).root(4) },
@@ -630,13 +630,13 @@ g:::::gg   gg:::::g
        gggggg       
 */
 addLayer("g", {
-        name: "generator", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "G", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "KEYborad", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "Kg-", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         color: "#a3d9a5",
         requires() { return new Decimal(200).times((player.g.unlockOrder&&!player.g.unlocked)?5000:1) }, // Can be a function that takes requirement increases into account
-        resource: "生成器", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "键盘软垫", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
 		branches: ["p"],
@@ -651,7 +651,7 @@ addLayer("g", {
 		canBuyMax() { return hasMilestone("g", 2) },
         row: 1, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "g", description: "按 G 进行生成器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "K", description: "按 K 进行键盘软垫重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return player.p.unlocked},
 		automate() {},
@@ -686,7 +686,7 @@ addLayer("g", {
 			return eff;
 		},
 		effectDescription() {
-			return "生成 "+format(tmp.g.effect)+" GP/sec"+(tmp.nerdMode?(inChallenge("ne", 11)?"\n (禁用)":("\n (每个 "+format(tmp.g.effBase)+"x)")):"")
+			return "生成 "+format(tmp.g.effect)+" KBD/sec"+(tmp.nerdMode?(inChallenge("ne", 11)?"\n (禁用)":("\n (每个 "+format(tmp.g.effBase)+"x)")):"")
 		},
 		extraAmtDisplay() {
 			if (tmp.sg.spectralTotal.eq(0)) return "";
@@ -735,11 +735,11 @@ addLayer("g", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.g.power) + ' GP，增幅点数获取 '+format(tmp.g.powerEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(tmp.g.powerExp)+")":"")},
+				function() {return '你有 ' + format(player.g.power) + ' KBD，增幅字符获取 '+format(tmp.g.powerEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(tmp.g.powerExp)+")":"")},
 					{}],
 			"blank",
 			["display-text",
-				function() {return '你最多拥有 ' + formatWhole(player.g.best) + ' 生成器<br>你总共拥有 '+formatWhole(player.g.total)+" 生成器"},
+				function() {return '你最多拥有 ' + formatWhole(player.g.best) + ' 键盘软垫<br>你总共拥有 '+formatWhole(player.g.total)+" 键盘软垫"},
 					{}],
 			"blank",
 			"milestones", "blank", "blank", "upgrades"],
@@ -1014,10 +1014,10 @@ addLayer("t", {
 			pseudoUpgs: [],
 			autoExt: false,
         }},
-        color: "#006609",
+        color: "#57ffc0",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
         resource: "时间胶囊", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?new Decimal(1.4):new Decimal(1.85) }, // Prestige currency exponent
@@ -1432,8 +1432,8 @@ e::::::::e
                     
 */
 addLayer("e", {
-        name: "enhance", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "E", // This appears on the layer's node. Default is the id with the first letter capitalized
+    name: "int secnt", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "IS", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -1444,7 +1444,7 @@ addLayer("e", {
 			auto: false,
 			pseudoUpgs: [],
         }},
-        color: "#b82fbd",
+        color: "#2bf7ff",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
         resource: "增强", // Name of prestige currency
         baseResource: "点数	", // Name of resource prestige is based on
@@ -1524,8 +1524,8 @@ addLayer("e", {
 				unlocked() { return hasUpgrade("e", 11) },
 			},
 			14: {
-				title: "更多添加物",
-				description: "对于增幅器和生成器底数的任何增幅器和生成器升级效果 x4。",
+				title: "数学的力量",
+				description: "对于UN器和键软底数的任何UN器和键软升级效果 x4。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":3e23) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() {
@@ -1743,7 +1743,7 @@ addLayer("s", {
 			autoBld: false,
 			pseudoUpgs: [],
         }},
-        color: "#dfdfdf",
+        color: "#c7ffdf",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
         resource: "空间能量", // Name of prestige currency
         baseResource: "点数", // Name of resource prestige is based on
