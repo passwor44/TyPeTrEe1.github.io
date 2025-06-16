@@ -27,13 +27,13 @@ ppppppppp
 */
 
 addLayer("p", {
-        name: "prestige", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "P", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "type", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "T_", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#31aeb0",
+        color: "#9dff4e",
         requires: new Decimal(10), // Can be a function that takes requirement increases into account
-        resource: "声望", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "子串级", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?0.75:0.5 }, // Prestige currency exponent
@@ -60,7 +60,7 @@ addLayer("p", {
         },
         row: 0, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "p", description: "按 P 进行声望重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "t", description: "按 T 进行子串级重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return true},
 		passiveGeneration() { return (hasMilestone("g", 1)&&player.ma.current!="p")?1:0 },
@@ -86,13 +86,13 @@ addLayer("p", {
 			rows: 4,
 			cols: 4,
 			11: {
-				title: "开始",
-				description: "每秒获得 1 点数。",
+				title: "才学会打字？",
+				description: "每秒获得 1 字符。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2:1).pow(tmp.h.costExp11) },
 			},
 			12: {
-				title: "声望增益",
-				description: "声望加成点数获取。",
+				title: "子串级增益",
+				description: "子串级加成字符获取。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?10:1).pow(tmp.h.costExp11) },
 				effect() {
 					if (inChallenge("ne", 11)) return new Decimal(1);
@@ -131,8 +131,8 @@ addLayer("p", {
 				},
 			},
 			13: {
-				title: "自协同",
-				description: "点数加成点数获取。",
+				title: "他会自己增加",
+				description: "字符加成字符获取。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?50:5).pow(tmp.h.costExp11) },
 				effect() { 
 					let eff = player.points.plus(1).log10().pow(0.75).plus(1);
@@ -154,23 +154,23 @@ addLayer("p", {
 				},
 			},
 			14: {
-				title: "声望强度",
-				description: "<b>声望增益</b> 效果提升至立方（不受软上限影响）。",
+				title: "我们不叫增益树",
+				description: "<b>子串级增益</b> 效果提升至立方（不受软上限影响）。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e589":"1e4070000").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && hasUpgrade("p", 13) },
-				pseudoReq: '需要: 在 "减产" 中达到 1e168,000 声望',
+				pseudoReq: '需要: 在 "字符丢失" 中达到 1e168,000 子串级',
 				pseudoCan() { return player.p.points.gte("1e168000")&&inChallenge("h", 42) },
 				unlocked() { return player.p.pseudoUpgs.includes(Number(this.id)) },
 			},
 			21: {
-				title: "更多声望",
-				description() { return "声望获取增加了 "+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e52":"80")+"%。" },
+				title: "更多子串级",
+				description() { return "子串级获取增加了 "+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e52":"80")+"%。" },
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e171:20).pow(tmp.h.costExp11) },
 				unlocked() { return hasAchievement("a", 21)&&hasUpgrade("p", 11) },
 			},
 			22: {
-				title: "力量升级",
-				description: "点数获取基于你已购买的声望升级更快。",
+				title: "录入type",
+				description: "字符获取基于你已购买的子串级升级更快。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e262:75).pow(tmp.h.costExp11) },
 				effect() {
 					let eff = Decimal.pow(1.4, player.p.upgrades.length);
@@ -191,8 +191,8 @@ addLayer("p", {
 				},
 			},
 			23: {
-				title: "反转声望增益",
-				description: "点数加成声望获取。",
+				title: "反了！！！",
+				description: "字符加成子串级获取。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e305:5e3).pow(tmp.h.costExp11) },
 				effect() {
 					let eff = player.points.plus(1).log10().cbrt().plus(1);
@@ -214,30 +214,30 @@ addLayer("p", {
 				},
 			},
 			24: {
-				title: "质能",
-				description: "差旋层电浆效果使用更好的公式 (log(log(x+1)+1)*10+1 -> 10^cbrt(log(x+1)))。",
+				title: "能量爆炸",
+				description: "地址电层效果使用更好的公式 (log(log(x+1)+1)*10+1 -> 10^cbrt(log(x+1)))。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e11435":"e5070000").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && (hasUpgrade("p", 14)||hasUpgrade("p", 23)) },
-				pseudoReq: "需要: 41,250 恶魂（无幽灵）",
+				pseudoReq: "需要: 41,250 电压（无电阻）",
 				pseudoCan() { return player.ps.souls.gte(41250) && player.ps.buyables[11].eq(0) },
 				unlocked() { return player.p.pseudoUpgs.includes(Number(this.id)) },
 				style: {"font-size": "9px" },
 			},
 			31: {
-				title: "我们需要更多声望",
-				description: "声望获取提升至 1.05 次幂。",
+				title: "子串级up",
+				description: "子串级获取提升至 1.05 次幂。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e316":1e45).pow(tmp.h.costExp11) },
 				unlocked() { return hasAchievement("a", 23)&&hasUpgrade("p", 21) },
 			},
 			32: {
-				title: "仍旧无用",
-				description: "平方 <b>力量升级</b> 效果。",
+				title: "证明他有用",
+				description: "平方 <b>录入type</b> 效果。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e355":1e56).pow(tmp.h.costExp11) },
 				unlocked() { return hasAchievement("a", 23)&&hasUpgrade("p", 22) },
 			},
 			33: {
-				title: "列长",
-				description: "总声望加成上面两个升级的效果",
+				title: "type连坐制",
+				description: "总子串级加成上面两个升级的效果",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e436":1e60).pow(tmp.h.costExp11) },
 				effect() { return player.p.total.plus(1).log10().plus(1).log10().div(5).plus(1).times(hasUpgrade("hn", 33) ? upgradeEffect("hn", 33) : 1) },
 				unlocked() { return hasAchievement("a", 23)&&hasUpgrade("p", 23) },
@@ -245,8 +245,8 @@ addLayer("p", {
 				formula() { return hasUpgrade("hn", 33) ? ("(log(log(x+1)+1)/5+1)*"+format(upgradeEffect("hn", 33))) : "log(log(x+1)+1)/5+1" },
 			},
 			34: {
-				title: "阳光潜能",
-				description: "阳光加成阳光获取。",
+				title: "能量复用",
+				description: "能量加成能量获取。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e11467":"ee7").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && (hasUpgrade("p", 24)||hasUpgrade("p", 33)) },
 				pseudoReq: "需要: 30 成就",
@@ -257,11 +257,11 @@ addLayer("p", {
 				formula: "log(log(log(x+1)+1)+1)+1",
 			},
 			41: {
-				title: "声望递归",
-				description: "声望加成声望获取。",
+				title: "这是里程碑吗",
+				description: "子串级加成子串级获取。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e9570":"1e4460000").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && hasUpgrade("p", 31) },
-				pseudoReq: "需要: 25 总荣耀",
+				pseudoReq: "需要: 25 总文本",
 				pseudoCan() { return player.hn.total.gte(25) },
 				unlocked() { return player.p.pseudoUpgs.includes(Number(this.id)) },
 				effect() { 
@@ -273,29 +273,29 @@ addLayer("p", {
 				formula() { return "10^(log(x+1)^0.8)"+(hasUpgrade("hn", 41)?("^"+format(upgradeEffect("hn", 41))):"") },
 			},
 			42: {
-				title: "空间感知",
-				description: "建筑价格减缓 50%。",
+				title: "一路顺风",
+				description: "ROM通道价格减缓 50%。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e11445":"e5960000").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && hasUpgrade("p", 32) },
-				pseudoReq: "需要: 1e100 阳光",
+				pseudoReq: "需要: 1e100 能量",
 				pseudoCan() { return player.o.points.gte(1e100) },
 				unlocked() { return player.p.pseudoUpgs.includes(Number(this.id)) },
 			},
 			43: {
-				title: "增幅器潜能",
-				description: "QE 加成增幅器效果。",
+				title: "unicode器分裂vnicode",
+				description: "NET 加成增幅器效果。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e11467":"e8888888").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && hasUpgrade("p", 33) },
-				pseudoReq: "需要: e10,000,000 点数",
+				pseudoReq: "需要: e10,000,000 字符",
 				pseudoCan() { return player.points.gte("ee7") },
 				unlocked() { return player.p.pseudoUpgs.includes(Number(this.id)) },
 			},
 			44: {
-				title: "法术词典",
-				description: "增幅器推迟前两个魔法的软上限。",
+				title: "字符大SC",
+				description: "unicode器推迟前两个功率的软上限。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e11456":"e6500000").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && hasUpgrade("p", 33) },
-				pseudoReq: "需要: 150,000 第一建筑",
+				pseudoReq: "需要: 150,000 第一ROM通道",
 				pseudoCan() { return player.s.buyables[11].gte(1.5e5) },
 				unlocked() { return player.p.pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.b.points.plus(1).pow(3) },
