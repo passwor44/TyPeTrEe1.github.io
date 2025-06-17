@@ -516,20 +516,20 @@ addLayer("b", {
 				style: {"font-size": "9px"},
 			},
 			21: {
-				title: "生成 Z^2",
-				description: "平方 GP 增益。",
+				title: "键盘双押",
+				description: "平方 KP 增益。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2000:9) },
 				unlocked() { return hasUpgrade("b", 11) && hasUpgrade("b", 12) },
 			},
 			22: {
-				title: "上到五楼",
+				title: "",
 				description: "GP 效果提升至 1.2 次幂。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2075:15) },
 				unlocked() { return hasUpgrade("b", 12) && hasUpgrade("b", 13) },
 			},
 			23: {
-				title: "一折",
-				description: "点数降低增幅器价格。",
+				title: "UN扩展符",
+				description: "字符降低UN器价格。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2088:18) },
 				effect() { 
 					let ret = player.points.add(1).log10().add(1).pow(3.2);
@@ -542,11 +542,11 @@ addLayer("b", {
 				formula() { return "(log(x+1)+1)^"+(player.s.unlocked?format(buyableEffect("s", 14).times(3.2).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.5:1)):"3.2") },
 			},
 			24: {
-				title: "增幅递归",
-				description: "增幅器加成增幅器底数。",
+				title: "UN+UN",
+				description: "UN器加成UN器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:2225) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 23) },
-				pseudoReq: "需要: 无妖术下获得 2,150 增幅器",
+				pseudoReq: "需要: 无妖术下获得 2,150 UN器",
 				pseudoCan() { return player.b.points.gte(2150) && player.m.hexes.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.b.points.plus(1).pow(500) },
@@ -651,7 +651,7 @@ addLayer("g", {
 		canBuyMax() { return hasMilestone("g", 2) },
         row: 1, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "g", description: "按 G 进行键盘软垫重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "k", description: "按 k 进行键盘软垫重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return player.p.unlocked},
 		automate() {},
@@ -867,7 +867,7 @@ addLayer("g", {
 				formula: "(x+1)^0.25",
 			},
 			23: {
-				title: "双重反转",
+				title: "",
 				description: "增幅器加成 <b>反转声望增益</b> 效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"2e47525":1e12) },
 				currencyDisplayName: "GP",
