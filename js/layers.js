@@ -30,7 +30,7 @@ addLayer("p", {
         name: "type", // This is optional, only used in a few places, If absent it just uses the layer id.
         symbol: "T_", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#9dff4e",
+        color: "#36ff9b",
         requires: new Decimal(10), // Can be a function that takes requirement increases into account
         resource: "子串级", // Name of prestige currency
         baseResource: "字符", // Name of resource prestige is based on
