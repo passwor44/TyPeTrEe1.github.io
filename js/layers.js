@@ -30,7 +30,7 @@ addLayer("p", {
         name: "type", // This is optional, only used in a few places, If absent it just uses the layer id.
         symbol: "T_", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#9dff4e",
+        color: "#52ffa3",
         requires: new Decimal(10), // Can be a function that takes requirement increases into account
         resource: "子串级", // Name of prestige currency
         baseResource: "字符", // Name of resource prestige is based on
@@ -2849,7 +2849,7 @@ h:::::h
 */
 addLayer("h", {
         name: "hindrance", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "H", // This appears on the layer's node. Default is the id with the first letter capitalized
+        symbol: "ER", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -2859,7 +2859,7 @@ addLayer("h", {
 			first: 0,
 			auto: false,
         }},
-        color: "#a14040",
+        color: "#58a7ff",
         requires: new Decimal(1e30), // Can be a function that takes requirement increases into account
         resource: "障碍灵魂", // Name of prestige currency
         baseResource: "TE", // Name of resource prestige is based on
@@ -4221,7 +4221,7 @@ addLayer("ss", {
 			auto: false,
 			first: 0,
         }},
-        color: "#e8ffff",
+        color: "#2814ff",
         requires() { return new Decimal((player[this.layer].unlockOrder>0&&!hasAchievement("a", 62))?30:28) }, // Can be a function that takes requirement increases into account
 		roundUpCost: true,
         resource: "子空间能量", // Name of prestige currency
