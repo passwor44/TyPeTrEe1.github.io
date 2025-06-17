@@ -313,7 +313,7 @@ function completeChallenge(layer, x) {
 	updateChallengeTemp(layer)
 }
 
-VERSION.withoutName = "v" + VERSION.num + (VERSION.pre ? (" Pre-Release " + VERSION.pre) : VERSION.beta ? (" Beta " + VERSION.beta) : "") + (VERSION.patch ? (" 补丁 "+VERSION.patch) : "")
+VERSION.withoutName = VERSION.num + (VERSION.pre ? (" Pre-Release " + VERSION.pre) : VERSION.beta ? (" Beta " + VERSION.beta) : "") + (VERSION.patch ? (" 补丁 "+VERSION.patch) : "")
 VERSION.withName = VERSION.withoutName + (VERSION.name ? ": " + VERSION.name : "")
 
 
