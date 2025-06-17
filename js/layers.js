@@ -30,7 +30,7 @@ addLayer("p", {
         name: "type", // This is optional, only used in a few places, If absent it just uses the layer id.
         symbol: "T_", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#36ff9b",
+        color: "#9dff4e",
         requires: new Decimal(10), // Can be a function that takes requirement increases into account
         resource: "子串级", // Name of prestige currency
         baseResource: "字符", // Name of resource prestige is based on
@@ -554,8 +554,8 @@ addLayer("b", {
 				formula: "(x+1)^500",
 			},
 			31: {
-				title: "差的 BP 连击",
-				description: "超级增幅器加成声望获取。",
+				title: "ACD字符",
+				description: "ACD器加成子串级获取。",
 				cost() { return tmp.h.costMult11b.times(103) },
 				unlocked() { return hasAchievement("a", 41) },
 				effect() { 
@@ -569,8 +569,8 @@ addLayer("b", {
 				},
 			},
 			32: {
-				title: "好的 BP 连击",
-				description() { return "<b>BP 连击</b> 使用更好的公式"+(tmp.nerdMode?" (sqrt(x+1) -> (1.125^x)*sqrt(x+1))":"")+"." },
+				title: "重拳出击",
+				description() { return "<b>查找字符串</b> 使用更好的公式"+(tmp.nerdMode?" (sqrt(x+1) -> (1.125^x)*sqrt(x+1))":"")+"." },
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:111) },
 				unlocked() { return hasAchievement("a", 41) },
 			},
@@ -589,8 +589,8 @@ addLayer("b", {
 				},
 			},
 			34: {
-				title: "不可度量",
-				description: "夸张地加成 <b>声望增益</b> 至指数（不受软上限影响）。",
+				title: "分支子串级",
+				description: "夸张地加成 <b>子串级增益</b> 至指数（不受软上限影响）。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2021:2275) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 33) },
 				pseudoReq: "需要: 1e15,000,000 声望在 <b>减产</b> 障碍中.",
@@ -633,7 +633,7 @@ addLayer("g", {
         name: "KeyBoard", // This is optional, only used in a few places, If absent it just uses the layer id.
         symbol: "Kb-", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#a7ff85",
+        color: "#81ecff",
         requires() { return new Decimal(200).times((player.g.unlockOrder&&!player.g.unlocked)?5000:1) }, // Can be a function that takes requirement increases into account
         resource: "键盘软垫", // Name of prestige currency
         baseResource: "字符", // Name of resource prestige is based on
@@ -735,28 +735,28 @@ addLayer("g", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.g.power) + ' GP，增幅点数获取 '+format(tmp.g.powerEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(tmp.g.powerExp)+")":"")},
+				function() {return '你有 ' + format(player.g.power) + ' KP，增幅字符获取 '+format(tmp.g.powerEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(tmp.g.powerExp)+")":"")},
 					{}],
 			"blank",
 			["display-text",
-				function() {return '你最多拥有 ' + formatWhole(player.g.best) + ' 生成器<br>你总共拥有 '+formatWhole(player.g.total)+" 生成器"},
+				function() {return '你最多拥有 ' + formatWhole(player.g.best) + ' 键盘软垫<br>你总共拥有 '+formatWhole(player.g.total)+" 键盘软垫"},
 					{}],
 			"blank",
 			"milestones", "blank", "blank", "upgrades"],
 		increaseUnlockOrder: ["b"],
 		milestones: {
 			0: {
-				requirementDescription: "8 生成器",
+				requirementDescription: "无需输入--8 键盘软垫",
 				done() { return player.g.best.gte(8) || hasAchievement("a", 41) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留声望升级。",
+				effectDescription: "重置时保留子串级升级。",
 			},
 			1: {
-				requirementDescription: "10 生成器",
+				requirementDescription: "超级子串级--10 键盘软垫",
 				done() { return player.g.best.gte(10) || hasAchievement("a", 71) },
-				effectDescription: "每秒获得重置时能获得的 100% 的声望。",
+				effectDescription: "每秒获得重置时能获得的 100% 的子串级。",
 			},
 			2: {
-				requirementDescription: "15 生成器",
+				requirementDescription: "FASTER--15 生成器",
 				done() { return player.g.best.gte(15) || hasAchievement("a", 71) },
 				effectDescription: "允许最大购买生成器。",
 			},
@@ -765,8 +765,8 @@ addLayer("g", {
 			rows: 3,
 			cols: 5,
 			11: {
-				title: "GP 连击",
-				description: "最多生成器加成声望获取。",
+				title: "enter",
+				description: "最多键盘软垫加成声望获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?380:3) },
 				effect() { return player.g.best.sqrt().plus(1).pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?5e5:1) },
 				unlocked() { return player.g.unlocked },
@@ -774,8 +774,8 @@ addLayer("g", {
 				formula() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"(x+1)^250,000":"sqrt(x)+1" },
 			},
 			12: {
-				title: "给我更多！",
-				description: "增幅器加成生成器底数。",
+				title: "键盘更新",
+				description: "UN器加成键盘软垫底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?375:7) },
 				effect() { 
 					let ret = player.b.points.add(1).log10().sqrt().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1);
@@ -791,8 +791,8 @@ addLayer("g", {
 				},
 			},
 			13: {
-				title: "给我更多 II",
-				description: "最多声望加成生成器底数。",
+				title: "键盘OS",
+				description: "最多子串级加成键软底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?381:8) },
 				effect() { 
 					let ret = player.p.best.add(1).log10().add(1).log10().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1);
@@ -808,14 +808,14 @@ addLayer("g", {
 				},
 			},
 			14: {
-				title: "增益增益",
-				description() { return "<b>声望增益</b> 的效果提升至 1.5 次幂。" },
+				title: "软上限的用处在哪",
+				description() { return "<b>子串级增益</b> 的效果提升至 1.5 次幂。" },
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?378:13) },
 				unlocked() { return player.g.best.gte(10) },
 			},
 			15: {
-				title: "外部协同",
-				description: "生成器加成 <b>自协同</b> 效果。",
+				title: "自动机助推器",
+				description: "生成器加成 <b>他会自己增加</b> 效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?382:15) },
 				effect() { 
 					let eff = player.g.points.sqrt().add(1);
@@ -827,8 +827,8 @@ addLayer("g", {
 				formula() { return upgradeEffect("g", 15).gte(400)?"((x+1)^(1/6))*(400^(2/3))":"sqrt(x)+1" },
 			},
 			21: {
-				title: "给我更多 III",
-				description: "GP 加成 GP 获取。",
+				title: "重大更新",
+				description: "KP 加成 KP 获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e314":1e10) },
 				currencyDisplayName: "GP",
                 currencyInternalName: "power",
@@ -851,8 +851,8 @@ addLayer("g", {
 				},
 			},
 			22: {
-				title: "两折",
-				description: "声望降低生成器价格。",
+				title: "27字母",
+				description: "子串级降低键软价格。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"5e47141":1e11) },
 				currencyDisplayName: "GP",
                 currencyInternalName: "power",
