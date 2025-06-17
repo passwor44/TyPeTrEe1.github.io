@@ -333,8 +333,8 @@ b::::::b
                     
 */
 addLayer("b", {
-        name: "booster", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "B", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "unicode", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "U+", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         color: "#52ffc1",
         requires() { return new Decimal(200).times((player.b.unlockOrder&&!player.b.unlocked)?5000:1) }, // Can be a function that takes requirement increases into account
@@ -426,22 +426,22 @@ addLayer("b", {
 		increaseUnlockOrder: ["g"],
 		milestones: {
 			0: {
-				requirementDescription: "8 增幅器",
+				requirementDescription: "不再点击-8 UN器",
 				done() { return player.b.best.gte(8) || hasAchievement("a", 41) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留声望升级。",
+				effectDescription: "重置时保留子串级升级。",
 			},
 			1: {
-				requirementDescription: "15 增幅器",
+				requirementDescription: "购买更多-15 UN器",
 				done() { return player.b.best.gte(15) || hasAchievement("a", 71) },
-				effectDescription: "允许最大购买增幅器。",
+				effectDescription: "允许最大购买UN器。",
 			},
 		},
 		upgrades: {
 			rows: 3,
 			cols: 4,
 			11: {
-				title: "BP 连击",
-				description: "最多增幅器加成声望获取。",
+				title: "查找字符串",
+				description: "最多UN器加成子串级获取。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:3) },
 				effect() { 
 					let ret = player.b.best.sqrt().plus(1);
@@ -465,8 +465,8 @@ addLayer("b", {
 				},
 			},
 			12: {
-				title: "交叉污染",
-				description: "生成器加成增幅器底数。",
+				title: "键盘+UN=输入法",
+				description: "键盘软垫加成UN器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1250:7) },
 				effect() {
 					let ret = player.g.points.add(1).log10().sqrt().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1);
@@ -484,8 +484,8 @@ addLayer("b", {
 				},
 			},
 			13: {
-				title: "PB 反转",
-				description: "总声望加成增幅器底数。",
+				title: "扳回不平衡",
+				description: "总子串级加成UN器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1436:8) },
 				effect() { 
 					let ret = player.p.total.add(1).log10().add(1).log10().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1) 
@@ -503,11 +503,11 @@ addLayer("b", {
 				},
 			},
 			14: {
-				title: "元连击",
-				description: "超级增幅器加成前三个增幅器升级，<b>BP 连击</b> 直接加成点数获取。",
+				title: "ACD超元层",
+				description: "ACD器加成前三个UN器升级，<b>查找字符串</b> 直接加成点数获取。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2088:2250) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 13) },
-				pseudoReq: "需要: 30 超级增幅器。",
+				pseudoReq: "需要: 30 ACD器。",
 				pseudoCan() { return player.sb.points.gte(30) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.sb.points.plus(1) },
@@ -630,13 +630,13 @@ g:::::gg   gg:::::g
        gggggg       
 */
 addLayer("g", {
-        name: "generator", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "G", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "KeyBoard", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "Kb-", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#a3d9a5",
+        color: "#a7ff85",
         requires() { return new Decimal(200).times((player.g.unlockOrder&&!player.g.unlocked)?5000:1) }, // Can be a function that takes requirement increases into account
-        resource: "生成器", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "键盘软垫", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
 		branches: ["p"],
@@ -651,7 +651,7 @@ addLayer("g", {
 		canBuyMax() { return hasMilestone("g", 2) },
         row: 1, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "g", description: "按 G 进行生成器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "g", description: "按 G 进行键盘软垫重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return player.p.unlocked},
 		automate() {},
