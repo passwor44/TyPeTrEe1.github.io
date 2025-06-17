@@ -112,7 +112,7 @@ h1, h2, h3, b, input {
 
 
 .locked {
-	background-color: #bf8f8f;
+	background-color: #e3f2ff;
 	cursor: not-allowed;
 }
 
@@ -145,7 +145,7 @@ h1, h2, h3, b, input {
 }
 
 .bought {
-	background-color: #77bf5f;
+	background-color: #00aeff;
 	cursor: default;
 }
 
@@ -279,17 +279,17 @@ h1, h2, h3, b, input {
 	z-index: 7;
 }
 .achievement.bought {
-	box-shadow: inset 0px 0px 45px 45px rgba(119, 191, 95, 0.4), 0px 0px 1px 1px rgba(119, 191, 95, 0.4);
+	box-shadow: inset 0px 0px 45px 45px rgba(0, 174, 255, 0.4), 0px 0px 1px 1px rgba(0, 174, 255, 0.4);
 }
 .achievement.bought:hover {
-	box-shadow: inset 0px 0px 45px 45px rgba(119, 191, 95, 0.4), 0px 0px 10px rgb(119, 191, 95);
+	box-shadow: inset 0px 0px 45px 45px rgba(0, 174, 255, 0.4), 0px 0px 10px rgb(0, 174, 255);
 	z-index: 7;
 }
 .achievement.locked {
-	box-shadow: inset 0px 0px 45px 45px rgba(191, 143, 143, 0.4), 0px 0px 1px 1px rgba(191, 143, 143, 0.4);
+	box-shadow: inset 0px 0px 45px 45px rgba(206, 234, 255, 0.4), 0px 0px 1px 1px rgba(206, 234, 255, 0.4);
 }
 .achievement.locked:hover {
-	box-shadow: inset 0px 0px 45px 45px rgba(191, 143, 143, 0.4), 0px 0px 10px rgb(191, 143, 143);
+	box-shadow: inset 0px 0px 45px 45px rgba(206, 234, 255, 0.4), 0px 0px 10px rgb(206, 234, 255);
 	z-index: 7;
 }
 
@@ -356,13 +356,13 @@ h1, h2, h3, b, input {
 	width: 40px;
 	height: 40px;
 	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: #e0f000;
+	-webkit-text-stroke-color: #00f0ca;
 }
 
 #help:hover {
 	transform: scale(1.2, 1.2);
-	text-shadow: 5px 0px 10px #e0f000,
-              -3px 0px 12px #e0f000;
+	text-shadow: 5px 0px 10px #00f0ca,
+              -3px 0px 12px #00f0ca;
 }
 
 #info {
