@@ -1014,7 +1014,7 @@ addLayer("t", {
 			pseudoUpgs: [],
 			autoExt: false,
         }},
-        color: "#006609",
+        color: "#f1ffeb",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
         resource: "时间胶囊", // Name of prestige currency
         baseResource: "点数", // Name of resource prestige is based on
@@ -1432,8 +1432,8 @@ e::::::::e
                     
 */
 addLayer("e", {
-        name: "enhance", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "E", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "insanblesec", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "IS", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -1444,7 +1444,7 @@ addLayer("e", {
 			auto: false,
 			pseudoUpgs: [],
         }},
-        color: "#b82fbd",
+        color: "#3edbff",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
         resource: "增强", // Name of prestige currency
         baseResource: "点数	", // Name of resource prestige is based on
@@ -1743,7 +1743,7 @@ addLayer("s", {
 			autoBld: false,
 			pseudoUpgs: [],
         }},
-        color: "#dfdfdf",
+        color: "#57d4c6",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
         resource: "空间能量", // Name of prestige currency
         baseResource: "点数", // Name of resource prestige is based on
@@ -2057,9 +2057,9 @@ addLayer("s", {
                 resetBuyables(this.layer)
                 doReset(this.layer, true) // Force a reset
             },
-            respecText: "重置建筑", // Text on Respec button, optional
+            respecText: "封闭通道", // Text on Respec button, optional
 			11: {
-				title: "第一建筑",
+				title: "第一ROM通道",
 				costExp() { 
 					let exp = 1.35;
 					if (hasUpgrade("s", 31) && player.i.buyables[12].gte(5)) exp -= 0.04*(15-this.id);
@@ -2634,12 +2634,12 @@ s::::::::::::::s  b::::::::::::::::b
 */
 addLayer("sb", {
         name: "super boosters", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "SB", // This appears on the layer's node. Default is the id with the first letter capitalized
+        symbol: "ACD", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#504899",
+        color: "#35ffe8",
         requires: new Decimal(100), // Can be a function that takes requirement increases into account
-        resource: "超级增幅器", // Name of prestige currency
-        baseResource: "增幅器", // Name of resource prestige is based on
+        resource: "ACD器", // Name of prestige currency
+        baseResource: "UN器", // Name of resource prestige is based on
         baseAmount() {return player.b.points}, // Get the current amount of baseResource
 		roundUpCost: true,
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -3812,7 +3812,7 @@ o:::::::::::::::o
 */
 addLayer("o", {
 	name: "solarity", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "O", // This appears on the layer's node. Default is the id with the first letter capitalized
+        symbol: "SAt", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -3824,12 +3824,12 @@ addLayer("o", {
         }},
 		increaseUnlockOrder: ["ss"],
 		roundUpCost: true,
-        color: "#ffcd00",
+        color: "#36e4ff",
 		nodeStyle() {return {
-			"background": (((player.o.unlocked||canReset("o"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer))))?((player.grad&&!player.oldStyle)?"radial-gradient(#ffcd00, #ff4300)":"#ff8200"):"#bf8f8f" ,
+			"background": (((player.o.unlocked||canReset("o"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer))))?((player.grad&&!player.oldStyle)?"radial-gradient(#36e4ff, #36d3ff)":"#36c3ff"):"#bf8f8f" ,
         }},
 		componentStyles: {
-			"prestige-button"() {return { "background": (canReset("o"))?((player.grad&&!player.oldStyle)?"radial-gradient(#ffcd00, #ff4300)":"#ff8200"):"#bf8f8f" }},
+			"prestige-button"() {return { "background": (canReset("o"))?((player.grad&&!player.oldStyle)?"radial-gradient(#36e4ff, #36d3ff)":"#36c3ff"):"#bf8f8f" }},
 		},
         requires() { 
 			let req = new Decimal((player[this.layer].unlockOrder>0&&!hasAchievement("a", 62))?16:14).sub(tmp.o.solEnEff);
