@@ -4227,7 +4227,7 @@ addLayer("ss", {
         resource: "子空间能量", // Name of prestige currency
         baseResource: "空间能量", // Name of resource prestige is based on
         baseAmount() {return player.s.points}, // Get the current amount of baseResource
-        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.07:1.1) }, // Prestige currency exponent
 		base() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.1:1.15) },
         gainMult() { // Calculate the multiplier for main currency from bonuses
