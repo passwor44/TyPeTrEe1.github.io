@@ -34,18 +34,14 @@ function sumValues(x) {
 	return x.reduce((a, b) => Decimal.add(a, b))
 }
 
-function format(decimal, precision=2, whole=false) {
-	decimal = new Decimal(decimal)
-	if (isNaN(decimal.sign)||isNaN(decimal.layer)||isNaN(decimal.mag)) {
-		player.hasNaN = true;
-		return "NaN"
-	}
+function format(decimal, precision=2, whole=false) 
 	if (decimal.sign<0) return "-"+format(decimal.neg(), precision)
 	if (decimal.mag == Number.POSITIVE_INFINITY) return "Infinity"
 	if (decimal.eq(0)) return "0"
 	if (decimal.gte("eeee1000")) {
 		var slog = decimal.slog()
 		if (slog.gte(1e3)) return "10^^" + formatWhole(slog)
+   if (slog.gte(1e4000)) return "10^^^" + log(formatWhole(slog))
 		else return "10^^" + regularFormat(slog, 3)
 	} else if (decimal.gte("eee100000")) return "eee"+format(decimal.log10().log10().log10(), 3)
 	else if (decimal.gte("ee100000")) return "ee"+format(decimal.log10().log10(), 3)
