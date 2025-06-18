@@ -341,7 +341,7 @@ addLayer("b", {
         resource: "UN器", // Name of prestige currency
         baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
-        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
 		branches: ["p"],
         exponent() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?0.75:1.25 }, // Prestige currency exponent
 		base() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.5:5 },
