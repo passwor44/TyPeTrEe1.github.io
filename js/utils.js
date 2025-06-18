@@ -41,7 +41,6 @@ function format(decimal, precision=2, whole=false)
 	if (decimal.gte("eeee1000")) {
 		var slog = decimal.slog()
 		if (slog.gte(1e3)) return "10^^" + formatWhole(slog)
-   if (slog.gte(1e4000)) return "10^^^" + log(formatWhole(slog))
 		else return "10^^" + regularFormat(slog, 3)
 	} else if (decimal.gte("eee100000")) return "eee"+format(decimal.log10().log10().log10(), 3)
 	else if (decimal.gte("ee100000")) return "ee"+format(decimal.log10().log10(), 3)
