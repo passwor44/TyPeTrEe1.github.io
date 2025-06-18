@@ -1,3 +1,4 @@
+
 // ************ Number formatting ************
 
 function exponentialFormat(num, precision) {
@@ -12,12 +13,14 @@ function exponentialFormat(num, precision) {
 }
 
 function commaFormat(num, precision) {
+	if (num === null || num === undefined) return "NaN"
 	if (num.mag < 0.001) return (0).toFixed(precision)
 	return num.toStringWithDecimalPlaces(precision).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 
 function regularFormat(num, precision) {
+	if (num === null || num === undefined) return "NaN"
 	if (num.mag < 0.001) return (0).toFixed(precision)
 	return num.toStringWithDecimalPlaces(precision)
 }
@@ -32,7 +35,12 @@ function sumValues(x) {
 	return x.reduce((a, b) => Decimal.add(a, b))
 }
 
-function format(decimal, precision=2, whole=false) 
+function format(decimal, precision=2, whole=false) {
+	decimal = new Decimal(decimal)
+	if (isNaN(decimal.sign)||isNaN(decimal.layer)||isNaN(decimal.mag)) {
+		player.hasNaN = true;
+		return "NaN"
+	}
 	if (decimal.sign<0) return "-"+format(decimal.neg(), precision)
 	if (decimal.mag == Number.POSITIVE_INFINITY) return "Infinity"
 	if (decimal.eq(0)) return "0"
