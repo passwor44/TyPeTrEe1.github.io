@@ -12,14 +12,12 @@ function exponentialFormat(num, precision) {
 }
 
 function commaFormat(num, precision) {
-	if (num === null || num === undefined) return "NaN"
 	if (num.mag < 0.001) return (0).toFixed(precision)
 	return num.toStringWithDecimalPlaces(precision).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 
 function regularFormat(num, precision) {
-	if (num === null || num === undefined) return "NaN"
 	if (num.mag < 0.001) return (0).toFixed(precision)
 	return num.toStringWithDecimalPlaces(precision)
 }
