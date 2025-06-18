@@ -4227,7 +4227,7 @@ addLayer("ss", {
         resource: "子空间能量", // Name of prestige currency
         baseResource: "空间能量", // Name of resource prestige is based on
         baseAmount() {return player.s.points}, // Get the current amount of baseResource
-        type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.07:1.1) }, // Prestige currency exponent
 		base() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.1:1.15) },
         gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -8656,7 +8656,7 @@ addLayer("id", {
         baseResource: "思考", // Name of resource prestige is based on
         baseAmount() {return player.ne.thoughts}, // Get the current amount of baseResource
 		roundUpCost: true,
-        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(1.4), // Prestige currency exponent
 		base: new Decimal(1.2),
 		effect() { return Decimal.sub((hasAchievement("a", 155)?0.005:0)+(hasUpgrade("ai", 32)?0.99:0.95), Decimal.div(0.95, player.id.points.plus(1).log10().times(hasMilestone("id", 4)?1.5:1).times(hasMilestone("id", 5)?1.75:1).plus(1))) },
