@@ -1014,7 +1014,7 @@ addLayer("t", {
 			pseudoUpgs: [],
 			autoExt: false,
         }},
-        color: "#f1ffeb",
+        color: "#4cffb5",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
         resource: "时间胶囊", // Name of prestige currency
         baseResource: "点数", // Name of resource prestige is based on
