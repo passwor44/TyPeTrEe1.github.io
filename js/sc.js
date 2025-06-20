@@ -16,7 +16,7 @@ const SOFTCAPS = {
 		info() { return "开始于 "+format(this.start)+", 指数平方根" },
 	},
 	p12: {
-		title: "声望升级 2 （声望增益）",
+		title: "子串级升级 2 （子串级增益）",
 		type: "log",
 		start() { return new Decimal("1e3500").times((hasUpgrade("hn", 12)) ? upgradeEffect("hn", 12) : 1) },
 		exp: new Decimal(1),
@@ -24,7 +24,7 @@ const SOFTCAPS = {
 		info() { return "开始于 "+format(this.start())+"x, 对数" },
 	},
 	p12_h22: {
-		title: "声望升级 2 （声望增益）",
+		title: "子串级升级 2 （子串级增益）",
 		type: "expRoot",
 		start() { return new Decimal("1e3500").times((hasUpgrade("hn", 12)) ? upgradeEffect("hn", 12) : 1) },
 		mag() { return new Decimal(2).sub((hasUpgrade("hn", 21)) ? upgradeEffect("hn", 21) : 0) },
