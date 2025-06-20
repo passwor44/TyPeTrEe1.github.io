@@ -261,7 +261,7 @@ addLayer("p", {
 				description: "子串级加成子串级获取。",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e9570":"1e4460000").pow(tmp.h.costExp11) },
 				pseudoUnl() { return hasUpgrade("hn", 11) && hasUpgrade("p", 31) },
-				pseudoReq: "需要: 25 总文本",
+				pseudoReq: "需要: 25 总微机能",
 				pseudoCan() { return player.hn.total.gte(25) },
 				unlocked() { return player.p.pseudoUpgs.includes(Number(this.id)) },
 				effect() { 
@@ -576,7 +576,7 @@ addLayer("b", {
 			},
 			33: {
 				title: "更更多添加物",
-				description: "超级增幅器加成 <b>更多添加物</b>。",
+				description: "ACD器加成 <b>更多添加物</b>。",
 				cost() { return tmp.h.costMult11b.times(118) },
 				unlocked() { return hasAchievement("a", 41) },
 				effect() { return player.sb.points.times(player.sb.points.gte(4)?2.6:2).plus(1).pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?3:1) },
@@ -1016,8 +1016,8 @@ addLayer("t", {
         }},
         color: "#4cffb5",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
-        resource: "时间胶囊", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "时间向量", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?new Decimal(1.4):new Decimal(1.85) }, // Prestige currency exponent
@@ -1123,7 +1123,7 @@ addLayer("t", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.t.energy) + ' TE，增幅点数和声望获取 '+format(tmp.t.enEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(1.2*(hasUpgrade("t", 14)?1.3:1)*(hasUpgrade("q", 24)?7.5:1))+")":"")+(hasUpgrade("t", 24)?("，并提供 "+formatWhole(tmp.t.enEff2)+" 个免费的扩展时间胶囊 ("+(tmp.nerdMode?"log(x+1)^0.556":("下一个在 "+format(tmp.t.nextEnEff2)))+")."):"")},
+				function() {return '你有 ' + format(player.t.energy) + ' TE，增幅字符和子串级获取 '+format(tmp.t.enEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(1.2*(hasUpgrade("t", 14)?1.3:1)*(hasUpgrade("q", 24)?7.5:1))+")":"")+(hasUpgrade("t", 24)?("，并提供 "+formatWhole(tmp.t.enEff2)+" 个免费的切片时间维度 ("+(tmp.nerdMode?"log(x+1)^0.556":("下一个在 "+format(tmp.t.nextEnEff2)))+")."):"")},
 					{}],
 			"blank",
 			["display-text",
@@ -1144,8 +1144,8 @@ addLayer("t", {
 			rows: 4,
 			cols: 5,
 			11: {
-				title: "伪增幅",
-				description: "非扩展时空胶囊加成增幅器底数。",
+				title: "UN组装",
+				description: "非切片时间维度加成UN器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?750:2) },
 				unlocked() { return player.t.unlocked },
 				effect() { 
@@ -1159,8 +1159,8 @@ addLayer("t", {
 				},
 			},
 			12: {
-				title: "超越极限",
-				description: "增幅器加成 TE 上限，并获取 1 个扩展时空胶囊。",
+				title: "获取一个",
+				description: "UN器加成 TE 上限，并获取 1 个切片时间维度。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e262:([5e4,2e5,2.5e6][player[this.layer].unlockOrder||0])) },
 				currencyDisplayName: "TE",
                 currencyInternalName: "energy",
@@ -1173,8 +1173,8 @@ addLayer("t", {
 				formula: "x^0.95+1",
 			},
 			13: {
-				title: "伪伪增幅",
-				description: "扩展时空胶囊同样计入 <b>伪增幅</b> 的效果。",
+				title: "UN库个UN",
+				description: "切片时间维度同样计入 <b>UN组装</b> 的效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e265:([3e6,3e7,3e8][player[this.layer].unlockOrder||0])) },
 				currencyDisplayName: "TE",
                 currencyInternalName: "energy",
@@ -1193,8 +1193,8 @@ addLayer("t", {
 				unlocked() { return hasUpgrade("t", 13) },
 			},
 			15: {
-				title: "时间效力",
-				description: "TE 加成 GP 获取。",
+				title: "时间键盘",
+				description: "TE 加成 KP 获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e267:([1.25e7,(player.s.unlocked?3e8:6e7),1.5e9][player[this.layer].unlockOrder||0])) },
 				currencyDisplayName: "TE",
                 currencyInternalName: "energy",
@@ -1202,14 +1202,14 @@ addLayer("t", {
 				unlocked() { return hasUpgrade("t", 13) },
 			},
 			21: {
-				title: "虚弱链",
+				title: "无法上限",
 				description: "TE 上限扩大 100 倍。",
 				cost() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:12 },
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			22: {
-				title: "增强时间",
-				description: "增强 加成 TE 获取和上限。",
+				title: "他俩不要在一起",
+				description: "弱秒 加成 TE 获取和上限。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?765:9) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() { 
@@ -1219,7 +1219,7 @@ addLayer("t", {
 				formula() { return "(x+1)^"+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"0.11":"0.1") },
 			},
 			23: {
-				title: "反转时间",
+				title: "减少目标",
 				description: "时间以你首先选择时间的方式运行。",
 				cost() { return new Decimal(player[this.layer].unlockOrder>=2?3e9:(player.s.unlocked?6.5e8:1.35e8)) },
 				currencyDisplayName: "TE",
@@ -1229,7 +1229,7 @@ addLayer("t", {
 				onPurchase() { player[this.layer].unlockOrder = 0; },
 			},
 			24: {
-				title: "时间膨胀",
+				title: "高效时间",
 				description: "解锁一个新的 TE 效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e267:2e17) },
 				currencyDisplayName: "TE",
@@ -1238,8 +1238,8 @@ addLayer("t", {
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			25: {
-				title: "底数",
-				description: "TE 加成增幅器底数。",
+				title: "底数增生",
+				description: "TE 加成UN器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?'1e9000':3e19) },
 				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
@@ -1250,35 +1250,35 @@ addLayer("t", {
 				formula() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"(log(x+1)/1.2)^3":"log(x+1)/1.2" },
 			},
 			31: {
-				title: "廉价时间",
-				description: "扩展时间胶囊价格不再缩放，价格指数降低 0.2。",
+				title: "削弱时间",
+				description: "切片时间维度价格不再缩放，价格指数降低 0.2。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e16400":"e3600000") },
 				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "需要: 1e42 荣耀",
+				pseudoReq: "需要: 1e42 微机能",
 				pseudoCan() { return player.hn.points.gte(1e42) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			32: {
 				title: "超时间连续体",
-				description: "超空间价格缩放减缓 33.33%。",
+				description: "超维度量价格缩放减缓 33.33%。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e39000":"e4240000") },
 				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "需要: 1e31 超空间能量",
+				pseudoReq: "需要: 1e31 绝对能量",
 				pseudoCan() { return player.hs.points.gte(1e31) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			33: {
-				title: "近似无限",
+				title: "时间堆叠",
 				description: "TE 加成 TE 上限底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:750) },
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "需要: 30 幽魂",
+				pseudoReq: "需要: 30 原子核",
 				pseudoCan() { return player.ps.points.gte(30) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.t.energy.plus(1).log10().plus(1).pow(3.5) },
@@ -1286,14 +1286,14 @@ addLayer("t", {
 				formula: "(log(x+1)+1)^3.5",
 			},
 			34: {
-				title: "缩放盛宴",
+				title: "后继延迟",
 				description: "1225 之后的增幅器和生成器缩放改为从 1400 开始。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e39000":"e4240000") },
 				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: '需要: 在 "减产" 障碍中以无超空间建筑达到 e124,000,000 声望。',
+				pseudoReq: '需要: 在 "粉碎性粒子" 障碍中以无超空间通道达到 e124,000,000 声望。',
 				pseudoCan() { return player.p.points.gte("e1.24e8") && inChallenge("h", 42) && player.hs.spentHS.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
@@ -1310,11 +1310,11 @@ addLayer("t", {
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			41: {
-				title: "亚时态之幂",
-				description: "将子空间底数提高至 1.5 次幂，同时增加超空间能量获取 2,500x。",
+				title: "空间第四维度",
+				description: "将密钥空间量底数提高至 1.5 次幂，同时增加超维度量获取 2,500x。",
 				cost: new Decimal(1050),
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "需要: 1e60 荣耀 & 1e575 魂力",
+				pseudoReq: "需要: 1e60 微机能 & 1e575 魂力",
 				pseudoCan() { return player.hn.points.gte(1e60) && player.ps.power.gte("1e575") },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
@@ -1330,7 +1330,7 @@ addLayer("t", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "扩展时空胶囊",
+				title: "切片时间维度",
 				costScalingEnabled() {
 					return !(hasUpgrade("t", 31) && player.i.buyables[12].gte(4))
 				},
@@ -1348,7 +1348,7 @@ addLayer("t", {
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
 					let e = tmp.t.freeExtraTimeCapsules;
-                    let display = (tmp.nerdMode?("价格公式: "+((player[this.layer].buyables[this.id].gte(25)&&data.costScalingEnabled)?"(((x^2)/25":"((x")+"*0.4)^"+format(data.costExp)+"+1)*10"):("价格: " + formatWhole(data.cost) + " 增幅器"))+"\n\
+                    let display = (tmp.nerdMode?("价格公式: "+((player[this.layer].buyables[this.id].gte(25)&&data.costScalingEnabled)?"(((x^2)/25":"((x")+"*0.4)^"+format(data.costExp)+"+1)*10"):("价格: " + formatWhole(data.cost) + " UN器"))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+(e.gt(0)?(" + "+formatWhole(e)):"")+(inChallenge("h", 31)?("\n剩余购买量: "+String(10-player.h.chall31bought)):"")
 					return display;
                 },
@@ -1377,28 +1377,28 @@ addLayer("t", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "2 时间胶囊",
+				requirementDescription: "里程自动--2 时间向量",
 				done() { return player.t.best.gte(2) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留 增幅器/生成器 里程碑。",
+				effectDescription: "重置时保留 UN器/键盘软垫 里程碑。",
 			},
 			1: {
-				requirementDescription: "3 时间胶囊",
+				requirementDescription: "子串级力速--3 时间向量",
 				done() { return player.t.best.gte(3) || hasAchievement("a", 41) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留声望升级。",
+				effectDescription: "重置时保留子串级升级。",
 			},
 			2: {
-				requirementDescription: "4 时间胶囊",
+				requirementDescription: "概念化--4 时间向量",
 				done() { return player.t.best.gte(4) || hasAchievement("a", 71) },
-				effectDescription: "对任何重置保留增幅器升级。",
+				effectDescription: "对任何重置保留UN器升级。",
 			},
 			3: {
-				requirementDescription: "5 时间胶囊",
+				requirementDescription: "石器时期--5 时间向量",
 				done() { return player.t.best.gte(5) || hasAchievement("a", 71) },
-				effectDescription: "解锁自动增幅器。",
+				effectDescription: "解锁自动UN器。",
 				toggles: [["b", "auto"]],
 			},
 			4: {
-				requirementDescription: "8 时间胶囊",
+				requirementDescription: "抹除重置--8 时间向量",
 				done() { return player.t.best.gte(8) || hasAchievement("a", 71) },
 				effectDescription: "增幅器不再重置任何东西。",
 			},
@@ -1743,10 +1743,10 @@ addLayer("s", {
 			autoBld: false,
 			pseudoUpgs: [],
         }},
-        color: "#57d4c6",
+        color: "#45ffb1",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
-        resource: "空间能量", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "通道时空", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.4:1.85) }, // Prestige currency exponent
@@ -1760,7 +1760,7 @@ addLayer("s", {
         },
         row: 2, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "s", description: "按 S 进行空间重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "s", description: "按 S 进行通道时空重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return hasMilestone("q", 5)&&player.ma.current!="s" },
         increaseUnlockOrder: ["t", "e"],
@@ -1806,7 +1806,7 @@ addLayer("s", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你最多拥有 ' + formatWhole(player.s.best) + ' 空间能量'},
+				function() {return '你最多拥有 ' + formatWhole(player.s.best) + ' 通道时空'},
 					{}],
 			"blank",
 			"milestones", "blank", 
@@ -1814,10 +1814,10 @@ addLayer("s", {
 				function() {return '你有 ' + format(player.g.power) + ' GP'},
 					{}],
 			["display-text",
-				function() {return '你的空间能量为你提供了 ' + formatWhole(tmp.s.space) + ' 空间'},
+				function() {return '你的通道时空为你提供了 ' + formatWhole(tmp.s.space) + ' 通道'},
 					{}],
 			["display-text",
-				function() {return tmp.s.buildingPower.eq(1)?"":("建筑增益: "+format(tmp.s.buildingPower.times(100))+"%")},
+				function() {return tmp.s.buildingPower.eq(1)?"":("ROM/CPS通道增益: "+format(tmp.s.buildingPower.times(100))+"%")},
 					{}],
 			"blank",
 			"buyables", "blank", "upgrades"],
@@ -1875,14 +1875,14 @@ addLayer("s", {
 			rows: 3,
 			cols: 5,
 			11: {
-				title: "Space X",
+				title: "免费奖励",
 				description: "为所有建筑提供一个免费等级。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?758:2) },
 				unlocked() { return player[this.layer].unlocked }
 			},
 			12: {
-				title: "生成器生成器",
-				description: "GP 加成 GP 生成。",
+				title: "KP指数",
+				description: "KP 加成 KP 生成。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?758:3) },
 				unlocked() { return hasUpgrade("s", 11) },
 				effect() { return player.g.power.add(1).log10().add(1) },
@@ -1890,10 +1890,10 @@ addLayer("s", {
 				formula: "log(x+1)+1",
 			},
 			13: {
-				title: "运走",
-				description: "建筑等级加成 GP 获取，你获得 2 个额外的空间。",
+				title: "你的通道有点松弛",
+				description: "通道等级加成 KP 获取，你获得 2 个额外的通道。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e48900":([1e37,1e59,1e94][player[this.layer].unlockOrder||0])) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				unlocked() { return hasUpgrade("s", 11) },
@@ -1902,14 +1902,14 @@ addLayer("s", {
 				formula: "20^x",
 			},
 			14: {
-				title: "进入重复",
-				description: "解锁 <b>第四建筑</b>.",
+				title: "新的清理",
+				description: "解锁 <b>第四ROM通道</b>.",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:4) },
 				unlocked() { return hasUpgrade("s", 12)||hasUpgrade("s", 13) }
 			},
 			15: {
 				title: "四边形",
-				description: "<b>第四建筑</b> 成本开立方根，3x 增强，并增益 <b>BP 连击</b> （效果是 2.7 次方根）。",
+				description: "<b>第四ROM通道</b> 成本开立方根，3x 增强，并增益 <b>BP 连击</b> （效果是 2.7 次方根）。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e55000":([1e65,(player.e.unlocked?1e94:1e88),1e129][player[this.layer].unlockOrder||0])) },
 				currencyDisplayName: "GP",
                 currencyInternalName: "power",
