@@ -1123,7 +1123,7 @@ addLayer("t", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.t.energy) + ' TE，增幅点数和声望获取 '+format(tmp.t.enEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(1.2*(hasUpgrade("t", 14)?1.3:1)*(hasUpgrade("q", 24)?7.5:1))+")":"")+(hasUpgrade("t", 24)?("，并提供 "+formatWhole(tmp.t.enEff2)+" 个免费的扩展时间胶囊 ("+(tmp.nerdMode?"log(x+1)^0.556":("下一个在 "+format(tmp.t.nextEnEff2)))+")."):"")},
+				function() {return '你有 ' + format(player.t.energy) + ' TE，增幅字符和子串级获取 '+format(tmp.t.enEff)+'x'+(tmp.nerdMode?" ((x+1)^"+format(1.2*(hasUpgrade("t", 14)?1.3:1)*(hasUpgrade("q", 24)?7.5:1))+")":"")+(hasUpgrade("t", 24)?("，并提供 "+formatWhole(tmp.t.enEff2)+" 个免费的事件切片 ("+(tmp.nerdMode?"log(x+1)^0.556":("下一个在 "+format(tmp.t.nextEnEff2)))+")."):"")},
 					{}],
 			"blank",
 			["display-text",
@@ -1144,8 +1144,8 @@ addLayer("t", {
 			rows: 4,
 			cols: 5,
 			11: {
-				title: "伪增幅",
-				description: "非扩展时空胶囊加成增幅器底数。",
+				title: "UN事件",
+				description: "非事件切片加成UN器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?750:2) },
 				unlocked() { return player.t.unlocked },
 				effect() { 
@@ -1159,8 +1159,8 @@ addLayer("t", {
 				},
 			},
 			12: {
-				title: "超越极限",
-				description: "增幅器加成 TE 上限，并获取 1 个扩展时空胶囊。",
+				title: "UN适切",
+				description: "UN器加成 TE 上限，并获取 1 个事件切片。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e262:([5e4,2e5,2.5e6][player[this.layer].unlockOrder||0])) },
 				currencyDisplayName: "TE",
                 currencyInternalName: "energy",
@@ -1173,8 +1173,8 @@ addLayer("t", {
 				formula: "x^0.95+1",
 			},
 			13: {
-				title: "伪伪增幅",
-				description: "扩展时空胶囊同样计入 <b>伪增幅</b> 的效果。",
+				title: "玻璃切片",
+				description: "事件切片同样计入 <b>UN事件</b> 的效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e265:([3e6,3e7,3e8][player[this.layer].unlockOrder||0])) },
 				currencyDisplayName: "TE",
                 currencyInternalName: "energy",
@@ -1187,14 +1187,14 @@ addLayer("t", {
 				formula: "x^0.95",
 			},
 			14: {
-				title: "更多时间",
+				title: "Effect切片",
 				description: "TE 效果提高到 1.3 次幂。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?760:(player.t.unlockOrder>=2?5:4)) },
 				unlocked() { return hasUpgrade("t", 13) },
 			},
 			15: {
-				title: "时间效力",
-				description: "TE 加成 GP 获取。",
+				title: "Keyboard切片",
+				description: "TE 加成 KP 获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e267:([1.25e7,(player.s.unlocked?3e8:6e7),1.5e9][player[this.layer].unlockOrder||0])) },
 				currencyDisplayName: "TE",
                 currencyInternalName: "energy",
@@ -1202,14 +1202,14 @@ addLayer("t", {
 				unlocked() { return hasUpgrade("t", 13) },
 			},
 			21: {
-				title: "虚弱链",
+				title: "增减软上限",
 				description: "TE 上限扩大 100 倍。",
 				cost() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:12 },
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			22: {
-				title: "增强时间",
-				description: "增强 加成 TE 获取和上限。",
+				title: "Weakness切片",
+				description: "弱秒 加成 TE 获取和上限。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?765:9) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() { 
@@ -1219,7 +1219,7 @@ addLayer("t", {
 				formula() { return "(x+1)^"+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"0.11":"0.1") },
 			},
 			23: {
-				title: "反转时间",
+				title: "Priority切片",
 				description: "时间以你首先选择时间的方式运行。",
 				cost() { return new Decimal(player[this.layer].unlockOrder>=2?3e9:(player.s.unlocked?6.5e8:1.35e8)) },
 				currencyDisplayName: "TE",
@@ -1229,7 +1229,7 @@ addLayer("t", {
 				onPurchase() { player[this.layer].unlockOrder = 0; },
 			},
 			24: {
-				title: "时间膨胀",
+				title: "source切片",
 				description: "解锁一个新的 TE 效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1e267:2e17) },
 				currencyDisplayName: "TE",
@@ -1238,7 +1238,7 @@ addLayer("t", {
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			25: {
-				title: "底数",
+				title: "Quantity切片",
 				description: "TE 加成增幅器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?'1e9000':3e19) },
 				currencyDisplayName: "TE",
@@ -1250,8 +1250,8 @@ addLayer("t", {
 				formula() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"(log(x+1)/1.2)^3":"log(x+1)/1.2" },
 			},
 			31: {
-				title: "廉价时间",
-				description: "扩展时间胶囊价格不再缩放，价格指数降低 0.2。",
+				title: "Expansion切片",
+				description: "事件切片价格不再缩放，价格指数降低 0.2。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e16400":"e3600000") },
 				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
@@ -1262,7 +1262,7 @@ addLayer("t", {
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			32: {
-				title: "超时间连续体",
+				title: "absolutely切片",
 				description: "超空间价格缩放减缓 33.33%。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e39000":"e4240000") },
 				currencyDisplayName: "TE",
@@ -1274,7 +1274,7 @@ addLayer("t", {
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			33: {
-				title: "近似无限",
+				title: "similar切片",
 				description: "TE 加成 TE 上限底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:750) },
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
@@ -1286,19 +1286,19 @@ addLayer("t", {
 				formula: "(log(x+1)+1)^3.5",
 			},
 			34: {
-				title: "缩放盛宴",
-				description: "1225 之后的增幅器和生成器缩放改为从 1400 开始。",
+				title: "Delay缩放",
+				description: "1225 之后的UN器和键盘软垫缩放改为从 1400 开始。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e39000":"e4240000") },
 				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: '需要: 在 "减产" 障碍中以无超空间建筑达到 e124,000,000 声望。',
+				pseudoReq: '需要: 在 "减产" 障碍中以无超空间建筑达到 e124,000,000 子串级。',
 				pseudoCan() { return player.p.points.gte("e1.24e8") && inChallenge("h", 42) && player.hs.spentHS.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			35: {
-				title: "珍惜时间",
+				title: "Index缩放",
 				description: "TE 的第二个效果的指数提高（0.556 -> 0.565)。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e38000":"e3600000") },
 				currencyDisplayName: "TE",
@@ -1310,7 +1310,7 @@ addLayer("t", {
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			41: {
-				title: "亚时态之幂",
+				title: "space切片",
 				description: "将子空间底数提高至 1.5 次幂，同时增加超空间能量获取 2,500x。",
 				cost: new Decimal(1050),
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
@@ -1330,7 +1330,7 @@ addLayer("t", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "扩展时空胶囊",
+				title: "事件切片",
 				costScalingEnabled() {
 					return !(hasUpgrade("t", 31) && player.i.buyables[12].gte(4))
 				},
@@ -1348,7 +1348,7 @@ addLayer("t", {
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
 					let e = tmp.t.freeExtraTimeCapsules;
-                    let display = (tmp.nerdMode?("价格公式: "+((player[this.layer].buyables[this.id].gte(25)&&data.costScalingEnabled)?"(((x^2)/25":"((x")+"*0.4)^"+format(data.costExp)+"+1)*10"):("价格: " + formatWhole(data.cost) + " 增幅器"))+"\n\
+                    let display = (tmp.nerdMode?("价格公式: "+((player[this.layer].buyables[this.id].gte(25)&&data.costScalingEnabled)?"(((x^2)/25":"((x")+"*0.4)^"+format(data.costExp)+"+1)*10"):("价格: " + formatWhole(data.cost) + " UN器"))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+(e.gt(0)?(" + "+formatWhole(e)):"")+(inChallenge("h", 31)?("\n剩余购买量: "+String(10-player.h.chall31bought)):"")
 					return display;
                 },
@@ -1377,30 +1377,30 @@ addLayer("t", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "2 时间胶囊",
+				requirementDescription: "正里程--2 时间胶囊",
 				done() { return player.t.best.gte(2) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留 增幅器/生成器 里程碑。",
+				effectDescription: "重置时保留 UN器/键盘软垫 里程碑。",
 			},
 			1: {
-				requirementDescription: "3 时间胶囊",
+				requirementDescription: "切片极限--3 时间胶囊",
 				done() { return player.t.best.gte(3) || hasAchievement("a", 41) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留声望升级。",
+				effectDescription: "重置时保留子串级升级。",
 			},
 			2: {
-				requirementDescription: "4 时间胶囊",
+				requirementDescription: "保持字库--4 时间胶囊",
 				done() { return player.t.best.gte(4) || hasAchievement("a", 71) },
-				effectDescription: "对任何重置保留增幅器升级。",
+				effectDescription: "对任何重置保留UN器升级。",
 			},
 			3: {
-				requirementDescription: "5 时间胶囊",
+				requirementDescription: "自动编写--5 时间胶囊",
 				done() { return player.t.best.gte(5) || hasAchievement("a", 71) },
-				effectDescription: "解锁自动增幅器。",
+				effectDescription: "解锁自动UN器。",
 				toggles: [["b", "auto"]],
 			},
 			4: {
-				requirementDescription: "8 时间胶囊",
+				requirementDescription: "字符非干涉--8 时间胶囊",
 				done() { return player.t.best.gte(8) || hasAchievement("a", 71) },
-				effectDescription: "增幅器不再重置任何东西。",
+				effectDescription: "UN器不再重置任何东西。",
 			},
 		},
 })
