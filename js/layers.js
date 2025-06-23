@@ -522,8 +522,8 @@ addLayer("b", {
 				unlocked() { return hasUpgrade("b", 11) && hasUpgrade("b", 12) },
 			},
 			22: {
-				title: "",
-				description: "GP 效果提升至 1.2 次幂。",
+				title: "互相增强",
+				description: "KP 效果提升至 1.2 次幂。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2075:15) },
 				unlocked() { return hasUpgrade("b", 12) && hasUpgrade("b", 13) },
 			},
@@ -575,8 +575,8 @@ addLayer("b", {
 				unlocked() { return hasAchievement("a", 41) },
 			},
 			33: {
-				title: "更更多添加物",
-				description: "超级增幅器加成 <b>更多添加物</b>。",
+				title: "继续增多",
+				description: "ACD器加成 <b>更多添加物</b>。",
 				cost() { return tmp.h.costMult11b.times(118) },
 				unlocked() { return hasAchievement("a", 41) },
 				effect() { return player.sb.points.times(player.sb.points.gte(4)?2.6:2).plus(1).pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?3:1) },
@@ -830,7 +830,7 @@ addLayer("g", {
 				title: "重大更新",
 				description: "KP 加成 KP 获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e314":1e10) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				effect() { 
@@ -854,7 +854,7 @@ addLayer("g", {
 				title: "27字母",
 				description: "子串级降低键软价格。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"5e47141":1e11) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				effect() { 
@@ -867,10 +867,10 @@ addLayer("g", {
 				formula: "(x+1)^0.25",
 			},
 			23: {
-				title: "",
-				description: "增幅器加成 <b>反转声望增益</b> 效果。",
+				title: "UN增益",
+				description: "UN器加成 <b>反了！！！</b> 效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"2e47525":1e12) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				effect() { return player.b.points.pow(0.85).add(1) },
@@ -879,16 +879,16 @@ addLayer("g", {
 				formula: "x^0.85+1",
 			},
 			24: {
-				title: "再次增益增益",
-				description: "<b>声望增益</b> 的效果提升至 1.467 次幂。",
+				title: "字符补偿",
+				description: "<b>子串级增益</b> 的效果提升至 1.467 次幂。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?690:20) },
 				unlocked() { return hasUpgrade("g", 14)&&(hasUpgrade("g", 21)||hasUpgrade("g", 22)) },
 			},
 			25: {
-				title: "给我更多 IV",
-				description: "声望加成 GP 获取。",
+				title: "你的KP够多了",
+				description: "子串级加成 KP 获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e47526":1e14) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				effect() { 
@@ -905,14 +905,14 @@ addLayer("g", {
 				},
 			},
 			31: {
-				title: "荒诞生成器",
-				description: "GP 加成超级生成器底数。",
+				title: "低器高增",
+				description: "KP 加成软垫复制底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e47545":"e4.4e7") },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
-				pseudoReq: "需要: 无 GP 达到 e73,600,000 声望（使用增强重置）。",
+				pseudoReq: "需要: 无 KP 达到 e73,600,000 子串级（使用弱秒重置）。",
 				pseudoCan() { return player.p.points.gte("e7.35e7") && player.g.power.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.g.power.plus(1).log10().plus(1).pow(2) },
@@ -920,11 +920,11 @@ addLayer("g", {
 				formula: "(log(x+1)+1)^2",
 			},
 			32: {
-				title: "原始本能",
-				description: "<b>第四建筑</b> 加成 <b>二折</b>。",
+				title: "始终打折",
+				description: "<b>第四ROM通道</b> 加成 <b>UN扩展符</b>。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1260:2200) },
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
-				pseudoReq: "需要: 无增幅器达到 e47,500,000 GP（使用增强重置)",
+				pseudoReq: "需要: 无UN器达到 e47,500,000 GP（使用弱秒重置)",
 				pseudoCan() { return player.g.power.gte("e4.75e7") && player.b.best.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return buyableEffect("s", 14).pow(0.8) },
@@ -934,7 +934,7 @@ addLayer("g", {
 			},
 			33: {
 				title: "星尘生产",
-				description: "生成器加成星尘获取。",
+				description: "键盘软垫加成星尘获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e48000":"e5.6e7") },
 				currencyDisplayName: "GP",
                 currencyInternalName: "power",
@@ -948,8 +948,8 @@ addLayer("g", {
 				formula: "1.15^sqrt(x)",
 			},
 			34: {
-				title: "增益增益^2",
-				description: "<b>声望增益</b> 的效果提升至 1.433 次幂",
+				title: "继续字符",
+				description: "<b>子串级增益</b> 的效果提升至 1.433 次幂",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1257:2200) },
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
 				pseudoReq: "需要: 36 成就。",
@@ -1016,8 +1016,8 @@ addLayer("t", {
         }},
         color: "#4cffb5",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
-        resource: "时间胶囊", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "时间层面", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?new Decimal(1.4):new Decimal(1.85) }, // Prestige currency exponent
