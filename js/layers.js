@@ -1446,8 +1446,8 @@ addLayer("e", {
         }},
         color: "#3edbff",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
-        resource: "增强", // Name of prestige currency
-        baseResource: "点数	", // Name of resource prestige is based on
+        resource: "弱秒", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?.025:.02) }, // Prestige currency exponent
@@ -1465,7 +1465,7 @@ addLayer("e", {
 		},
         row: 2, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "e", description: "按 E 进行增强重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "i", description: "按 I 进行虚弱时间重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         increaseUnlockOrder: ["t", "s"],
         doReset(resettingLayer){ 
@@ -1488,20 +1488,20 @@ addLayer("e", {
 			rows: 4,
 			cols: 4,
 			11: {
-				title: "第 2 列协同",
-				description: "增幅器和生成器互相加成。",
+				title: "双生",
+				description: "UN器和键盘软垫互相加成。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e98000":((player.e.unlockOrder>=2)?25:100)) },
 				unlocked() { return player.e.unlocked },
 				effect() { 
 					let exp = 1
 					return {g: player.b.points.add(1).log10().pow(exp), b: player.g.points.add(1).log10().pow(exp)} 
 				},
-				effectDisplay() { return "生成器底数+"+format(tmp.e.upgrades[11].effect.g)+"，增幅器底数+"+format(tmp.e.upgrades[11].effect.b) },
+				effectDisplay() { return "键盘软垫。底数+"+format(tmp.e.upgrades[11].effect.g)+"，UN器底数+"+format(tmp.e.upgrades[11].effect.b) },
 				formula: "log(x+1)",
 			},
 			12: {
-				title: "增强声望",
-				description: "总共增强加成声望获取。",
+				title: "增强子串级",
+				description: "总共弱秒加成子串级获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e98000":(player.e.unlockOrder>=2?400:1e3)) },
 				unlocked() { return hasUpgrade("e", 11) },
 				effect() { 
@@ -1518,14 +1518,14 @@ addLayer("e", {
 				},
 			},
 			13: {
-				title: "增强 Plus",
-				description: "获得一个免费的增强子。",
+				title: "免费领取",
+				description: "获得一个免费的虚弱后继。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1e5":2.5e3) },
 				unlocked() { return hasUpgrade("e", 11) },
 			},
 			14: {
-				title: "更多添加物",
-				description: "对于增幅器和生成器底数的任何增幅器和生成器升级效果 x4。",
+				title: "脱离序数",
+				description: "对于UN器和键盘软垫底数的任何UN器和键盘软垫升级效果 x4。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":3e23) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() {
@@ -1537,21 +1537,21 @@ addLayer("e", {
 				noFormula: true,
 			},
 			21: {
-				title: "增强 Plus Plus",
-				description: "获得两个免费的增强子。",
+				title: "递增计数",
+				description: "获得两个免费的虚弱后继。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":(player.e.unlockOrder>0?1e4:1e9)) },
 				unlocked() { return hasUpgrade("e", 13) && ((!player.s.unlocked||(player.s.unlocked&&player.t.unlocked))&&player.t.unlocked) },
 			},
 			22: {
-				title: "增强反转",
-				description: "增强以你首先选择增强的方式运行。",
+				title: "优先三层",
+				description: "虚弱时间以你首先选择虚弱时间的方式运行。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":(player.e.unlockOrder>=2?1e3:3e4)) },
 				unlocked() { return (player[this.layer].unlockOrder>0||hasUpgrade("e", 22))&&hasUpgrade("e", 12) },
 				onPurchase() { player[this.layer].unlockOrder = 0; },
 			},
 			23: {
-				title: "进入 E-空间",
-				description: "空间能量提供免费增强子。",
+				title: "弱时空",
+				description: "空间能量提供免费虚弱后继。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":2e20) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() {
@@ -1563,8 +1563,8 @@ addLayer("e", {
 				formula() { return "floor(x^2"+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"/7.14":"/25")+")" },
 			},
 			24: {
-				title: "野兽般增长",
-				description: "增幅器和生成器加成增强获取。",
+				title: "积虚弱",
+				description: "UN器和键盘软垫加成增强获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.011e5":2.5e28) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() { return Decimal.pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e2000":1.1, player.b.points.plus(player.g.points).pow(0.9)) },
@@ -1593,20 +1593,20 @@ addLayer("e", {
 				formula: "log(x+1)^3.25",
 			},
 			33: {
-				title: "扩增",
-				description: "增强子的两个效果指数提高 20%。",
+				title: "虚指增",
+				description: "虚弱后继的两个效果指数提高 20%。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3460000":"e4500000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
-				pseudoReq: "需要: 60,600 购买的增强子。",
+				pseudoReq: "需要: 60,600 购买的虚弱后继。",
 				pseudoCan() { return player.e.buyables[11].gte(60600) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			34: {
-				title: "强化",
-				description: "增强子价格不再缩放。",
+				title: "后继序增",
+				description: "虚弱后继价格不再缩放。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3450000":"e4125000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
-				pseudoReq: "需要: 无诡异层达到 e3,050,000 增强（使用第五行升级）。",
+				pseudoReq: "需要: 无诡异层达到 e3,050,000 弱秒（使用第五行升级）。",
 				pseudoCan() { return player.e.points.gte("e3.05e6") && player.q.buyables[11].eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
@@ -1627,7 +1627,7 @@ addLayer("e", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "增强子",
+				title: "虚弱后继",
 				costScalingEnabled() {
 					return !(hasUpgrade("e", 34) && player.i.buyables[12].gte(3));
 				},
@@ -1659,9 +1659,9 @@ addLayer("e", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: 2^("+((player[this.layer].buyables[this.id].gte(25)&&data.costScalingEnabled)?"((x^2)/25)":"x")+"^1.5)"):("价格: " + formatWhole(data.cost) + " 增强"))+"\n\
+                    return (tmp.nerdMode?("价格公式: 2^("+((player[this.layer].buyables[this.id].gte(25)&&data.costScalingEnabled)?"((x^2)/25)":"x")+"^1.5)"):("价格: " + formatWhole(data.cost) + " 弱秒"))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+(tmp.e.freeEnh.gt(0)?(" + "+formatWhole(tmp.e.freeEnh)):"") + "\n\
-                   "+(tmp.nerdMode?(" 公式 1: 25^(x^"+format(data.power.times(1.1))+")\n\ 公式 2: x^"+format(data.power.times(0.8))):(" 增幅声望获取 " + format(data.effect.first) + "x 并提高增幅器和生成器的底数 " + format(data.effect.second)))+(inChallenge("h", 31)?("\n剩余购买量: "+String(10-player.h.chall31bought)):"")
+                   "+(tmp.nerdMode?(" 公式 1: 25^(x^"+format(data.power.times(1.1))+")\n\ 公式 2: x^"+format(data.power.times(0.8))):(" UN声望获取 " + format(data.effect.first) + "x 并提高UN器和键盘软垫的底数 " + format(data.effect.second)))+(inChallenge("h", 31)?("\n剩余购买量: "+String(10-player.h.chall31bought)):"")
                 },
                 unlocked() { return player[this.layer].unlocked }, 
                 canAfford() {
@@ -1686,19 +1686,19 @@ addLayer("e", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "2 增强",
+				requirementDescription: "积速停留--2 弱秒",
 				done() { return player.e.best.gte(2) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留增幅器和生成器的里程碑。",
+				effectDescription: "重置时保留UN器和键盘软垫的里程碑。",
 			},
 			1: {
-				requirementDescription: "5 增强",
+				requirementDescription: "重值自动--5 弱秒",
 				done() { return player.e.best.gte(5) || hasAchievement("a", 41) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留声望升级。",
+				effectDescription: "重置时保留子串级升级。",
 			},
 			2: {
-				requirementDescription: "25 增强",
+				requirementDescription: "始终保留--25 弱秒",
 				done() { return player.e.best.gte(25) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留增幅器和生成器的升级。",
+				effectDescription: "重置时保留UN器和键盘软垫的升级。",
 			},
 		},
 })
