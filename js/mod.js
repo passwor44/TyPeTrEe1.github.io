@@ -1,6 +1,6 @@
 let modInfo = {
 	name: "Type Tree /Internet/",
-	id: "tyte",
+	id: "ptr",
 	author: "152",
 	pointsName: "字符",
 	discordName: "PT Rewritten Server",
