@@ -1377,28 +1377,28 @@ addLayer("t", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "正里程--2 时间胶囊",
+				requirementDescription: "正里程--2 时间层面",
 				done() { return player.t.best.gte(2) || hasAchievement("a", 71) },
 				effectDescription: "重置时保留 UN器/键盘软垫 里程碑。",
 			},
 			1: {
-				requirementDescription: "切片极限--3 时间胶囊",
+				requirementDescription: "切片极限--3 时间层面",
 				done() { return player.t.best.gte(3) || hasAchievement("a", 41) || hasAchievement("a", 71) },
 				effectDescription: "重置时保留子串级升级。",
 			},
 			2: {
-				requirementDescription: "保持字库--4 时间胶囊",
+				requirementDescription: "保持字库--4 时间层面",
 				done() { return player.t.best.gte(4) || hasAchievement("a", 71) },
 				effectDescription: "对任何重置保留UN器升级。",
 			},
 			3: {
-				requirementDescription: "自动编写--5 时间胶囊",
+				requirementDescription: "自动编写--5 时间层面",
 				done() { return player.t.best.gte(5) || hasAchievement("a", 71) },
 				effectDescription: "解锁自动UN器。",
 				toggles: [["b", "auto"]],
 			},
 			4: {
-				requirementDescription: "字符非干涉--8 时间胶囊",
+				requirementDescription: "字符非干涉--8 时间层面",
 				done() { return player.t.best.gte(8) || hasAchievement("a", 71) },
 				effectDescription: "UN器不再重置任何东西。",
 			},
@@ -1745,8 +1745,8 @@ addLayer("s", {
         }},
         color: "#57d4c6",
         requires() { return new Decimal(1e120).times(Decimal.pow("1e180", Decimal.pow(player[this.layer].unlockOrder, 1.415038))) }, // Can be a function that takes requirement increases into account
-        resource: "空间能量", // Name of prestige currency
-        baseResource: "点数", // Name of resource prestige is based on
+        resource: "空间量化", // Name of prestige currency
+        baseResource: "字符", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.4:1.85) }, // Prestige currency exponent
@@ -1806,18 +1806,18 @@ addLayer("s", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你最多拥有 ' + formatWhole(player.s.best) + ' 空间能量'},
+				function() {return '你最多拥有 ' + formatWhole(player.s.best) + ' 空间量化'},
 					{}],
 			"blank",
 			"milestones", "blank", 
 			["display-text",
-				function() {return '你有 ' + format(player.g.power) + ' GP'},
+				function() {return '你有 ' + format(player.g.power) + ' KP'},
 					{}],
 			["display-text",
-				function() {return '你的空间能量为你提供了 ' + formatWhole(tmp.s.space) + ' 空间'},
+				function() {return '你的空间量化为你提供了 ' + formatWhole(tmp.s.space) + ' 通道'},
 					{}],
 			["display-text",
-				function() {return tmp.s.buildingPower.eq(1)?"":("建筑增益: "+format(tmp.s.buildingPower.times(100))+"%")},
+				function() {return tmp.s.buildingPower.eq(1)?"":("通道增益: "+format(tmp.s.buildingPower.times(100))+"%")},
 					{}],
 			"blank",
 			"buyables", "blank", "upgrades"],
@@ -1875,14 +1875,14 @@ addLayer("s", {
 			rows: 3,
 			cols: 5,
 			11: {
-				title: "Space X",
-				description: "为所有建筑提供一个免费等级。",
+				title: "发布等级",
+				description: "为所有通道提供一个免费等级。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?758:2) },
 				unlocked() { return player[this.layer].unlocked }
 			},
 			12: {
-				title: "生成器生成器",
-				description: "GP 加成 GP 生成。",
+				title: "键鼠",
+				description: "KP 加成 KP 生成。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?758:3) },
 				unlocked() { return hasUpgrade("s", 11) },
 				effect() { return player.g.power.add(1).log10().add(1) },
@@ -1890,10 +1890,10 @@ addLayer("s", {
 				formula: "log(x+1)+1",
 			},
 			13: {
-				title: "运走",
-				description: "建筑等级加成 GP 获取，你获得 2 个额外的空间。",
+				title: "重建新概念",
+				description: "通道等级加成 KP 获取，你获得 2 个额外的通道。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e48900":([1e37,1e59,1e94][player[this.layer].unlockOrder||0])) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				unlocked() { return hasUpgrade("s", 11) },
@@ -1902,29 +1902,29 @@ addLayer("s", {
 				formula: "20^x",
 			},
 			14: {
-				title: "进入重复",
-				description: "解锁 <b>第四建筑</b>.",
+				title: "快速通道",
+				description: "解锁 <b>第四ROM通道</b>.",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:4) },
 				unlocked() { return hasUpgrade("s", 12)||hasUpgrade("s", 13) }
 			},
 			15: {
-				title: "四边形",
-				description: "<b>第四建筑</b> 成本开立方根，3x 增强，并增益 <b>BP 连击</b> （效果是 2.7 次方根）。",
+				title: "弯道",
+				description: "<b>第四ROM通道</b> 成本开立方根，3x 弱秒，并增益 <b>查找字符串</b> （效果是 2.7 次方根）。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e55000":([1e65,(player.e.unlocked?1e94:1e88),1e129][player[this.layer].unlockOrder||0])) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				unlocked() { return hasUpgrade("s", 14) },
 			},
 			21: {
-				title: "宽广",
-				description: "所有建筑效果提高 8%。",
+				title: "通道放大",
+				description: "所有通道效果提高 8%。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:13) },
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			22: {
-				title: "时空异常",
-				description: "非扩展时空胶囊提供免费建筑。",
+				title: "时空通道",
+				description: "非扩展时空层面提供免费通道。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e55225":2.5e207) },
 				currencyDisplayName: "GP",
 				currencyInternalName: "power",
@@ -1936,7 +1936,7 @@ addLayer("s", {
 			},
 			23: {
 				title: "反转空间",
-				description() { return (player.e.unlocked&&player.t.unlocked&&(player.s.unlockOrder||0)==0)?"所有建筑价格除以 1e20。":("空间以你首先选择空间的方式运行"+(player.t.unlocked?"，并且所有建筑价格除以 1e20。":"。")) },
+				description() { return (player.e.unlocked&&player.t.unlocked&&(player.s.unlockOrder||0)==0)?"所有通道价格除以 1e20。":("空间以你首先选择空间的方式运行"+(player.t.unlocked?"，并且所有通道价格除以 1e20。":"。")) },
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e55300":(player.s.unlockOrder>=2?1e141:(player.e.unlocked?1e105:1e95))) },
 				currencyDisplayName: "GP",
                 currencyInternalName: "power",
@@ -1946,9 +1946,9 @@ addLayer("s", {
 			},
 			24: {
 				title: "想要更多？",
-				description: "建筑总数加成四个 <b>给我更多</b> 效果。",
+				description: "通道总数加成四个赋能值升级效果。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e55555":1e177) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
 				unlocked() { return hasAchievement("a", 33) },
@@ -1959,33 +1959,33 @@ addLayer("s", {
 				formula: "sqrt(x)/5+1",
 			},
 			25: {
-				title: "另一个？",
-				description: "解锁 第五建筑",
+				title: "五连升击",
+				description: "解锁 第五ROM通道",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e8e5":1e244) },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			31: {
-				title: "有用维度",
-				description: "前四个建筑的价格指数降低 0.04*(5-n)，n 是这个建筑的编号。",
+				title: "通道开拓",
+				description: "前四个通道的价格指数降低 0.04*(5-n)，n 是这个通道的编号。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?815:1225) },
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "需要: 1,200% 建筑增益",
+				pseudoReq: "需要: 1,200% 通道增益",
 				pseudoCan() { return tmp.s.buildingPower.gte(12) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				style: {"font-size": "9px"},
 			},
 			32: {
-				title: "庞加莱循环",
-				description: "每个建筑的购买等级加成至前一个建筑的额外等级。",
+				title: "附加前道面",
+				description: "每个通道的购买等级加成至前一个通道的额外等级。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e9e5":"e2.25e8") },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "需要: e1e9 点数",
+				pseudoReq: "需要: e1e9 字符",
 				pseudoCan() { return player.points.gte("e1e9") },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
@@ -2006,14 +2006,14 @@ addLayer("s", {
 				style: {"font-size": "8px"},
 			},
 			34: {
-				title: "能量还原",
-				description: "空间能量降低前五个建筑的价格底数。",
+				title: "通道渗透",
+				description: "空间能量降低前五个ROM通道的价格底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e9.01e5":"e1.95e8") },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "需要: 无购买建筑达到 e160,000,000 GP（使用建筑重置）。",
+				pseudoReq: "需要: 无购买ROM通道达到 e160,000,000 KP（使用通道重置）。",
 				pseudoCan() { return player.g.power.gte("e1.6e8") && tmp.s.manualBuildingLevels.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.s.points.plus(1).log10().plus(1).log10().plus(1) },
@@ -2022,11 +2022,11 @@ addLayer("s", {
 				style: {"font-size": "9px"},
 			},
 			35: {
-				title: "连续维度",
-				description: "未使用的空间增幅荣耀获取。",
+				title: "通道积",
+				description: "未使用的通道增幅荣耀获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?825:1255) },
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "需要: 9e16 空间",
+				pseudoReq: "需要: 9e16 通道",
 				pseudoCan() { return tmp.s.space.gte(9e16) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return tmp.s.space.plus(1) },
@@ -2082,9 +2082,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x"+("*"+format(tmp.s.buildScalePower))+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x"+("*"+format(tmp.s.buildScalePower))+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " KP"))+"\n\
                     等级: " + formatWhole(player[this.layer].buyables[this.id])+(data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-                   "+(tmp.nerdMode?("公式: 等级^sqrt(空间能量)*等级*4"):(" 空间能量加成点数和声望获取 " + format(data.effect) +"x"))
+                   "+(tmp.nerdMode?("公式: 等级^sqrt(空间能量)*等级*4"):(" 空间能量加字符和子串级获取 " + format(data.effect) +"x"))
                 },
                 unlocked() { return player[this.layer].unlocked }, 
                 canAfford() {
@@ -2113,7 +2113,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			12: {
-				title: "第二建筑",
+				title: "第二ROM通道",
 				costExp() { 
 					let exp = 1.35;
 					if (hasUpgrade("s", 31) && player.i.buyables[12].gte(5)) exp -= 0.04*(15-this.id);
@@ -2135,9 +2135,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " KP"))+"\n\
                     等级: " + formatWhole(player[this.layer].buyables[this.id])+(data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-                    "+(tmp.nerdMode?("公式: sqrt(等级)"):("加成增幅器和生成器底数 +" + format(data.effect)))
+                    "+(tmp.nerdMode?("公式: sqrt(等级)"):("加成UN器和键盘软垫底数 +" + format(data.effect)))
                 },
                 unlocked() { return player[this.layer].unlocked }, 
                 canAfford() {
