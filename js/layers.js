@@ -2166,7 +2166,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			13: {
-				title: "第三建筑",
+				title: "第三ROM通道",
 				costExp() { 
 					let exp = 1.35;
 					if (hasUpgrade("s", 31) && player.i.buyables[12].gte(5)) exp -= 0.04*(15-this.id);
@@ -2189,9 +2189,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " KP"))+"\n\
                     等级: " + formatWhole(player[this.layer].buyables[this.id])+(data.freeLevels.times(tmp.s.buildingPower).gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-                    "+(tmp.nerdMode?("公式: "+(data.effect.gte("e3e9")?"10^((等级^0.3)*5.45e6)":"1e18^(等级^0.9)")):("将增幅器和生成器的价格除以 " + format(data.effect)))
+                    "+(tmp.nerdMode?("公式: "+(data.effect.gte("e3e9")?"10^((等级^0.3)*5.45e6)":"1e18^(等级^0.9)")):("将UN器和键盘软垫的价格除以 " + format(data.effect)))
                 },
                 unlocked() { return player[this.layer].unlocked }, 
                 canAfford() {
@@ -2220,7 +2220,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			14: {
-				title: "第四建筑",
+				title: "第四ROM通道",
 				costExp() { 
 					let exp = 1.35;
 					if (hasUpgrade("s", 31) && player.i.buyables[12].gte(5)) exp -= 0.04*(15-this.id);
@@ -2248,7 +2248,7 @@ addLayer("s", {
 					let extForm = hasUpgrade("s", 15)?3:1
                     return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+(hasUpgrade("s", 15)?"^(1/3)":"")+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
                     等级: " + formatWhole(player[this.layer].buyables[this.id])+(data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-					"+(tmp.nerdMode?("公式: "+(data.effect.gte(1e6)?("log(等级"+(extForm==1?"":"*3")+"+1)*2.08e5"):("(等级"+(extForm==1?"":"*3")+"+1)^1.25"))):("<b>一折</b> 效果提升至 " + format(data.effect) + " 次幂"))
+					"+(tmp.nerdMode?("公式: "+(data.effect.gte(1e6)?("log(等级"+(extForm==1?"":"*3")+"+1)*2.08e5"):("(等级"+(extForm==1?"":"*3")+"+1)^1.25"))):("<b>UN扩展符</b> 效果提升至 " + format(data.effect) + " 次幂"))
                 },
                 unlocked() { return player[this.layer].unlocked&&hasUpgrade("s", 14) }, 
                 canAfford() {
@@ -2277,7 +2277,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			15: {
-				title: "第五建筑",
+				title: "第五ROM通道",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
 					let cost = Decimal.pow(base, x.times(tmp.s.buildScalePower).pow(1.35)).times(base);
@@ -2296,9 +2296,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^1.35)*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^1.35)*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " KP"))+"\n\
                     等级: " + formatWhole(player[this.layer].buyables[this.id])+(data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-					"+(tmp.nerdMode?("公式: 等级"+(hasUpgrade("q", 32)?"":"/2")):("为之前的建筑增加 " + formatWhole(data.effect)+" 等级。"))
+					"+(tmp.nerdMode?("公式: 等级"+(hasUpgrade("q", 32)?"":"/2")):("为之前的通道增加 " + formatWhole(data.effect)+" 等级。"))
                 },
                 unlocked() { return player[this.layer].unlocked&&hasUpgrade("s", 25) }, 
                 canAfford() {
@@ -2327,7 +2327,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			16: {
-				title: "第六建筑",
+				title: "第六ROM--TROM链",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2377,7 +2377,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			17: {
-				title: "第七建筑",
+				title: "第七ROM--YROM链",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2427,7 +2427,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			18: {
-				title: "第八建筑",
+				title: "第八ROM--HROM链",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2477,7 +2477,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			19: {
-				title: "第九建筑",
+				title: "第九ROM--EROM链",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2527,7 +2527,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			20: {
-				title: "第十建筑",
+				title: "第十ROM-DROM链",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2578,30 +2578,30 @@ addLayer("s", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "2 空间能量",
+				requirementDescription: "空间扩增--2 空间量化",
 				done() { return player.s.best.gte(2) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留增幅器和生成器里程碑。",
+				effectDescription: "重置时保留UN器和键盘软垫里程碑。",
 			},
 			1: {
-				requirementDescription: "3 空间能量",
+				requirementDescription: "子串级静止--3 空间量化",
 				done() { return player.s.best.gte(3) || hasAchievement("a", 41) || hasAchievement("a", 71) },
-				effectDescription: "重置时保留声望升级。",
+				effectDescription: "重置时保留子串级升级。",
 			},
 			2: {
-				requirementDescription: "4 空间能量",
+				requirementDescription: "键盘量减--4 空间量化",
 				done() { return player.s.best.gte(4) || hasAchievement("a", 71) },
-				effectDescription: "对任何重置保留生成器升级。",
+				effectDescription: "对任何重置保留键盘软垫升级。",
 			},
 			3: {
-				requirementDescription: "5 空间能量",
+				requirementDescription: "彻底自动化--5 空间量化",
 				done() { return player.s.best.gte(5) || hasAchievement("a", 71) },
-				effectDescription: "解锁自动生成器。",
+				effectDescription: "解锁自动键盘软垫。",
 				toggles: [["g", "auto"]],
 			},
 			4: {
-				requirementDescription: "8 空间能量",
+				requirementDescription: "子串级节省--8 空间量化",
 				done() { return player.s.best.gte(8) || hasAchievement("a", 71) },
-				effectDescription: "生成器不再重置任何东西。",
+				effectDescription: "键盘软垫不再重置任何东西。",
 			},
 		},
 })
@@ -2656,7 +2656,7 @@ addLayer("sb", {
 		canBuyMax() { return hasMilestone("q", 7) },
         row: 2, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "B", description: "按 Shift+B 进行超级增幅器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "B", description: "按 Shift+B 进行ACD器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return player.t.unlocked&&player.e.unlocked&&player.s.unlocked},
 		automate() {},
@@ -2680,7 +2680,7 @@ addLayer("sb", {
 			return Decimal.pow(this.effectBase(), player.sb.points).max(0);
 		},
 		effectDescription() {
-			return "增幅增幅器底数 "+format(tmp.sb.effect)+"x"+(tmp.nerdMode?("\n (每个 "+format(tmp.sb.effectBase)+"x)"):"")
+			return "ascUN器底数 "+format(tmp.sb.effect)+"x"+(tmp.nerdMode?("\n (每个 "+format(tmp.sb.effectBase)+"x)"):"")
 		},
 		doReset(resettingLayer){ 
 			let keep = []
@@ -8656,7 +8656,7 @@ addLayer("id", {
         baseResource: "思考", // Name of resource prestige is based on
         baseAmount() {return player.ne.thoughts}, // Get the current amount of baseResource
 		roundUpCost: true,
-        type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(1.4), // Prestige currency exponent
 		base: new Decimal(1.2),
 		effect() { return Decimal.sub((hasAchievement("a", 155)?0.005:0)+(hasUpgrade("ai", 32)?0.99:0.95), Decimal.div(0.95, player.id.points.plus(1).log10().times(hasMilestone("id", 4)?1.5:1).times(hasMilestone("id", 5)?1.75:1).plus(1))) },
@@ -10719,4 +10719,4 @@ addLayer("ab", {
 			style: {"background-color"() { return player.id.auto?"#fad682":"#666666" }},
 		},
 	},
-})
+}
