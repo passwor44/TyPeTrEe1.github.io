@@ -10719,4 +10719,4 @@ addLayer("ab", {
 			style: {"background-color"() { return player.id.auto?"#fad682":"#666666" }},
 		},
 	},
-}
+})
