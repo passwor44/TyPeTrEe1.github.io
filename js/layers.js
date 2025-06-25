@@ -3510,7 +3510,7 @@ addLayer("q", {
 				unlocked() { return hasUpgrade("q", 14)&&hasUpgrade("q", 22) },
 			},
 			25: {
-				title: "本降芯片"
+				title: "本降芯片",
 				description: "星云砖降低光片价格底数。",
 				cost() { return Decimal.pow("e3e6", player.q.time.times(4).plus(1).log10().pow(2)).times("e2e7") },
 				costFormula: "(e3,000,000^(log(time*4+1)^2))*e20,000,000",
