@@ -2696,7 +2696,7 @@ addLayer("sb", {
 		tabFormat: ["main-display",
 			"prestige-button",
 			"blank",
-			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sb"):false)?("你的超级增幅器为你提供了 <h3 style='color: #8882ba; text-shadow: #7f78c4 0px 0px 10px;'>"+formatWhole(tmp.sb.spectralTotal)+"</h3> 虚增幅器"+(tmp.nerdMode?(" (每个 "+formatWhole(tmp.sb.spectralEach)+")"):"")+"，计算入增幅器效果，但不计入增幅器相关的升级效果。"):"" }],
+			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sb"):false)?("你的ACD器为你提供了 <h3 style='color: #71ffc1; text-shadow: #b7fff0 0px 0px 10px;'>"+formatWhole(tmp.sb.spectralTotal)+"</h3> casU"+(tmp.nerdMode?(" (每个 "+formatWhole(tmp.sb.spectralEach)+")"):"")+"，计算入UN器效果，但不计入UN器相关的升级效果。"):"" }],
 		],
 		startData() { return {
 			unlocked: false,
@@ -2734,13 +2734,13 @@ s::::::::::::::s  g::::::::::::::::g
                         gggggg       
 */
 addLayer("sg", {
-        name: "super generators", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "SG", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "Kbreplicator", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "KBr", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#248239",
+        color: "#8fc6bb",
         requires: new Decimal(200), // Can be a function that takes requirement increases into account
-        resource: "超级生成器", // Name of prestige currency
-        baseResource: "生成器", // Name of resource prestige is based on
+        resource: "键盘复制", // Name of prestige currency
+        baseResource: "键软", // Name of resource prestige is based on
         baseAmount() {return player.g.points}, // Get the current amount of baseResource
 		roundUpCost: true,
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -2761,7 +2761,7 @@ addLayer("sg", {
 		canBuyMax() { return hasMilestone("q", 7) },
         row: 2, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "G", description: "按 Shift+G 进行超级生成器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "K", description: "按 Shift+K 进行键盘复制重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		layerShown(){return (hasUpgrade("q", 33)||player.ma.selectionActive)&&player.q.unlocked},
 		resetsNothing() { return hasMilestone("q", 6) && player.ma.current!="sg" },
@@ -2785,7 +2785,7 @@ addLayer("sg", {
 			return eff;
 		},
 		effectDescription() {
-			return "生成 "+format(tmp.sg.effect)+" 超级 GP/sec"+(tmp.nerdMode?("\n (每个 "+format(tmp.sg.effectBase)+"x)"):"")
+			return "生成 "+format(tmp.sg.effect)+" infitKP/sec"+(tmp.nerdMode?("\n (每个 "+format(tmp.sg.effectBase)+"x)"):"")
 		},
 		enEff() {
 			if (!unl(this.layer)) return new Decimal(1);
@@ -2805,10 +2805,10 @@ addLayer("sg", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.sg.power) + ' 超级 GP，增幅生成器底数 '+format(tmp.sg.enEff)+'x'+(tmp.nerdMode?(" (sqrt(x+1))"):"")},
+				function() {return '你有 ' + format(player.sg.power) + ' infitKP，增幅键软底数 '+format(tmp.sg.enEff)+'x'+(tmp.nerdMode?(" (sqrt(x+1))"):"")},
 					{}],
 			"blank",
-			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sg"):false)?("你的超级生成器为你提供了 <h3 style='color: #84b88a; text-shadow: #78c48f 0px 0px 10px;'>"+formatWhole(tmp.sg.spectralTotal)+"</h3> 虚生成器"+(tmp.nerdMode?(" (((log(timeSinceRow4Reset+1)*(SG^2))^0.95)*1.2)"):"")+"，计算入生成器效果，但不计入生成器相关的升级效果。"):"" }],
+			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sg"):false)?("你的键盘复制为你供了 <h3 style='color: #63fcff; text-shadow: #a3ffec 0px 0px 10px;'>"+formatWhole(tmp.sg.spectralTotal)+"</h3> 虚键软"+(tmp.nerdMode?(" (((log(timeSinceRow4Reset+1)*(SG^2))^0.95)*1.2)"):"")+"，计算入键软效果，但不计入键软相关的升级效果。"):"" }],
 		],
 		startData() { return {
 			unlocked: false,
@@ -2848,8 +2848,8 @@ h:::::h
                     
 */
 addLayer("h", {
-        name: "hindrance", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "ER", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "EpsilonParticle", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "EP", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -2861,7 +2861,7 @@ addLayer("h", {
         }},
         color: "#58a7ff",
         requires: new Decimal(1e30), // Can be a function that takes requirement increases into account
-        resource: "障碍灵魂", // Name of prestige currency
+        resource: "对虚粒子", // Name of prestige currency
         baseResource: "TE", // Name of resource prestige is based on
         baseAmount() {return player.t.energy}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -2878,7 +2878,7 @@ addLayer("h", {
         },
         row: 3, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "h", description: "按 H 进行障碍重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "e", description: "按 E 进行粒子重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         doReset(resettingLayer){ 
 			let keep = [];
@@ -2909,7 +2909,7 @@ addLayer("h", {
 			return eff;
 		},
 		effectDescription() {
-			return "增幅点数获取、TE 获取与 TE 上限 "+format(tmp.h.effect)+" ("+(tmp.nerdMode?(tmp.h.effect.gte(15e4)?("(10^sqrt(log(hindranceSpirit/1e3*(log(points+1)+1))/log(1.5e5))+1)^("+((hasChallenge("h", 11)?3.6:3)*(hasUpgrade("ba", 21)?8:1))+")"):("(hindranceSpirit/1e3*(log(points+1)+1)+1)^("+((hasChallenge("h", 11)?3.6:3)*(hasUpgrade("ba", 21)?8:1))+")")):"基于点数")+")"
+			return "增幅字符获取、TE 获取与 TE 上限 "+format(tmp.h.effect)+" ("+(tmp.nerdMode?(tmp.h.effect.gte(15e4)?("(10^sqrt(log(hindranceSpirit/1e3*(log(points+1)+1))/log(1.5e5))+1)^("+((hasChallenge("h", 11)?3.6:3)*(hasUpgrade("ba", 21)?8:1))+")"):("(hindranceSpirit/1e3*(log(points+1)+1)+1)^("+((hasChallenge("h", 11)?3.6:3)*(hasUpgrade("ba", 21)?8:1))+")")):"基于字符")+")"
 		},
 		costMult11() {
 			let mult = new Decimal(1);
@@ -2942,9 +2942,9 @@ addLayer("h", {
 		milestones: {
 			0: {
 				unlocked() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("h"):false) },
-				requirementDescription: "e300,000,000 障碍灵魂",
+				requirementDescription: "重复生产--e300,000,000 虚粒子",
 				done() { return player.h.points.gte("e3e8") },
-				effectDescription: "解锁自动可重复障碍。",
+				effectDescription: "解锁自动可重复生成粒子。",
 				toggles: [["h", "auto"]],
 			},
 		},
@@ -2952,14 +2952,14 @@ addLayer("h", {
 			rows: 4,
 			cols: 2,
 			11: {
-				name: "升级荒漠",
+				name: "重价粒子",
 				completionLimit: 1,
-				challengeDescription: "声望/增幅器升级会无视里程碑进行重置，同时每个声望/增幅器升级夸张地增加其他升级的价格。",
+				challengeDescription: "子串级/UN器升级会无视里程碑进行重置，同时每个子串级/UN器升级夸张地增加其他升级的价格。",
 				unlocked() { return player.h.unlocked },
 				goal() { return new Decimal(player.ma.current=="h"?"e1.37e8":"1e1325") },
-				currencyDisplayName: "点数",
+				currencyDisplayName: "字符",
 				currencyInternalName: "points",
-				rewardDescription: "解锁诡异升级，同时障碍灵魂的效果提升至 1.2 次幂。",
+				rewardDescription: "解锁诡异升级，同时虚粒子的效果提升至 1.2 次幂。",
 				onStart(testInput=false) { 
 					if (testInput && !(hasAchievement("a", 81)&&player.ma.current!="h")) {
 						player.p.upgrades = []; 
@@ -3177,8 +3177,8 @@ q:::::::qqqqq:::::q
                     
 */
 addLayer("q", {
-        name: "quirks", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "Q", // This appears on the layer's node. Default is the id with the first letter capitalized
+        name: "intangible", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "Int", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -3191,10 +3191,10 @@ addLayer("q", {
 			first: 0,
 			pseudoUpgs: [],
         }},
-        color: "#c20282",
+        color: "#a7edff",
         requires: new Decimal("1e512"), // Can be a function that takes requirement increases into account
-        resource: "诡异", // Name of prestige currency
-        baseResource: "GP", // Name of resource prestige is based on
+        resource: "透术", // Name of prestige currency
+        baseResource: "KP", // Name of resource prestige is based on
         baseAmount() {return player.g.power}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?.008:.0075) }, // Prestige currency exponent
@@ -3212,7 +3212,7 @@ addLayer("q", {
         },
         row: 3, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "q", description: "按 Q 进行诡异重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "i", description: "按 I 进行透析重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         doReset(resettingLayer){ 
 			let keep = [];
@@ -3254,33 +3254,33 @@ addLayer("q", {
 					"prestige-button",
 					"blank",
 					["display-text",
-						function() {return '你有 ' + formatWhole(player.g.power)+' GP'},
+						function() {return '你有 ' + formatWhole(player.g.power)+' KP'},
 							{}],
 					["display-text",
-						function() {return '你最多拥有 ' + formatWhole(player.q.best)+' 诡异'},
+						function() {return '你最多拥有 ' + formatWhole(player.q.best)+' 透术'},
 							{}],
 					["display-text",
-						function() {return '你总共拥有 ' + formatWhole(player.q.total)+' 诡异'},
+						function() {return '你总共拥有 ' + formatWhole(player.q.total)+' 透术'},
 							{}],
 					"blank",
 					["display-text",
-						function() {return '你有 ' + formatWhole(player.q.energy)+' QE ('+(tmp.nerdMode?('基础获取: (timeInRun^(quirkLayers-1))'):'由诡异层生成')+')，增幅点数和 GP 获取 ' + format(tmp.q.enEff)+(tmp.nerdMode?(" ((x+1)^"+format(hasUpgrade("q", 23)?6:2)+"*"+format(improvementEffect("q", 23))+")"):"")},
+						function() {return '你有 ' + formatWhole(player.q.energy)+' IE ('+(tmp.nerdMode?('基础获取: (timeInRun^(quirkLayers-1))'):'由光片生成')+')，增幅字符和 KP 获取 ' + format(tmp.q.enEff)+(tmp.nerdMode?(" ((x+1)^"+format(hasUpgrade("q", 23)?6:2)+"*"+format(improvementEffect("q", 23))+")"):"")},
 							{}],
 					"blank",
 					"milestones", "blank",
 					"blank",
 					"buyables", "blank",
-					["display-text", "注意: 大部分诡异升级随时间变贵，但在执行诡异重置时恢复。"], "blank",
+					["display-text", "注意: 大部分透明升级随时间变贵，但在执行透明重置时恢复。"], "blank",
 					"upgrades"],
 			},
 			Improvements: {
 				unlocked() { return hasUpgrade("q", 41) },
-				buttonStyle() { return {'background-color': '#f25ed7'} },
+				buttonStyle() { return {'background-color': '#a7c5ff'} },
 				content: [
 					"main-display",
 					"blank",
 					["display-text",
-						function() {return '你有 ' + formatWhole(player.q.energy)+' QE ('+(tmp.nerdMode?('基础获取: (timeInRun^(quirkLayers-1))'):'由诡异层生成')+'), 提供了下列诡异改良 (下一个需要 '+format(tmp.q.impr.overallNextImpr)+')'},
+						function() {return '你有 ' + formatWhole(player.q.energy)+' IE ('+(tmp.nerdMode?('基础获取: (timeInRun^(quirkLayers-1))'):'由光片生成')+'), 提供了下列光谱调整 (下一个需要 '+format(tmp.q.impr.overallNextImpr)+')'},
 							{}],
 					"blank",
 					"improvements"],
@@ -3297,7 +3297,7 @@ addLayer("q", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "诡异层",
+				title: "光片",
 				costBase() {
 					let base = new Decimal(2);
 					if (hasUpgrade("q", 43)) base = base.sub(.25);
@@ -3314,7 +3314,7 @@ addLayer("q", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = (tmp.nerdMode?("价格公式: "+format(data.costBase)+"^("+format(data.costBase)+"^x-1)"):("价格: " + formatWhole(data.cost) + " 诡异")+"\n\
+                    let display = (tmp.nerdMode?("价格公式: "+format(data.costBase)+"^("+format(data.costBase)+"^x-1)"):("价格: " + formatWhole(data.cost) + " 透术")+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+(tmp.q.freeLayers?(tmp.q.freeLayers.gt(0)?(" + "+format(tmp.q.freeLayers)):""):""))
 					return display;
                 },
@@ -3339,50 +3339,50 @@ addLayer("q", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "2 总诡异",
+				requirementDescription: "20%透明--2 总透术",
 				done() { return player.q.total.gte(2) || hasAchievement("a", 71) },
-				effectDescription: "对任何重置保留增幅器、生成器、空间和时间里程碑。",
+				effectDescription: "对任何重置保留UN器、键软、空间和时间里程碑。",
 			},
 			1: {
-				requirementDescription: "3 总诡异",
+				requirementDescription: "光焦三层--3 总透术",
 				done() { return player.q.total.gte(3) || hasAchievement("a", 71) },
-				effectDescription: "你可以最大购买时间和空间，每秒获得 100% 增强，并解锁自动增强子和自动扩展时空胶囊。",
+				effectDescription: "你可以最大购买时间和空间，每秒获得 100% 弱秒，并解锁自动虚弱后继和自动事件切片。",
 				toggles: [["e", "auto"], ["t", "autoExt"]],
 			},
 			2: {
-				requirementDescription: "4 总诡异",
+				requirementDescription: "重新聚焦--4 总透术",
 				done() { return player.q.total.gte(4) || hasAchievement("a", 71) },
-				effectDescription: "对任何重置保留空间、增强和时间升级，同时在诡异/障碍重置中保留建筑。",
+				effectDescription: "对任何重置保留空间、虚弱和时间升级，同时在透析/粒子重置中保留通道。",
 			},
 			3: {
-				requirementDescription: "6 总诡异",
+				requirementDescription: "透光获取--6 总透术",
 				done() { return player.q.total.gte(6) || hasAchievement("a", 71) },
-				effectDescription: "解锁自动时间胶囊和自动空间能量。",
+				effectDescription: "解锁自动时间层面和自动空间量化。",
 				toggles: [["t", "auto"], ["s", "auto"]],
 			},
 			4: {
-				requirementDescription: "10 总诡异",
+				requirementDescription: "双生层级--10 总透术",
 				done() { return player.q.total.gte(10) || hasAchievement("a", 71) },
 				effectDescription: "解锁障碍和自动超级增幅器。",
 				toggles: [["sb", "auto"]],
 			},
 			5: {
-				requirementDescription: "25 总诡异",
+				requirementDescription: "聚焦交换--25 总透术",
 				done() { return player.q.total.gte(25) || hasAchievement("a", 71) },
-				effectDescription: "时间、空间和超级增幅器不再重置任何东西，同时你可以摧毁建筑。",
+				effectDescription: "时间、空间和ACD器不再重置任何东西，同时你可以摧毁通道。",
 			},
 			6: {
 				unlocked() { return player.sg.unlocked },
-				requirementDescription: "1e22 总诡异",
+				requirementDescription: "生成革命-1e22 总透术",
 				done() { return player.q.total.gte(1e22) || hasAchievement("a", 71) },
-				effectDescription: "解锁自动超级生成器，并且超级生成器不再重置任何东西。",
+				effectDescription: "解锁自动软垫复制，并且软垫复制不再重置任何东西。",
 				toggles: [["sg", "auto"]],
 			},
 			7: {
 				unlocked() { return player.sg.unlocked },
-				requirementDescription: "1e60 总诡异",
+				requirementDescription: "完全第三--1e60 总透术",
 				done() { return player.q.total.gte(1e60) || hasAchievement("a", 71) },
-				effectDescription: "你可以最大购买超级增幅器和超级生成器，同时解锁自动建筑。",
+				effectDescription: "你可以最大购买ACD器和软垫复制，同时解锁自动通道。",
 				toggles: [["s", "autoBld"]],
 			},
 		},
