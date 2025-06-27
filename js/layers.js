@@ -5212,8 +5212,8 @@ ppppppppp
                                      
 */
 addLayer("ps", {
-		name: "phantom souls", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "PS", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "deconstruction", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "DC", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -5227,9 +5227,9 @@ addLayer("ps", {
 			autoGhost: false,
 			first: 0,
         }},
-        color: "#b38fbf",
+        color: "#96bcff",
         requires() { return new Decimal("1e16000") }, // Can be a function that takes requirement increases into account
-        resource: "幽魂", // Name of prestige currency
+        resource: "解构", // Name of prestige currency
         baseResource: "IE", // Name of resource prestige is based on
         baseAmount() {return player.q.energy}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -5558,8 +5558,8 @@ h:::::h
                                       
 */
 addLayer("hn", {
-		name: "honour", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "HN", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "machine", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "MH", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -5568,11 +5568,11 @@ addLayer("hn", {
 			total: new Decimal(0),
 			first: 0,
         }},
-        color: "#ffbf00",
+        color: "#91fff7",
 		nodeStyle() {return {
 			"background-color": (((player.hn.unlocked||canReset("hn"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer)))?"#ffbf00":"#bf8f8f"),
         }},
-        resource: "荣耀", // Name of prestige currency
+        resource: "机器", // Name of prestige currency
         type: "custom", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
 		baseResource: "魔法和平衡",
 		baseAmount() { return new Decimal(0) },
@@ -6195,8 +6195,8 @@ nn:::::::::::::::n
                   
 */
 addLayer("n", {
-		name: "nebula", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "N", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "celestial", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "CS", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -6209,9 +6209,9 @@ addLayer("n", {
 			activeSecondaries: {purpleBlue: false, blueOrange: false, orangePurple: false},
 			first: 0,
         }},
-        color: "#430082",
+        color: "#96f0ff",
 		nodeStyle() { return {
-			"background-color": (((player.n.unlocked||canReset("n"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer)))?"#430082":"#bf8f8f"),
+			"background-color": (((player.n.unlocked||canReset("n"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer)))?"#96f0ff":"#bf8f8f"),
 			color: (player.oldStyle?"white":"rgba(255, 255, 255, 0.75)"),
 		}},
 		componentStyles() { return {
@@ -6221,7 +6221,7 @@ addLayer("n", {
 		}},
         requires() { return new Decimal((player[this.layer].unlockOrder>0&&!hasAchievement("a", 92))?"1e288":"1e280") }, // Can be a function that takes requirement increases into account
 		increaseUnlockOrder: ["hs"],
-        resource: "星云", // Name of prestige currency
+        resource: "天星", // Name of prestige currency
         baseResource: "阳光", // Name of resource prestige is based on
         baseAmount() {return player.o.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -6464,7 +6464,7 @@ addLayer("hs", {
 			auto: false,
         }},
 		roundUpCost: true,
-        color: "#dfdfff",
+        color: "#6e81c2",
         requires() { return new Decimal((player[this.layer].unlockOrder>0&&!hasAchievement("a", 92))?420:360) }, // Can be a function that takes requirement increases into account
 		increaseUnlockOrder: ["n"],
         resource: "超空间能量", // Name of prestige currency 
@@ -6918,8 +6918,8 @@ iiiiiiii
         
 */
 addLayer("i", {
-		name: "imperium", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "I", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "release", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "Re", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -6930,9 +6930,9 @@ addLayer("i", {
 			auto: false,
 			first: 0,
         }},
-        color: "#e5dab7",
+        color: "#a2c1de",
         requires() { return new Decimal("1e11750") }, // Can be a function that takes requirement increases into account
-        resource: "砖石", // Name of prestige currency
+        resource: "版本", // Name of prestige currency
         baseResource: "子空间", // Name of resource prestige is based on
         baseAmount() {return player.ss.subspace}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
