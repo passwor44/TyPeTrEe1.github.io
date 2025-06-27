@@ -6266,7 +6266,7 @@ addLayer("n", {
 			"prestige-button",
 			"resource-display",
 			"blank",
-			["column", \
+			["column",
 				[(second?["clickable", 14]:[]),
 				
 				"blank",
