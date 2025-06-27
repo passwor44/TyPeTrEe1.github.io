@@ -4176,9 +4176,9 @@ addLayer("o", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "50,000 总阳光",
+				requirementDescription: "微型辐射--50,000 总阳光辐射",
 				done() { return player.o.total.gte(5e4) || hasAchievement("a", 71) },
-				effectDescription: "每秒获得 5% 的阳光。",
+				effectDescription: "每秒获得 5% 的阳光辐射。",
 			},
 		},
 })
@@ -4210,7 +4210,7 @@ s::::::::::::::s s::::::::::::::s
                                   
 */
 addLayer("ss", {
-        name: "subspace", // This is optional, only used in a few places, If absent it just uses the layer id.
+        name: "secondspace", // This is optional, only used in a few places, If absent it just uses the layer id.
         symbol: "SS", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
@@ -4224,8 +4224,8 @@ addLayer("ss", {
         color: "#2814ff",
         requires() { return new Decimal((player[this.layer].unlockOrder>0&&!hasAchievement("a", 62))?30:28) }, // Can be a function that takes requirement increases into account
 		roundUpCost: true,
-        resource: "子空间能量", // Name of prestige currency
-        baseResource: "空间能量", // Name of resource prestige is based on
+        resource: "第二空间能量", // Name of prestige currency
+        baseResource: "空间量化", // Name of resource prestige is based on
         baseAmount() {return player.s.points}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.07:1.1) }, // Prestige currency exponent
@@ -4264,14 +4264,14 @@ addLayer("ss", {
 		},
 		autoPrestige() { return player.ss.auto && hasMilestone("ba", 2) && player.ma.current!="ss" },
 		effectDescription() {
-			return "生成 "+format(tmp.ss.effect)+" 子空间/sec"+(tmp.nerdMode?("\n\(每个 "+format(tmp.ss.effBase)+"x)"):"")
+			return "生成 "+format(tmp.ss.effect)+" 第二空间/sec"+(tmp.nerdMode?("\n\(每个 "+format(tmp.ss.effBase)+"x)"):"")
 		},
 		update(diff) {
 			if (player.ss.unlocked) player.ss.subspace = player.ss.subspace.plus(tmp.ss.effect.times(diff));
 		},
         row: 3, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "S", description: "按 Shift+S 进行子空间重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "S", description: "按 Shift+S 进行第二空间重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return hasMilestone("ba", 2) },
 		effPow() {
@@ -4288,7 +4288,7 @@ addLayer("ss", {
 			"resource-display",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.ss.subspace) + ' 子空间，提供了 '+formatWhole(tmp.ss.eff1)+' 额外空间'+(tmp.nerdMode?(" ((log(x+1)^3)*"+format(tmp.ss.effPow.pow(3).times(100))+")"):"")+'，使建筑增强 '+format(tmp.ss.eff2.times(100))+'%'+(tmp.nerdMode?(" (log(log(x+1)*"+format(tmp.ss.effPow)+"+1)/6)"):"")+'，并使建筑价格降低 '+format(tmp.ss.eff3)+'x.'+(tmp.nerdMode?(" ((x+1)^"+format(tmp.ss.effPow.times(1e3))+")"):"")},
+				function() {return '你有 ' + format(player.ss.subspace) + ' 第二空间，提供了 '+formatWhole(tmp.ss.eff1)+' 额外通道'+(tmp.nerdMode?(" ((log(x+1)^3)*"+format(tmp.ss.effPow.pow(3).times(100))+")"):"")+'，使通道增强 '+format(tmp.ss.eff2.times(100))+'%'+(tmp.nerdMode?(" (log(log(x+1)*"+format(tmp.ss.effPow)+"+1)/6)"):"")+'，并使通道价格降低 '+format(tmp.ss.eff3)+'x.'+(tmp.nerdMode?(" ((x+1)^"+format(tmp.ss.effPow.times(1e3))+")"):"")},
 					{}],
 			"blank",
 			"upgrades",
@@ -4306,16 +4306,16 @@ addLayer("ss", {
 			cols: 3,
 			11: {
 				title: "空间觉醒",
-				description: "空间能量的价格公式的底下降 (1e15 -> 1e10)。",
+				description: "空间量化的价格公式的底下降 (1e15 -> 1e10)。",
 				cost() { return new Decimal((player.ma.current=="ss")?"1e14326":180) },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return player.ss.unlocked },
 			},
 			12: {
-				title: "子空间觉醒",
-				description: "子空间能量加成所有子空间效果。",
+				title: "继续觉醒",
+				description: "第二空间能量加成所有第二空间效果。",
 				cost() { return new Decimal((player.ma.current=="ss")?20:2) },
 				unlocked() { return hasUpgrade("ss", 11) },
 				effect() { 
@@ -4327,10 +4327,10 @@ addLayer("ss", {
 				formula: "sqrt(x/2.5)*100",
 			},
 			13: {
-				title: "粉碎使徒",
-				description: "诡异加成子空间获取。",
+				title: "穿越时空",
+				description: "透术加成第二空间获取。",
 				cost() { return new Decimal((player.ma.current=="ss")?"2e14382":1e3) },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return hasUpgrade("ss", 11) },
@@ -4339,37 +4339,37 @@ addLayer("ss", {
 				formula: "log(x+1)/10+1",
 			},
 			21: {
-				title: "非法升级",
-				description: "超级增幅器和超级生成器降价 20%。",
+				title: "独立加成下降",
+				description: "ACD器和键盘复制降价 20%。",
 				cost() { return new Decimal((player.ma.current=="ss")?"1e16708":1e4) },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return hasUpgrade("ss", 13) },
 			},
 			22: {
-				title: "太阳之下",
-				description: "<b>太阳核心</b> 使用更好的公式。",
+				title: "公式空间",
+				description: "<b>辐射增强</b> 使用更好的公式。",
 				cost() { return new Decimal((player.ma.current=="ss")?"1e17768":4e5) },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return hasUpgrade("ss", 21)&&player.o.unlocked },
 			},
 			23: {
-				title: "刹那",
-				description: "<b>永恒</b> 效果随时间增长（而不是下降）。",
+				title: "不减反增",
+				description: "<b>虚后继粒子</b> 效果随时间增长（而不是下降）。",
 				cost() { return new Decimal((player.ma.current=="ss")?"5e17768":1e6) },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return hasUpgrade("ss", 21)&&player.o.unlocked },
 			},
 			31: {
-				title: "止步",
-				description: "未使用的空间提供免费建筑。",
+				title: "废弃重建",
+				description: "未使用的建筑提供免费通道。",
 				cost() { return new Decimal((player.ma.current=="ss")?1626:42) },
-				currencyDisplayName: "空间能量",
+				currencyDisplayName: "空间量化",
 				currencyInternalName: "points",
 				currencyLayer: "s",
 				unlocked() { return hasUpgrade("ss", 22)||hasUpgrade("ss", 23) },
@@ -4379,9 +4379,9 @@ addLayer("ss", {
 			},
 			32: {
 				title: "超越无限",
-				description: "诡异层加成子空间能量和超级生成器底数。.",
+				description: "诡异层加成子空间能量和键盘复制底数。.",
 				cost() { return new Decimal((player.ma.current=="ss")?1628:43) },
-				currencyDisplayName: "空间能量",
+				currencyDisplayName: "空间量化",
 				currencyInternalName: "points",
 				currencyLayer: "s",
 				unlocked() { return hasUpgrade("ss", 31) },
@@ -4390,10 +4390,10 @@ addLayer("ss", {
 				formula: "sqrt(x)/1.25",
 			},
 			33: {
-				title: "永辉",
-				description: "<b>永恒</b> 效果基于你本轮游戏时长，太阳核心加成太阳能。",
+				title: "粒子超越",
+				description: "<b>虚后继粒子</b> 效果基于你本轮游戏时长，辐射增幅加成控制光能。",
 				cost() { return new Decimal((player.ma.current=="ss")?"1e17796":2.5e7) },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return hasUpgrade("ss", 23)&&hasUpgrade("ss", 31) },
@@ -4403,29 +4403,29 @@ addLayer("ss", {
 				style: {"font-size": "9px"},
 			},
 			41: {
-				title: "更多太阳",
-				description: "解锁日冕波动。",
+				title: "更多辐射",
+				description: "解锁辐射阶层。",
 				cost() { return new Decimal((player.ma.current=="ss")?1628:46) },
-				currencyDisplayName: "空间能量",
+				currencyDisplayName: "空间量化",
 				currencyInternalName: "points",
 				currencyLayer: "s",
 				unlocked() { return hasUpgrade("ss", 33) },
 			},
 			42: {
-				title: "子子空间",
-				description: "建筑增强 100%（叠加）。",
+				title: "通道更提高",
+				description: "通道增强 100%（叠加）。",
 				cost() { return new Decimal((player.ma.current=="ss")?"1e17799":"1e936") },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return hasChallenge("h", 42) },
 			},
 			43: {
-				title: "挑战加速",
+				title: "速离",
 				endpoint() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1e11":"e1e6") },
-				description() { return "当其小于 "+format(tmp.ss.upgrades[43].endpoint)+" 时，点数获取提升至 1.1 次幂，否则提升至 1.01 次幂。" },
+				description() { return "当其小于 "+format(tmp.ss.upgrades[43].endpoint)+" 时，字符获取提升至 1.1 次幂，否则提升至 1.01 次幂。" },
 				cost() { return new Decimal((player.ma.current=="ss")?"1e17800":"1e990") },
-				currencyDisplayName: "子空间",
+				currencyDisplayName: "第二空间",
 				currencyInternalName: "subspace",
 				currencyLayer: "ss",
 				unlocked() { return hasChallenge("h", 42) },
