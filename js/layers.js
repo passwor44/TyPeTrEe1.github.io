@@ -3969,10 +3969,10 @@ addLayer("o", {
 				effect() { return Decimal.pow(hasUpgrade("p", 24)?Decimal.pow(10, player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).log10().cbrt()):(player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).pow(tmp.o.solPow).log10().plus(1).log10().times(10).plus(1)), ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.1:1) },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = ("献祭你所有的阳光辐射和 SE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 差旋层电浆\n"+
-					"需要: 100 阳光、2,500 SE\n"+
+                    let display = ("献祭你所有的阳光辐射和 SE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 辐射金电层\n"+
+					"需要: 100 阳光辐射、2,500 SE\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
-					(tmp.nerdMode?("公式: "+(hasUpgrade("p", 24)?"10^cbrt(log(x+1))":"log(log(x+1)+1)*10+1")):("效果: 加成超级增幅器底数和诡异层 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
+					(tmp.nerdMode?("公式: "+(hasUpgrade("p", 24)?"10^cbrt(log(x+1))":"log(log(x+1)+1)*10+1")):("效果: 加成ACD器底数和光片 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked }, 
@@ -3994,10 +3994,10 @@ addLayer("o", {
 				effect() { return player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).pow(tmp.o.solPow).log10().plus(1).pow(2.5).pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?27.5:1) },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = ("献祭所有阳光、SE 和子空间，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 对流能\n"+
-					"需要: 1e3 阳光、2e5 SE 和 10 子空间\n"+
+                    let display = ("献祭所有阳光辐射、SE 和第二空间，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 对流能\n"+
+					"需要: 1e3 阳光辐射、2e5 SE 和 10 第二空间\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
-					(tmp.nerdMode?("公式: (log(x+1)+1)^2.5"):("效果: 加成时间胶囊底数和子空间获取 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
+					(tmp.nerdMode?("公式: (log(x+1)+1)^2.5"):("效果: 加成时间胶囊底数和第二空间获取 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked&&player.ss.unlocked }, 
@@ -4015,7 +4015,7 @@ addLayer("o", {
 				autoed() { return hasMilestone("m", 0) },
 			},
 			21: {
-				title: "日冕波动",
+				title: "辐射阶乘",
 				gain() { return player.o.points.div(1e5).root(5).times(player.o.energy.div(1e30).root(30)).times(player.ss.subspace.div(1e8).root(8)).times(player.q.energy.div("1e675").root(675)).pow(tmp.o.buyableGainExp).floor() },
 				effect() { 
 					let eff = player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).pow(tmp.o.solPow).log10().plus(1).log10();
@@ -4026,10 +4026,10 @@ addLayer("o", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = ("献祭所有阳光、SE、子空间和 QE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 日冕波动\n"+
-					"需要: 1e5 阳光、1e30 SE、5e8 子空间和 1e675 QE\n"+
+                    let display = ("献祭所有阳光辐射、SE、第二空间和 IE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 辐射阶乘\n"+
+					"需要: 1e5 阳光辐射、1e30 SE、5e8 第二空间和 1e675 IE\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
-					(tmp.nerdMode?("公式: log(log(x+1)+1)"):("效果: 子空间底数+"+format(tmp[this.layer].buyables[this.id].effect)+"，太阳能+"+format(tmp[this.layer].buyables[this.id].effect.times(100))+"%"))
+					(tmp.nerdMode?("公式: log(log(x+1)+1)"):("效果: 第二空间底数+"+format(tmp[this.layer].buyables[this.id].effect)+"，控制光能+"+format(tmp[this.layer].buyables[this.id].effect.times(100))+"%"))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked&&hasUpgrade("ss", 41) }, 
@@ -4073,17 +4073,17 @@ addLayer("o", {
 				autoed() { return hasMilestone("m", 0) },
 			},
 			23: {
-				title: "核熔炉",
+				title: "审视真核",
 				gain() { return player.o.buyables[11].div(1e175).times(player.o.energy.div("1e2500").root(10)).pow(tmp.o.buyableGainExp).floor() },
 				effect() {
 					return player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).pow(tmp.o.solPow).log10().plus(1).log10().root(2.5).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.4:1)
 				},
 				display() {
 					let data = tmp[this.layer].buyables[this.id]
-					return ("献祭所有太阳核心和 SE，获得 "+formatWhole(data.gain)+" 核熔炉\n"+
-					"需要: 1e175 太阳核心 & 1e2,500 SE\n"+
+					return ("献祭所有辐射增强和 SE，获得 "+formatWhole(data.gain)+" 审视真核\n"+
+					"需要: 1e175 辐射增强 & 1e2,500 SE\n"+
 					"数量: "+formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables)))+"\n"+
-					(tmp.nerdMode?("公式: (log(log(x+1)+1)^0.4)*100"):("效果: 建筑增强 "+format(data.effect.times(100))+"%")))
+					(tmp.nerdMode?("公式: (log(log(x+1)+1)^0.4)*100"):("效果: 捅到增强 "+format(data.effect.times(100))+"%")))
 				},
 				unlocked() { return player.n.buyables[11].gte(2) },
 				canAfford() { return player.o.buyables[11].gte(1e175)&&player.o.energy.gte("1e2500") },
@@ -4124,17 +4124,17 @@ addLayer("o", {
 				autoed() { return hasMilestone("m", 0) },
 			},
 			32: {
-				title: "燃气",
+				title: "γ燃料",
 				gain() { return player.o.energy.div("1e200000").root(100).pow(tmp.o.buyableGainExp).floor() },
 				effect() {
 					return player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).pow(tmp.o.solPow).log10().plus(1).log10().plus(1).log10().div(1.6).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.9:1).plus(1)
 				},
 				display() {
 					let data = tmp[this.layer].buyables[this.id]
-					return ("献祭所有 SE，获得 "+formatWhole(data.gain)+" 燃气\n"+
+					return ("献祭所有 SE，获得 "+formatWhole(data.gain)+" γ燃料\n"+
 					"需要: e200,000 SE\n"+
 					"Amount: "+formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables)))+"\n"+
-					(tmp.nerdMode?("公式: log(log(log(x+1)+1)+1)/1.6+1"):("效果: 将阳光获取指数乘 "+format(data.effect)+"。")))
+					(tmp.nerdMode?("公式: log(log(log(x+1)+1)+1)/1.6+1"):("效果: 将阳光辐射获取指数乘 "+format(data.effect)+"。")))
 				},
 				unlocked() { return player.n.buyables[11].gte(4) },
 				canAfford() { return player.o.energy.gte("1e200000") },
