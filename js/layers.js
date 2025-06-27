@@ -1,4 +1,4 @@
-/*
+</*
                     
                     
                     
@@ -4903,7 +4903,7 @@ addLayer("ba", {
         },
         row: 4, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "a", description: "按 A 进行平衡重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "c", description: "按 C 进行碰撞重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         doReset(resettingLayer){ 
 			let keep = [];
@@ -4960,10 +4960,10 @@ addLayer("ba", {
 			["clickable", 31],
 			["row", [["clickable", 21], ["clickable", 11], "blank", ["bar", "balanceBar"], "blank", ["clickable", 12], ["clickable", 22]]],
 			["row", [
-				["column", [["display-text", function() {return tmp.nerdMode?("获取公式: "+format(tmp.ba.dirBase)+"^(1-barPercent/100)*(1-barBercent/100)"+(tmp.ba.negGainMult.eq(1)?"":("*"+format(tmp.ba.negGainMult)))):("+"+format(tmp.ba.negGain)+"/sec")}, {}], ["display-text", function() {return "消极: "+format(player.ba.neg)}, {}], ["display-text", function() {return (tmp.nerdMode?("效果公式: "+((hasUpgrade("ba", 13))?"(x+1)^10":"x+1")):("效果: 加成诡异层 "+format(tmp.ba.negBuff) + "x"))}, {}], ["display-text", function() {return tmp.ba.noNerfs?"":(tmp.nerdMode?("惩罚公式: "+(hasUpgrade("ba", 14)?"sqrt(log(x+1)+1)"+(inChallenge("h", 41)?"^100":"")+"/2":"sqrt(log(x+1)+1)")):("惩罚: 将积极效果除以 "+format(tmp.ba.negNerf)))}, {}], "blank", ["row", [["upgrade", 11], ["upgrade", 13]]]], {"max-width": "240px"}], 
+				["column", [["display-text", function() {return tmp.nerdMode?("获取公式: "+format(tmp.ba.dirBase)+"^(1-barPercent/100)*(1-barBercent/100)"+(tmp.ba.negGainMult.eq(1)?"":("*"+format(tmp.ba.negGainMult)))):("+"+format(tmp.ba.negGain)+"/sec")}, {}], ["display-text", function() {return "X粒体: "+format(player.ba.neg)}, {}], ["display-text", function() {return (tmp.nerdMode?("效果公式: "+((hasUpgrade("ba", 13))?"(x+1)^10":"x+1")):("效果: 加成光片 "+format(tmp.ba.negBuff) + "x"))}, {}], ["display-text", function() {return tmp.ba.noNerfs?"":(tmp.nerdMode?("惩罚公式: "+(hasUpgrade("ba", 14)?"sqrt(log(x+1)+1)"+(inChallenge("h", 41)?"^100":"")+"/2":"sqrt(log(x+1)+1)")):("惩罚: 将Y粒体效果除以 "+format(tmp.ba.negNerf)))}, {}], "blank", ["row", [["upgrade", 11], ["upgrade", 13]]]], {"max-width": "240px"}], 
 				"blank", "blank", "blank", 
 				["column", 
-				[["display-text", function() {return tmp.nerdMode?("获取公式: "+format(tmp.ba.dirBase)+"^(barPercent/100)*(barBercent/100)"+(tmp.ba.posGainMult.eq(1)?"":("*"+format(tmp.ba.posGainMult)))):("+"+format(tmp.ba.posGain)+"/sec")}, {}], ["display-text", function() {return "积极: "+format(player.ba.pos)}, {}], ["display-text", function() {return (tmp.nerdMode?("效果公式: log(x+1)+1"):("效果: 加成子空间和时间底数 "+format(tmp.ba.posBuff + "x")))}, {}], ["display-text", function() {return tmp.ba.noNerfs?"":(tmp.nerdMode?("惩罚公式: sqrt(x+1)"+(inChallenge("h", 41)?"^100":"")):("惩罚: 将消极效果除以 "+format(tmp.ba.posNerf)))}, {}], "blank", ["row", [["upgrade", 14], ["upgrade", 12]]]], {"max-width": "240px"}]], {"visibility": function() { return player.ba.unlocked?"visible":"hidden" }}],
+				[["display-text", function() {return tmp.nerdMode?("获取公式: "+format(tmp.ba.dirBase)+"^(barPercent/100)*(barBercent/100)"+(tmp.ba.posGainMult.eq(1)?"":("*"+format(tmp.ba.posGainMult)))):("+"+format(tmp.ba.posGain)+"/sec")}, {}], ["display-text", function() {return "Y粒子: "+format(player.ba.pos)}, {}], ["display-text", function() {return (tmp.nerdMode?("效果公式: log(x+1)+1"):("效果: 加成第二空间和时间底数 "+format(tmp.ba.posBuff + "x")))}, {}], ["display-text", function() {return tmp.ba.noNerfs?"":(tmp.nerdMode?("惩罚公式: sqrt(x+1)"+(inChallenge("h", 41)?"^100":"")):("惩罚: 将X粒体除以 "+format(tmp.ba.posNerf)))}, {}], "blank", ["row", [["upgrade", 14], ["upgrade", 12]]]], {"max-width": "240px"}]], {"visibility": function() { return player.ba.unlocked?"visible":"hidden" }}],
 			["row", [["upgrade", 22], ["upgrade", 21], ["upgrade", 23]]],
 			["row", [["upgrade", 31], ["upgrade", 24], ["upgrade", 32]]],
 			["upgrade", 33],
@@ -4982,7 +4982,7 @@ addLayer("ba", {
 					let b = 52 + (252 - 52) * tmp.ba.bars.balanceBar.progress;
 					return {"background-color": ("rgb("+r+", "+g+", "+b+")") } 
 				},
-				borderStyle() { return {"border-color": "#fced9f"} },
+				borderStyle() { return {"border-color": "#a59ffc"} },
 			},
 		},
 		clickables: {
@@ -4993,35 +4993,35 @@ addLayer("ba", {
 				unlocked() { return player.ba.unlocked },
 				canClick() { return player.ba.allotted>0 },
 				onClick() { player.ba.allotted = Math.max(player.ba.allotted-0.05, 0) },
-				style: {"height": "50px", "width": "50px", "background-color": "rgb(235, 64, 52)"},
+				style: {"height": "50px", "width": "50px", "background-color": "rgb(91, 254, 172)"},
 			},
 			12: {
 				title: "Y",
 				unlocked() { return player.ba.unlocked },
 				canClick() { return player.ba.allotted<1 },
 				onClick() { player.ba.allotted = Math.min(player.ba.allotted+0.05, 1) },
-				style: {"height": "50px", "width": "50px", "background-color": "rgb(162, 249, 252)"},
+				style: {"height": "50px", "width": "50px", "background-color": "rgb(91, 187, 254)"},
 			},
 			21: {
 				title: "&#8592;",
 				unlocked() { return player.ba.unlocked },
 				canClick() { return player.ba.allotted>0 },
 				onClick() { player.ba.allotted = 0 },
-				style: {"height": "50px", "width": "50px", "background-color": "rgb(235, 64, 52)"},
+				style: {"height": "50px", "width": "50px", "background-color": "rgb(91, 254, 123)"},
 			},
 			22: {
 				title: "&#8594;",
 				unlocked() { return player.ba.unlocked },
 				canClick() { return player.ba.allotted<1 },
 				onClick() { player.ba.allotted = 1 },
-				style: {"height": "50px", "width": "50px", "background-color": "rgb(162, 249, 252)"},
+				style: {"height": "50px", "width": "50px", "background-color": "rgb(91, 202, 254)"},
 			},
 			31: {
 				title: "C",
 				unlocked() { return player.ba.unlocked },
 				canClick() { return player.ba.allotted!=.5 },
 				onClick() { player.ba.allotted = .5 },
-				style: {"height": "50px", "width": "50px", "background-color": "yellow"},
+				style: {"height": "50px", "width": "50px", "background-color": "rgb(91, 254, 254)"},
 			},
 		},
 		upgrades: {
@@ -5029,9 +5029,9 @@ addLayer("ba", {
 			cols: 4,
 			11: {
 				title: "阴离子",
-				description: "消极加成太阳能。",
+				description: "X粒子加成太阳能。",
 				cost() { return new Decimal(player.ma.current=="ba"?"1e166666":5e7) },
-				currencyDisplayName: "消极",
+				currencyDisplayName: "X粒子",
 				currencyInternalName: "neg",
 				currencyLayer: "ba",
 				unlocked() { return hasMilestone("ba", 3) },
