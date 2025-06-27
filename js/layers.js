@@ -10662,7 +10662,7 @@ addLayer("ab", {
 			unlocked() { return player.ma.unlocked },
 			canClick() { return hasMilestone("ma", 5) },
 			onClick() { player.hs.auto = !player.hs.auto },
-			style: {"background-color"() { return player.hs.auto?"#000c63:"#666666" }},
+			style: {"background-color"() { return player.hs.auto?"#000c63":"#666666" }},
 		},
 		52: {
 			title: "齿轮升级",
