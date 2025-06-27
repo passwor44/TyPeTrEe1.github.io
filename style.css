@@ -833,7 +833,7 @@ button > * {
 }
 
 .ne.grad:not(.locked):not(.bought) {
-        background: repeating-radial-gradient(circle, #c9d2ff 50%, #ffd1f7 52%);
+        background: repeating-radial-gradient(circle, #0d0d97 50%, #4a0d97 52%);
         background-size: 100% 100%;
         background-position: center;
 }
