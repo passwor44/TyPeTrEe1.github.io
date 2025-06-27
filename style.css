@@ -781,7 +781,7 @@ button > * {
 }
 
 .ma.grad:not(.locked):not(.bought) {
-	background: radial-gradient(circle, rgba(255,100,100,1) 0%, rgba(255,159,127,1) 50%);
+	background: radial-gradient(circle, rgba(100,255,211,1) 0%, rgba(12,23,255,1) 50%);
 	background-size: 200%;
 	background-position: center;
 }
