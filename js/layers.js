@@ -4508,7 +4508,7 @@ addLayer("m", {
         },
         row: 4, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "m", description: "按 M 进行魔法重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "F", description: "按 F 进行能效重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         doReset(resettingLayer){ 
 			let keep = [];
@@ -4557,8 +4557,8 @@ addLayer("m", {
 		},
 		hexEffDesc() {
 			let nerd = (tmp.nerdMode?" (2*x+1)^5":"")
-			if ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false) return "增幅障碍灵魂、诡异和 SE 获取 "+format(tmp.m.mainHexEff)+"x，并增幅子空间获取 "+format(tmp.m.hexEff) + "x" + nerd
-			else return "增幅障碍灵魂、诡异、 SE 和子空间获取 "+format(tmp.m.hexEff)+"x"+nerd
+			if ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false) return "增幅对虚粒子、透术和 SE 获取 "+format(tmp.m.mainHexEff)+"x，并增幅第二空间获取 "+format(tmp.m.hexEff) + "x" + nerd
+			else return "增幅对虚粒子、透术、 SE 和第二空间获取 "+format(tmp.m.hexEff)+"x"+nerd
 		},
 		tabFormat: ["main-display",
 			"prestige-button",
@@ -4566,10 +4566,10 @@ addLayer("m", {
 			"blank",
 			"milestones",
 			"blank",
-			["display-text", function() { return tmp.m.spellPower.eq(1)?"":("魔法强度: "+format(tmp.m.spellPower.times(100))+"%") }], "blank",
+			["display-text", function() { return tmp.m.spellPower.eq(1)?"":("能效强度: "+format(tmp.m.spellPower.times(100))+"%") }], "blank",
 			"buyables",
 			["display-text",
-				function() {return "你有 "+formatWhole(player.m.hexes)+" 妖术, "+tmp.m.hexEffDesc },
+				function() {return "你有 "+formatWhole(player.m.hexes)+" 效果, "+tmp.m.hexEffDesc },
 					{}],
 		],
 		spellsUnlocked() { return 3+player.i.buyables[13].toNumber() },
@@ -4587,7 +4587,7 @@ addLayer("m", {
 			rows: 1,
 			cols: 6,
 			11: {
-				title: "装载增幅器",
+				title: "装载UN器",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					return tmp.m.spellInputAmt;
                 },
@@ -4601,7 +4601,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 增幅器底数提升至 ^1.05 次幂， x" + format(data.effect)+"\n\
+                    let display = "效果: UN器底数提升至 ^1.05 次幂， x" + format(data.effect)+"\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: ((log(inserted+1)+1)/2+1)/1.5"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4625,7 +4625,7 @@ addLayer("m", {
                 style: {'height':'150px', 'width':'150px'},
 			},
 			12: {
-				title: "时间折跃",
+				title: "事件放大",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                   return tmp.m.spellInputAmt;
                 },
@@ -4639,7 +4639,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 时间胶囊底数提升至 ^1.1 次幂， x" + format(data.effect)+"\n\
+                    let display = "效果: 事件切片提升至 ^1.1 次幂， x" + format(data.effect)+"\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: ((log(inserted+1)+1)/5+1)/1.2"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4663,7 +4663,7 @@ addLayer("m", {
                 style: {'height':'150px', 'width':'150px'},
 			},
 			13: {
-				title: "诡异聚焦",
+				title: "光片聚焦",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return tmp.m.spellInputAmt;
                 },
@@ -4676,7 +4676,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: +" + format(data.effect)+" 个免费诡异层\n\
+                    let display = "效果: +" + format(data.effect)+" 个免费光片\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: (log(inserted+1)+1)*1.25"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4700,7 +4700,7 @@ addLayer("m", {
                 style: {'height':'150px', 'width':'150px'},
 			},
 			14: {
-				title: "空间压缩",
+				title: "压缩通道",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return tmp.m.spellInputAmt;
                 },
@@ -4712,7 +4712,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 建筑价格缩放减缓 " + format(data.effect.times(100))+"%\n\
+                    let display = "效果: 通道价格缩放减缓 " + format(data.effect.times(100))+"%\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: 1-1/sqrt(log(log(inserted+1)+1)/500+1)"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4736,7 +4736,7 @@ addLayer("m", {
                 style: {'height':'150px', 'width':'150px'},
 			},
 			15: {
-				title: "超越阻碍",
+				title: "超粒子",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return tmp.m.spellInputAmt;
                 },
@@ -4748,7 +4748,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 可重复障碍的需求缩放减缓 " + format(data.effect.times(100))+"%\n\
+                    let display = "效果: 可重复合成粒子的需求缩放减缓 " + format(data.effect.times(100))+"%\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: 1-1/sqrt(log(log(inserted+1)+1)*140+1)"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4772,7 +4772,7 @@ addLayer("m", {
                 style: {'height':'150px', 'width':'150px'},
 			},
 			16: {
-				title: "生成器扩容",
+				title: "键软扩容",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return tmp.m.spellInputAmt;
                 },
@@ -4784,7 +4784,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 超级生成器底数乘以 " + format(data.effect)+"\n\
+                    let display = "效果: 键盘复制底数乘以 " + format(data.effect)+"\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: (log(inserted+1)+1)^400"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4810,24 +4810,24 @@ addLayer("m", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "2 总魔法",
+				requirementDescription: "大型辐射--2 总能效",
 				done() { return player.m.total.gte(2) || (hasMilestone("hn", 0)) },
-				effectDescription: "每秒获取 100% 阳光和阳光购买项。",
+				effectDescription: "每秒获取 100% 阳光辐射和辐射购买项。",
 			},
 			1: {
-				requirementDescription: "3 总魔法",
+				requirementDescription: "重粒子--3 总能效",
 				done() { return player.m.total.gte(3) || (hasMilestone("hn", 0)) },
-				effectDescription: '对任何重置保留已完成的障碍。',
+				effectDescription: '对任何重置保留已完成的粒子。',
 			},
 			2: {
-				requirementDescription: "10 总魔法",
+				requirementDescription: "虚力粒子--10 总能效",
 				done() { return player.m.total.gte(10) || (hasMilestone("hn", 0)) },
-				effectDescription: "每秒获取 100% 障碍灵魂。",
+				effectDescription: "每秒获取 100% 对虚粒子。",
 			},
 			3: {
-				requirementDescription: "5,000 总魔法",
+				requirementDescription: "效果增强--5,000 总能效",
 				done() { return player.m.total.gte(5e3) || (hasMilestone("hn", 0)) },
-				effectDescription: "你可以插入更多魔法来使它们更长更强。",
+				effectDescription: "你可以插入更多能效来使它们更长更强。",
 				toggles: [{
 					layer: "m",
 					varName: "spellInput",
@@ -4836,9 +4836,9 @@ addLayer("m", {
 			},
 			4: {
 				unlocked() { return hasMilestone("m", 3) },
-				requirementDescription: "1e10 总魔法",
+				requirementDescription: "分散效果--1e10 总能效",
 				done() { return player.m.total.gte(1e10) || (hasMilestone("hn", 0)) },
-				effectDescription: "释放一个魔法时，同时释放其他魔法（魔法消耗是分散的）。",
+				effectDescription: "释放一个能效时，同时释放其他能效（能效消耗是分散的）。",
 				toggles: [["m", "distrAll"]],
 			},
 		},
@@ -6209,7 +6209,7 @@ addLayer("n", {
 			activeSecondaries: {purpleBlue: false, blueOrange: false, orangePurple: false},
 			first: 0,
         }},
-        color: "#96f0ff",
+        color: "#31aeff",
 		nodeStyle() { return {
 			"background-color": (((player.n.unlocked||canReset("n"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer)))?"#96f0ff":"#bf8f8f"),
 			color: (player.oldStyle?"white":"rgba(255, 255, 255, 0.75)"),
@@ -6222,7 +6222,7 @@ addLayer("n", {
         requires() { return new Decimal((player[this.layer].unlockOrder>0&&!hasAchievement("a", 92))?"1e288":"1e280") }, // Can be a function that takes requirement increases into account
 		increaseUnlockOrder: ["hs"],
         resource: "天星", // Name of prestige currency
-        baseResource: "阳光", // Name of resource prestige is based on
+        baseResource: "阳光辐射", // Name of resource prestige is based on
         baseAmount() {return player.o.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?0.05:0.03) }, // Prestige currency exponent
@@ -6275,17 +6275,17 @@ addLayer("n", {
 				
 				"blank",
 			
-				["row", [["display-text", ("<span style='color: #bd6afc; font-size: 24px'>"+format(player.n.purpleDust)+"</span> 紫尘"+(tmp.nerdMode?" (获取公式: (x^0.333)*"+format(tmp.n.dustGainMult.div(20))+")":((tmp.n.effect.purple||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.purple||new Decimal(1))+"/sec)"):""))+"<br><br>增幅恶魂和魂力获取 <span style='color: #bd6afc; font-size: 24px'>"+format(tmp.n.dustEffs.purple)+"x</span>"+(tmp.nerdMode?" (效果公式: 10^sqrt(log(x+1)))":""))]], {"background-color": "rgba(189, 106, 252, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
+				["row", [["display-text", ("<span style='color: #31e8ff; font-size: 24px'>"+format(player.n.purpleDust)+"</span> cyan spec"+(tmp.nerdMode?" (获取公式: (x^0.333)*"+format(tmp.n.dustGainMult.div(20))+")":((tmp.n.effect.purple||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.purple||new Decimal(1))+"/sec)"):""))+"<br><br>增幅恶魂和魂力获取 <span style='color: #37ecff; font-size: 24px'>"+format(tmp.n.dustEffs.purple)+"x</span>"+(tmp.nerdMode?" (效果公式: 10^sqrt(log(x+1)))":""))]], {"background-color": "rgba(55, 236, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 				
-				(second?["column", [["clickable", 11], ["display-text", ("加成魔法获取 <span style='color: #ee82ee; font-size: 24px'>"+format(tmp.n.dustEffs2.purpleBlue)+"x</span>"+(tmp.nerdMode?" (效果公式: (purple*blue+1)^10)":" (基于紫尘蓝尘)"))]], {"background-color": "rgba(238, 130, 238, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
+				(second?["column", [["clickable", 11], ["display-text", ("加成能效获取 <span style='color: #318bff; font-size: 24px'>"+format(tmp.n.dustEffs2.purpleBlue)+"x</span>"+(tmp.nerdMode?" (效果公式: (cyan*blue+1)^10)":" (基于cyan blue)"))]], {"background-color": "rgba(49, 114, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 				
-				["row", [["display-text", ("<span style='color: #7569ff; font-size: 24px'>"+format(player.n.blueDust)+"</span> 蓝尘"+(tmp.nerdMode?" (获取公式: (x^0.5)*"+format(tmp.n.dustGainMult.div(1e3))+")":((tmp.n.effect.blue||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.blue||new Decimal(1))+"/sec)"):""))+"<br><br>加成超级增幅器底数 <span style='color: #7569ff; font-size: 24px'>"+format(tmp.n.dustEffs.blue)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^50)":""))]], {"background-color": "rgba(117, 105, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
+				["row", [["display-text", ("<span style='color: #3136ff; font-size: 24px'>"+format(player.n.blueDust)+"</span> blue spec"+(tmp.nerdMode?" (获取公式: (x^0.5)*"+format(tmp.n.dustGainMult.div(1e3))+")":((tmp.n.effect.blue||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.blue||new Decimal(1))+"/sec)"):""))+"<br><br>加成ACD器底数 <span style='color: #374bff; font-size: 24px'>"+format(tmp.n.dustEffs.blue)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^50)":""))]], {"background-color": "rgba(95, 111, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 				
-				(second?["column", [["clickable", 12], ["display-text", ("加成 <b>永恒</b> 和 <b>D 选项</b> 效果 <span style='color: #ba9397; font-size: 24px'>"+format(tmp.n.dustEffs2.blueOrange)+"x</span><br>(不受软上限影响)"+(tmp.nerdMode?" (效果公式: (blue*orange+1)^5)":" (基于蓝尘橙尘)"))]], {"background-color": "rgba(186, 147, 151, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
+				(second?["column", [["clickable", 12], ["display-text", ("加成 <b>虚后继粒子</b> 和 <b>全虚粒子</b> 效果 <span style='color: #ba9397; font-size: 24px'>"+format(tmp.n.dustEffs2.blueOrange)+"x</span><br>(不受软上限影响)"+(tmp.nerdMode?" (效果公式: (blue*orange+1)^5)":" (基于blue，purple)"))]], {"background-color": "rgba(83, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 				
-				["row", [["display-text", ("<span style='color: #ffbd2e; font-size: 24px'>"+format(player.n.orangeDust)+"</span> 橙尘"+(tmp.nerdMode?" (获取公式: (x^0.2)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 加成所有阳光购买项数量 <span style='color: #ffbd2e; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(255, 189, 46, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
+				["row", [["display-text", ("<span style='color: #6131ff; font-size: 24px'>"+format(player.n.orangeDust)+"</span> purple spec"+(tmp.nerdMode?" (获取公式: (x^0.2)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 加成所有阳光购买项数量 <span style='color: #9831ff; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(135, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 				
-				(second?["column", [["clickable", 13], ["display-text", ("加成时间胶囊上限底数 <span style='color: #94de95; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (orange*purple+1)^0.6)":" (基于橙尘紫尘)"))]], {"background-color": "rgba(148, 222, 149, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
+				(second?["column", [["clickable", 13], ["display-text", ("加成时间层面上限底数 <span style='color: #2effb1; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.6)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 			]],
 			"blank", "blank", ["buyable", 11], "blank", "blank",
 		]},
