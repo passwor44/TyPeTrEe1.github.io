@@ -14,8 +14,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "int 0.10",
-	patch: 0,
+	num: "int 0.11",
+	patch: -5,
 	name: "测试",
 }
 
