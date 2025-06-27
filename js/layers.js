@@ -6464,7 +6464,7 @@ addLayer("hs", {
 			auto: false,
         }},
 		roundUpCost: true,
-        color: "#6e81c2",
+        color: "#000c64",
         requires() { return new Decimal((player[this.layer].unlockOrder>0&&!hasAchievement("a", 92))?420:360) }, // Can be a function that takes requirement increases into account
 		increaseUnlockOrder: ["n"],
         resource: "超空间能量", // Name of prestige currency 
@@ -6930,7 +6930,7 @@ addLayer("i", {
 			auto: false,
 			first: 0,
         }},
-        color: "#a2c1de",
+        color: "#0b276c",
         requires() { return new Decimal("1e11750") }, // Can be a function that takes requirement increases into account
         resource: "版本", // Name of prestige currency
         baseResource: "子空间", // Name of resource prestige is based on
@@ -8636,8 +8636,8 @@ iiiiiiii   ddddddddd   ddddd
                             
 */
 addLayer("id", {
-		name: "ideas", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "ID", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "quailty", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "QI", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 5, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -8660,7 +8660,7 @@ addLayer("id", {
         exponent: new Decimal(1.4), // Prestige currency exponent
 		base: new Decimal(1.2),
 		effect() { return Decimal.sub((hasAchievement("a", 155)?0.005:0)+(hasUpgrade("ai", 32)?0.99:0.95), Decimal.div(0.95, player.id.points.plus(1).log10().times(hasMilestone("id", 4)?1.5:1).times(hasMilestone("id", 5)?1.75:1).plus(1))) },
-		effectDescription() { return "减缓思考阈值增加 <h2 style='color: #fad682; text-shadow: #fad682 0px 0px 10px;'>"+format(tmp[this.layer].effect)+"</h2>"+(tmp.nerdMode?" (0.95-0.95/(log(x+1)+1))。":"。") },
+		effectDescription() { return "减缓思考阈值增加 <h2 style='color: #7e7aff; text-shadow: #7e7aff 0px 0px 10px;'>"+format(tmp[this.layer].effect)+"</h2>"+(tmp.nerdMode?" (0.95-0.95/(log(x+1)+1))。":"。") },
 		rev() { return player.ne.signals.plus(1).log10().div(10).pow(.75).times(player.id.points).pow(hasMilestone("id", 0)?2:1).times(hasUpgrade("ai", 32)?1.5:1).times(hasUpgrade("ai", 14)?1.5:1).floor() },
 		revEff() { return Decimal.pow(1e25, tmp.id.rev.pow(.95)) },
         gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -8765,8 +8765,8 @@ rr::::::rrrrr::::::r
                     
 */
 addLayer("r", {
-		name: "robots", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "R", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "replicative cycle", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "RP", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -8791,12 +8791,12 @@ addLayer("r", {
         }},
         color: "#00ccff",
 		nodeStyle() { return {
-			background: (player.r.unlocked||canReset("r"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #00ccff 0%, #b0b0b0 75%)":"#b0b0b0"):"#bf8f8f",
+			background: (player.r.unlocked||canReset("r"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #00ccff 0%, #3b35ff 75%)":"#3b35ff"):"#ceeaff",
 		}},
 		componentStyles: {
-			background() { return (player.r.unlocked||canReset("r"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #00ccff 0%, #b0b0b0 75%)":"#b0b0b0"):"#bf8f8f" },
+			background() { return (player.r.unlocked||canReset("r"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #00ccff 0%, #3b35ff- 75%)":"#3b35ff"):"#ceeaff" },
 		},
-        resource: "机器人", // Name of prestige currency
+        resource: "复制周期", // Name of prestige currency
         type: "custom", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
 		baseResource: "总能量",
 		baseAmount() { return player.en.total },
@@ -9164,13 +9164,13 @@ addLayer("ai", {
 			time: new Decimal(0),
 			consc: new Decimal(0),
         }},
-        color: "#e6ffcc",
+        color: "#915aff",
 		nodeStyle() { return {
-			background: (player.ai.unlocked||canReset("ai"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #e6ffcc 0%, #566b65 100%)":"#e6ffcc"):"#bf8f8f",
+			background: (player.ai.unlocked||canReset("ai"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #915aff 0%, #605bff 100%)":"#915aff"):"#ceeaff",
 		}},
 		componentStyles: {
 			"prestige-button": {
-				background() { return (canReset("ai"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #e6ffcc 0%, #566b65 100%)":"#e6ffcc"):"#bf8f8f" },
+				background() { return (canReset("ai"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #915aff 0%, #605bff 100%)":"#915aff"):"#ceeaff" },
 			},
 		},
         requires: new Decimal(408), // Can be a function that takes requirement increases into account
@@ -9667,8 +9667,8 @@ c:::::::cccccc:::::c
                     
 */
 addLayer("c", {
-		name: "civilizations", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "C", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "TerminationType", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "TT", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -9677,7 +9677,7 @@ addLayer("c", {
 			gainedPower: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
 			first: 0,
         }},
-        color: "#edb3ff",
+        color: "#929dff",
         requires() { return Decimal.sub(108, hasAchievement("a", 164)?player.c.buyables[11].times(2):0).max(8) }, // Can be a function that takes requirement increases into account
         resource: "文明力量", // Name of prestige currency
         baseResource: "砖石", // Name of resource prestige is based on
