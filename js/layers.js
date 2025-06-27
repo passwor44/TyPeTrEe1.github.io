@@ -411,7 +411,7 @@ addLayer("b", {
 		},
 		extraAmtDisplay() {
 			if (tmp.sb.spectralTotal.eq(0)) return "";
-			return "<h3 style='color: #8882ba; text-shadow: #7f78c4 0px 0px 10px;'> + "+formatWhole(tmp.sb.spectralTotal)+"</h3>"
+			return "<h3 style='color: #b7fff0; text-shadow: #b7fff0 0px 0px 10px;'> + "+formatWhole(tmp.sb.spectralTotal)+"</h3>"
 		},
 		startData() { return {
 			unlocked: false,
@@ -690,7 +690,7 @@ addLayer("g", {
 		},
 		extraAmtDisplay() {
 			if (tmp.sg.spectralTotal.eq(0)) return "";
-			return "<h3 style='color: #84b88a; text-shadow: #78c48f 0px 0px 10px;'> + "+formatWhole(tmp.sg.spectralTotal)+"</h3>"
+			return "<h3 style='color: #63fcff; text-shadow: #a3ffec 0px 0px 10px;'> + "+formatWhole(tmp.sg.spectralTotal)+"</h3>"
 		},
 		update(diff) {
 			if (player.g.unlocked) player.g.power = player.g.power.plus(tmp.g.effect.times(diff));
@@ -3812,7 +3812,7 @@ o:::::::::::::::o
 */
 addLayer("o", {
 	name: "solarity", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "SAt", // This appears on the layer's node. Default is the id with the first letter capitalized
+        symbol: "Ol", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -3836,8 +3836,8 @@ addLayer("o", {
 			if (hasUpgrade("ba", 23)) req = req.div(tmp.ba.posBuff.max(1));
 			return req;
 		},
-        resource: "阳光", // Name of prestige currency
-        baseResource: "超级增幅器", // Name of resource prestige is based on
+        resource: "阳光辐射", // Name of prestige currency
+        baseResource: "ACD器", // Name of resource prestige is based on
         baseAmount() {return player.sb.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { 
@@ -3858,7 +3858,7 @@ addLayer("o", {
         },
         row: 3, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "o", description: "按 O 进行阳光重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "S", description: "按 S 进行阳光辐射重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         doReset(resettingLayer){ 
 			let keep = [];
@@ -3911,13 +3911,13 @@ addLayer("o", {
 			"resource-display",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.o.energy) + ' SE，减少阳光需求 '+format(tmp.o.solEnEff)+(tmp.nerdMode?(" (4-4/(log(x+1)+1))"):"")+' 并加成 TE 上限 '+format(tmp.o.solEnEff2)+'.'+(tmp.nerdMode?(" (x+1)^2"):"")},
+				function() {return '你有 ' + format(player.o.energy) + ' SE，减少太阳辐射需求 '+format(tmp.o.solEnEff)+(tmp.nerdMode?(" (4-4/(log(x+1)+1))"):"")+' 并加成 TE 上限 '+format(tmp.o.solEnEff2)+'.'+(tmp.nerdMode?(" (x+1)^2"):"")},
 					{}],
 			"blank",
 			"milestones",
 			"blank",
 			["display-text",
-				function() { return "<b>太阳能: "+format(tmp.o.solPow.times(100))+"%</b><br>" },
+				function() { return "<b>控制光能: "+format(tmp.o.solPow.times(100))+"%</b><br>" },
 					{}],
 			"buyables",
 			"blank"
@@ -3935,7 +3935,7 @@ addLayer("o", {
 			rows: 3,
 			cols: 3,
 			11: {
-				title: "太阳核心",
+				title: "辐射增强",
 				gain() { return player.o.points.div(2).root(1.5).pow(tmp.o.buyableGainExp).floor() },
 				effect() { 
 					let amt = player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables)
@@ -3945,10 +3945,10 @@ addLayer("o", {
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
 					let x = player[this.layer].buyables[this.id].gte(5e4)?"10^(sqrt(log(x)*log(5e4)))":"x"
-                    let display = ("献祭你所有的阳光，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 太阳核心\n"+
-					"需要: 2 阳光\n"+
+                    let display = ("献祭你所有的阳光辐射，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 辐射增强\n"+
+					"需要: 2 阳光辐射\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
-					(tmp.nerdMode?("公式: "+(hasUpgrade("ss", 22)?"cbrt("+x+"+1)":"log("+x+"+1)+1")+""):("效果: 加成阳光获取 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
+					(tmp.nerdMode?("公式: "+(hasUpgrade("ss", 22)?"cbrt("+x+"+1)":"log("+x+"+1)+1")+""):("效果: 加成阳光辐射获取 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked }, 
@@ -3964,12 +3964,12 @@ addLayer("o", {
 				autoed() { return hasMilestone("m", 0) },
 			},
 			12: {
-				title: "差旋层电浆",
+				title: "辐射金电层",
 				gain() { return player.o.points.div(100).times(player.o.energy.div(2500)).root(3.5).pow(tmp.o.buyableGainExp).floor() },
 				effect() { return Decimal.pow(hasUpgrade("p", 24)?Decimal.pow(10, player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).log10().cbrt()):(player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).pow(tmp.o.solPow).log10().plus(1).log10().times(10).plus(1)), ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.1:1) },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = ("献祭你所有的阳光和 SE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 差旋层电浆\n"+
+                    let display = ("献祭你所有的阳光辐射和 SE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 差旋层电浆\n"+
 					"需要: 100 阳光、2,500 SE\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
 					(tmp.nerdMode?("公式: "+(hasUpgrade("p", 24)?"10^cbrt(log(x+1))":"log(log(x+1)+1)*10+1")):("效果: 加成超级增幅器底数和诡异层 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
@@ -10486,8 +10486,8 @@ a:::::aaaa::::::a  b::::::::::::::::b
 */
 addLayer("ab", {
 	startData() { return {unlocked: true}},
-	color: "yellow",
-	symbol: "AB",
+	color: "#c2c9ff",
+	symbol: "AU",
 	row: "side",
 	layerShown() { return player.t.unlocked || player.s.unlocked },
 	tooltip: "自动购买",
@@ -10495,54 +10495,54 @@ addLayer("ab", {
 		rows: 6,
 		cols: 4,
 		11: {
-			title: "增幅器",
+			title: "UN器",
 			display(){
 				return hasMilestone("t", 3)?(player.b.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.t.unlocked },
 			canClick() { return hasMilestone("t", 3) },
 			onClick() { player.b.auto = !player.b.auto },
-			style: {"background-color"() { return player.b.auto?"#6e64c4":"#666666" }},
+			style: {"background-color"() { return player.b.auto?"#52ffc0":"#666666" }},
 		},
 		12: {
-			title: "生成器",
+			title: "键盘软垫",
 			display(){
 				return hasMilestone("s", 3)?(player.g.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.s.unlocked },
 			canClick() { return hasMilestone("s", 3) },
 			onClick() { player.g.auto = !player.g.auto },
-			style: {"background-color"() { return player.g.auto?"#a3d9a5":"#666666" }},
+			style: {"background-color"() { return player.g.auto?"#81ecff":"#666666" }},
 		},
 		13: {
-			title: "增强子",
+			title: "虚弱后继",
 			display(){
 				return hasMilestone("q", 1)?(player.e.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.q.unlocked },
 			canClick() { return hasMilestone("q", 1) },
 			onClick() { player.e.auto = !player.e.auto },
-			style: {"background-color"() { return player.e.auto?"#b82fbd":"#666666" }},
+			style: {"background-color"() { return player.e.auto?"#3edbfe":"#666666" }},
 		},
 		14: {
-			title: "扩展时间胶囊",
+			title: "事件切片",
 			display(){
 				return hasMilestone("q", 1)?(player.t.autoExt?"开":"关"):"禁用"
 			},
 			unlocked() { return player.q.unlocked },
 			canClick() { return hasMilestone("q", 1) },
 			onClick() { player.t.autoExt = !player.t.autoExt },
-			style: {"background-color"() { return player.t.autoExt?"#006609":"#666666" }},
+			style: {"background-color"() { return player.t.autoExt?"#4cffb5":"#666666" }},
 		},
 		21: {
-			title: "时间胶囊",
+			title: "时间层面",
 			display(){
 				return hasMilestone("q", 3)?(player.t.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.q.unlocked },
 			canClick() { return hasMilestone("q", 3) },
 			onClick() { player.t.auto = !player.t.auto },
-			style: {"background-color"() { return player.t.auto?"#006609":"#666666" }},
+			style: {"background-color"() { return player.t.auto?"#4cffb5":"#666666" }},
 		},
 		22: {
 			title: "空间能量",
@@ -10552,27 +10552,27 @@ addLayer("ab", {
 			unlocked() { return player.q.unlocked },
 			canClick() { return hasMilestone("q", 3) },
 			onClick() { player.s.auto = !player.s.auto },
-			style: {"background-color"() { return player.s.auto?"#dfdfdf":"#666666" }},
+			style: {"background-color"() { return player.s.auto?"#57d4c6":"#666666" }},
 		},
 		23: {
-			title: "超级增幅器",
+			title: "ACD器",
 			display(){
 				return hasMilestone("q", 4)?(player.sb.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.q.unlocked },
 			canClick() { return hasMilestone("q", 4) },
 			onClick() { player.sb.auto = !player.sb.auto },
-			style: {"background-color"() { return player.sb.auto?"#504899":"#666666" }},
+			style: {"background-color"() { return player.sb.auto?"#35ffe9":"#666666" }},
 		},
 		24: {
-			title: "超级生成器",
+			title: "软垫复制",
 			display(){
 				return hasMilestone("q", 6)?(player.sg.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.sg.unlocked },
 			canClick() { return hasMilestone("q", 6) },
 			onClick() { player.sg.auto = !player.sg.auto },
-			style: {"background-color"() { return player.sg.auto?"#248239":"#666666" }},
+			style: {"background-color"() { return player.sg.auto?"#8ec6bb":"#666666" }},
 		},
 		31: {
 			title: "建筑",
@@ -10582,7 +10582,7 @@ addLayer("ab", {
 			unlocked() { return player.sg.unlocked },
 			canClick() { return hasMilestone("q", 7) },
 			onClick() { player.s.autoBld = !player.s.autoBld },
-			style: {"background-color"() { return player.s.autoBld?"#dfdfdf":"#666666" }},
+			style: {"background-color"() { return player.s.autoBld?"#57d4c6":"#666666" }},
 		},
 		32: {
 			title: "诡异层",
@@ -10592,17 +10592,17 @@ addLayer("ab", {
 			unlocked() { return player.ba.unlocked },
 			canClick() { return hasMilestone("ba", 1) },
 			onClick() { player.q.auto = !player.q.auto },
-			style: {"background-color"() { return player.q.auto?"#c20282":"#666666" }},
+			style: {"background-color"() { return player.q.auto?"#a4eeff":"#666666" }},
 		},
 		33: {
-			title: "子空间能量",
+			title: "第二空间",
 			display(){
 				return hasMilestone("ba", 2)?(player.ss.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.ba.unlocked },
 			canClick() { return hasMilestone("ba", 2) },
 			onClick() { player.ss.auto = !player.ss.auto },
-			style: {"background-color"() { return player.ss.auto?"#e8ffff":"#666666" }},
+			style: {"background-color"() { return player.ss.auto?"#2814ff":"#666666" }},
 		},
 		34: {
 			title: "施法",
@@ -10612,7 +10612,7 @@ addLayer("ab", {
 			unlocked() { return player.hn.unlocked },
 			canClick() { return hasMilestone("hn", 2) },
 			onClick() { player.m.auto = !player.m.auto },
-			style: {"background-color"() { return player.m.auto?"#eb34c0":"#666666" }},
+			style: {"background-color"() { return player.m.auto?"#6e74ff":"#666666" }},
 		},
 		41: {
 			title: "幽魂",
@@ -10622,7 +10622,7 @@ addLayer("ab", {
 			unlocked() { return player.hn.unlocked },
 			canClick() { return hasMilestone("hn", 4) },
 			onClick() { player.ps.auto = !player.ps.auto },
-			style: {"background-color"() { return player.ps.auto?"#b38fbf":"#666666" }},
+			style: {"background-color"() { return player.ps.auto?"#96bbff":"#666666" }},
 		},
 		42: {
 			title: "幽灵",
@@ -10632,7 +10632,7 @@ addLayer("ab", {
 			unlocked() { return player.hn.unlocked },
 			canClick() { return hasMilestone("hn", 5) },
 			onClick() { player.ps.autoW = !player.ps.autoW },
-			style: {"background-color"() { return player.ps.autoW?"#b38fbf":"#666666" }},
+			style: {"background-color"() { return player.ps.autoW?"#96bbff":"#666666" }},
 		},
 		43: {
 			title: "灵魂",
@@ -10642,7 +10642,7 @@ addLayer("ab", {
 			unlocked() { return player.ma.unlocked },
 			canClick() { return hasMilestone("ma", 0) },
 			onClick() { player.ps.autoGhost = !player.ps.autoGhost },
-			style: {"background-color"() { return player.ps.autoGhost?"#b38fbf":"#666666" }},
+			style: {"background-color"() { return player.ps.autoGhost?"#96bbff":"#666666" }},
 		},
 		44: {
 			title: "砖石",
@@ -10652,7 +10652,7 @@ addLayer("ab", {
 			unlocked() { return player.ma.unlocked },
 			canClick() { return hasMilestone("ma", 4) },
 			onClick() { player.i.auto = !player.i.auto },
-			style: {"background-color"() { return player.i.auto?"#e5dab7":"#666666" }},
+			style: {"background-color"() { return player.i.auto?"#0a276b":"#666666" }},
 		},
 		51: {
 			title: "超空间",
@@ -10662,7 +10662,7 @@ addLayer("ab", {
 			unlocked() { return player.ma.unlocked },
 			canClick() { return hasMilestone("ma", 5) },
 			onClick() { player.hs.auto = !player.hs.auto },
-			style: {"background-color"() { return player.hs.auto?"#dfdfff":"#666666" }},
+			style: {"background-color"() { return player.hs.auto?"#000c63:"#666666" }},
 		},
 		52: {
 			title: "齿轮升级",
@@ -10670,7 +10670,7 @@ addLayer("ab", {
 			unlocked() { return player.ai.unlocked && player.ge.unlocked },
 			canClick() { return hasMilestone("ge", 3) },
 			onClick() { player.ge.auto = !player.ge.auto },
-			style: {"background-color"() { return player.ge.auto?"#ababab":"#666666" }},
+			style: {"background-color"() { return player.ge.auto?"#2dacff":"#666666" }},
 		},
 		53: {
 			title: "命令行扩展",
@@ -10680,7 +10680,7 @@ addLayer("ab", {
 			unlocked() { return player.id.unlocked && player.mc.unlocked },
 			canClick() { return hasMilestone("id", 3) },
 			onClick() { player.mc.autoSE = !player.mc.autoSE },
-			style: {"background-color"() { return player.mc.autoSE?"#c99a6b":"#666666" }},
+			style: {"background-color"() { return player.mc.autoSE?"#2dacff":"#666666" }},
 		},
 		54: {
 			title: "主板",
@@ -10688,7 +10688,7 @@ addLayer("ab", {
 			unlocked() { return player.ai.unlocked && player.mc.unlocked },
 			canClick() { return hasMilestone("mc", 1) },
 			onClick() { player.mc.auto = !player.mc.auto },
-			style: {"background-color"() { return player.mc.auto?"#c99a6b":"#666666" }},
+			style: {"background-color"() { return player.mc.auto?"#2dacff":"#666666" }},
 		},
 		61: {
 			title: "神经元",
@@ -10698,7 +10698,7 @@ addLayer("ab", {
 			unlocked() { return player.ne.unlocked && player.en.unlocked },
 			canClick() { return hasMilestone("ne", 5) },
 			onClick() { player.ne.auto = !player.ne.auto },
-			style: {"background-color"() { return player.ne.auto?"#ded9ff":"#666666" }},
+			style: {"background-color"() { return player.ne.auto?"#2b0a95":"#666666" }},
 		},
 		62: {
 			title: "神经网络",
@@ -10708,7 +10708,7 @@ addLayer("ab", {
 			unlocked() { return player.ne.unlocked && player.ai.unlocked },
 			canClick() { return hasMilestone("ne", 7) },
 			onClick() { player.ne.autoNN = !player.ne.autoNN },
-			style: {"background-color"() { return player.ne.autoNN?"#ded9ff":"#666666" }},
+			style: {"background-color"() { return player.ne.autoNN?"#2b0a95":"#666666" }},
 		},
 		63: {
 			title: "想法",
@@ -10716,7 +10716,7 @@ addLayer("ab", {
 			unlocked() { return player.id.unlocked && player.ai.unlocked },
 			canClick() { return hasMilestone("id", 4) },
 			onClick() { player.id.auto = !player.id.auto },
-			style: {"background-color"() { return player.id.auto?"#fad682":"#666666" }},
+			style: {"background-color"() { return player.id.auto?"#98b9fe":"#666666" }},
 		},
 	},
-})
+})=
