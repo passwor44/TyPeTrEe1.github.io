@@ -839,7 +839,7 @@ button > * {
 }
 
 .id.grad:not(.locked):not(.bought) {
-        background: repeating-radial-gradient(circle, #faf3c0 0%, #ffdb63 72.5%, #faf3c0 20%);
+        background: repeating-radial-gradient(circle, #b4d9ff 0%, #80a0ff 72.5%, #b4d9ff 20%);
         background-size: 100% 100%;
         background-position: center;
         animation: idea 20s ease infinite;
