@@ -2959,7 +2959,7 @@ addLayer("h", {
 				goal() { return new Decimal(player.ma.current=="h"?"e1.37e8":"1e1325") },
 				currencyDisplayName: "字符",
 				currencyInternalName: "points",
-				rewardDescription: "解锁诡异升级，同时虚粒子的效果提升至 1.2 次幂。",
+				rewardDescription: "解锁透析升级，同时虚粒子的效果提升至 1.2 次幂。",
 				onStart(testInput=false) { 
 					if (testInput && !(hasAchievement("a", 81)&&player.ma.current!="h")) {
 						player.p.upgrades = []; 
@@ -2968,25 +2968,25 @@ addLayer("h", {
 				},
 			},
 			12: {
-				name: "速度之魔",
+				name: "时弱粒子",
 				completionLimit: 1,
-				challengeDescription: "增幅器/生成器底数被时间消减（你的超级增幅器会放大此效果）。",
+				challengeDescription: "UN器/键软底数被时间消减（你的ACD器会放大此效果）。",
 				unlocked() { return hasChallenge("h", 11) },
 				goal() { return new Decimal(player.ma.current=="h"?"e5e8":"1e3550") },
-				currencyDisplayName: "点数",
+				currencyDisplayName: "字符",
 				currencyInternalName: "points",
 				rewardDescription() { return "超级增幅器底数增加 0.25"+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("h"):false)?(" 并以超空间能量加成它"):"")+"。" },
 			},
 			21: {
-				name: "空间紧缺",
+				name: "缩孔粒子",
 				completionLimit: 1,
-				challengeDescription: "建筑重置，你的空间变为 10%，建筑效果变为 10%。",
+				challengeDescription: "建筑重置，你的通道变为 10%，通道效果变为 10%。",
 				unlocked() { return hasChallenge("h", 12) },
 				goal() { return new Decimal(player.ma.current=="h"?"e5.7e7":"1e435") },
-				currencyDisplayName: "GP",
+				currencyDisplayName: "KP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
-				rewardDescription: "空间能量加成建筑效果。",
+				rewardDescription: "空间量化加成通道效果。",
 				rewardEffect() { return player.s.points.div(2).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("h"):false)?1.4:1) },
 				rewardDisplay() { return format(this.rewardEffect())+"% 增强 （累加）" },
 				formula() { return "(x*"+format(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("h"):false)?.7:.5)+")%" },
@@ -2998,17 +2998,17 @@ addLayer("h", {
 				},
 			},
 			22: {
-				name: "弱化",
+				name: "虚字符粒子",
 				completionLimit: 1,
-				challengeDescription: "只有声望升级、成就奖励和第一建筑能增益点数获取。",
+				challengeDescription: "只有子串级升级、成就奖励和第一通道能增益字符获取。",
 				unlocked() { return hasChallenge("h", 21) },
 				goal() { return new Decimal(player.ma.current=="h"?"e8.225e6":"1e3570") },
-				currencyDisplayName: "点数",
+				currencyDisplayName: "字符",
 				currencyInternalName: "points",
-				rewardDescription: "<b>点数增益</b> 的硬上限变为软上限。",
+				rewardDescription: "<b>子串级增益</b> 的硬上限变为软上限。",
 			},
 			31: {
-				name: "永恒",
+				name: "虚后继粒子",
 				scalePower() {
 					let power = new Decimal(1);
 					if (tmp.m.buyables[15].unlocked) power = power.times(Decimal.sub(1, buyableEffect("m", 15)));
@@ -3024,7 +3024,7 @@ addLayer("h", {
 				challengeDescription() {
 					let lim = this.completionLimit();
 					let infLim = !isFinite(lim);
-					return "你只能买 10 个增强子和扩展时间胶囊（总计），增强子/扩展时间胶囊自动购买已被禁止，同时点数生成被开 "+format(tmp.h.pointRoot31)+" 次根。<br>完成次数: "+formatWhole(challengeCompletions("h", 31))+(infLim?"":("/"+lim));
+					return "你只能买 10 个虚弱后继和事件切片（总计），虚弱后继/事件切片自动购买已被禁止，同时字符生成被开 "+format(tmp.h.pointRoot31)+" 次根。<br>完成次数: "+formatWhole(challengeCompletions("h", 31))+(infLim?"":("/"+lim));
 				},
 				unlocked() { return hasChallenge("h", 22) },
 				goal() { 
@@ -3040,9 +3040,9 @@ addLayer("h", {
 					player.h.challenges[this.id] = Math.min(Math.max(player.h.challenges[this.id], target.toNumber()), tmp[this.layer].challenges[this.id].completionLimit);
 					if (isNaN(player.h.challenges[this.id])) player.h.challenges[this.id] = 0;
 				},
-				currencyDisplayName: "点数",
+				currencyDisplayName: "字符",
 				currencyInternalName: "points",
-				rewardDescription() { return "<b>永恒</b> 加成超级 GP 获取，基于"+(hasUpgrade("ss", 33)?"当前游戏时间。":"当前第四行重置后时间。") },
+				rewardDescription() { return "<b>虚后继粒子</b> 加成infitKP 获取，基于"+(hasUpgrade("ss", 33)?"当前游戏时间。":"当前第四行重置后时间。") },
 				rewardEffect() { 
 					let eff = Decimal.div(9, Decimal.add((hasUpgrade("ss", 33)?(player.timePlayed||0):player.q.time), 1).cbrt().pow(hasUpgrade("ss", 23)?(-1):1)).plus(1).pow(challengeCompletions("h", 31)).times(tmp.n.realDustEffs2?tmp.n.realDustEffs2.blueOrange:new Decimal(1)).pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?5:1);
 					if (!eff.eq(eff)) eff = new Decimal(1);
@@ -3052,7 +3052,7 @@ addLayer("h", {
 				formula() { return "(9"+(hasUpgrade("ss", 23)?"*":"/")+"cbrt(time+1)+1)^completions" },
 			},
 			32: {
-				name: "D 选项",
+				name: "全虚粒子",
 				scalePower() {
 					let power = new Decimal(1);
 					if (tmp.m.buyables[15].unlocked) power = power.times(Decimal.sub(1, buyableEffect("m", 15)));
@@ -3066,7 +3066,7 @@ addLayer("h", {
 				challengeDescription() { 
 					let lim = this.completionLimit();
 					let infLim = !isFinite(lim);
-					return '之前的所有障碍一起生效（"永恒" 以第 '+formatWhole(challengeCompletions("h", 32)*2+1)+' 级难度生效)<br>完成次数: '+formatWhole(challengeCompletions("h", 32))+(infLim?"":('/'+lim))
+					return '之前的所有粒子一起生效（"虚后继粒子" 以第 '+formatWhole(challengeCompletions("h", 32)*2+1)+' 级难度生效)<br>完成次数: '+formatWhole(challengeCompletions("h", 32))+(infLim?"":('/'+lim))
 				},
 				goal() {
 					let comps = Decimal.mul(challengeCompletions("h", 32), tmp.h.challenges[this.id].scalePower);
@@ -3083,9 +3083,9 @@ addLayer("h", {
 					player.h.challenges[this.id] = Math.min(Math.max(player.h.challenges[this.id], target.toNumber()), tmp[this.layer].challenges[this.id].completionLimit);
 					if (isNaN(player.h.challenges[this.id])) player.h.challenges[this.id] = 0;
 				},
-				currencyDisplayName: "点数",
+				currencyDisplayName: "字符",
 				currencyInternalName: "points",
-				rewardDescription: "<b>D 选项</b> 完成次数加成 TE 获取。",
+				rewardDescription: "<b>全虚粒子</b> 完成次数加成 TE 获取。",
 				rewardEffect() { 
 					let eff = softcap("option_d", Decimal.pow(100, Decimal.pow(challengeCompletions("h", 32), 2))).times(tmp.n.realDustEffs2?tmp.n.realDustEffs2.blueOrange:new Decimal(1));
 					if (!eff.eq(eff)) eff = new Decimal(1);
@@ -3675,8 +3675,8 @@ addLayer("q", {
 			activeCols: 3,
 			11: {
 				num: 1,
-				title: "集中改良",
-				description: "<b>集中诡异</b> 效果提高。",
+				title: "反光片改良",
+				description: "<b>反透光片</b> 效果提高。",
 				unlocked() { return hasUpgrade("q", 41) },
 				effect() { return Decimal.mul(0.1, getImprovements("q", 11).plus(tmp.q.impr.free)).plus(1) },
 				effectDisplay() { return "^"+format(tmp.q.impr[11].effect) },
@@ -3684,8 +3684,8 @@ addLayer("q", {
 			},
 			12: {
 				num: 2,
-				title: "第二改良",
-				description: "<b>回到第 2 层</b> 效果提高。",
+				title: "聚光片改良",
+				description: "<b>聚返二层</b> 效果提高。",
 				unlocked() { return hasUpgrade("q", 41) },
 				effect() { return Decimal.mul(0.05, getImprovements("q", 12).plus(tmp.q.impr.free)).plus(1) },
 				effectDisplay() { return format(tmp.q.impr[12].effect)+"x" },
@@ -3693,8 +3693,8 @@ addLayer("q", {
 			},
 			13: {
 				num: 3,
-				title: "4 级改良",
-				description: "<b>第 4 列协同</b> 效果提高。",
+				title: "旋钮改良",
+				description: "<b>相互作用旋钮</b> 效果提高。",
 				unlocked() { return hasUpgrade("q", 41) },
 				effect() { return Decimal.mul(0.25, getImprovements("q", 13).plus(tmp.q.impr.free)).plus(1) },
 				effectDisplay() { return "^"+format(tmp.q.impr[13].effect) },
@@ -3702,8 +3702,8 @@ addLayer("q", {
 			},
 			21: {
 				num: 4,
-				title: "发展改良",
-				description: "<b>诡异城市</b> 效果提高。",
+				title: "星扩改良",
+				description: "<b>星级扩展芯片</b> 效果提高。",
 				unlocked() { return hasUpgrade("q", 42) },
 				effect() { return Decimal.mul(1.5, getImprovements("q", 21).plus(tmp.q.impr.free)).plus(1) },
 				effectDisplay() { return "^"+format(tmp.q.impr[21].effect) },
@@ -3711,8 +3711,8 @@ addLayer("q", {
 			},
 			22: {
 				num: 5,
-				title: "离谱改良",
-				description: "<b>无限可能</b> 效果提高。",
+				title: "免征改良",
+				description: "<b>免征芯片</b> 效果提高。",
 				unlocked() { return hasUpgrade("q", 42) },
 				effect() { return Decimal.mul(0.2, getImprovements("q", 22).plus(tmp.q.impr.free)).plus(1) },
 				effectDisplay() { return format(tmp.q.impr[22].effect)+"x" },
@@ -3720,8 +3720,8 @@ addLayer("q", {
 			},
 			23: {
 				num: 6,
-				title: "能量改良",
-				description: "QE 效果提高。",
+				title: "能效改良",
+				description: "IE 效果提高。",
 				unlocked() { return hasUpgrade("q", 42) },
 				effect() { return Decimal.pow(1e25, Decimal.pow(getImprovements("q", 23).plus(tmp.q.impr.free), 1.5)) },
 				effectDisplay() { return format(tmp.q.impr[23].effect)+"x" },
@@ -3729,8 +3729,8 @@ addLayer("q", {
 			},
 			31: {
 				num: 7,
-				title: "比例改良",
-				description: "<b>比例软化</b> 效果提高。",
+				title: "软晶体改良",
+				description: "<b>环形增长晶体管</b> 效果提高。",
 				unlocked() { return hasUpgrade("q", 44) },
 				effect() { return Decimal.mul(0.5, getImprovements("q", 31).plus(tmp.q.impr.free)).plus(1) },
 				effectDisplay() { return format(tmp.q.impr[31].effect)+"x" },
@@ -3738,8 +3738,8 @@ addLayer("q", {
 			},
 			32: {
 				num: 8,
-				title: "增幅改良",
-				description: "<b>增幅狂怒</b> 效果提高。",
+				title: "Discap改良",
+				description: "<b>UN仿生晶体管</b> 效果提高。",
 				unlocked() { return hasUpgrade("q", 44) },
 				effect() { return Decimal.mul(0.2, getImprovements("q", 32).plus(tmp.q.impr.free)).plus(1) },
 				effectDisplay() { return format(tmp.q.impr[32].effect)+"x" },
@@ -3747,8 +3747,8 @@ addLayer("q", {
 			},
 			33: {
 				num: 9,
-				title: "诡异改良",
-				description: "诡异获取提高。",
+				title: "透术改良",
+				description: "透术获取提高。",
 				unlocked() { return hasUpgrade("q", 44) },
 				effect() { return Decimal.pow(1e8, Decimal.pow(getImprovements("q", 33).plus(tmp.q.impr.free), 1.2)) },
 				effectDisplay() { return format(tmp.q.impr[33].effect)+"x" },
@@ -4461,8 +4461,8 @@ mmmmmm   mmmmmm   mmmmmm
                         
 */
 addLayer("m", {
-		name: "magic", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "M", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "efficacy", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "Eff", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -4491,10 +4491,10 @@ addLayer("m", {
 			auto: false,
 			first: 0,
         }},
-        color: "#eb34c0",
+        color: "#6e74ff",
         requires: new Decimal(1e285), // Can be a function that takes requirement increases into account
-        resource: "魔法", // Name of prestige currency
-        baseResource: "障碍灵魂", // Name of resource prestige is based on
+        resource: "能效", // Name of prestige currency
+        baseResource: "虚粒子", // Name of resource prestige is based on
         baseAmount() {return player.h.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?0.0085:0.007) }, // Prestige currency exponent
@@ -4871,8 +4871,8 @@ b::::::b
                                       
 */
 addLayer("ba", {
-		name: "balance", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "BA", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "clash", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "C", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -4885,10 +4885,10 @@ addLayer("ba", {
 			keepPosNeg: false,
 			first: 0,
         }},
-        color: "#fced9f",
+        color: "#1219b6",
         requires: new Decimal("1e365"), // Can be a function that takes requirement increases into account
-        resource: "平衡", // Name of prestige currency
-        baseResource: "诡异", // Name of resource prestige is based on
+        resource: "氦核", // Name of prestige currency
+        baseResource: "透术", // Name of resource prestige is based on
         baseAmount() {return player.q.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?0.0125:0.005) }, // Prestige currency exponent
@@ -4989,14 +4989,14 @@ addLayer("ba", {
 			rows: 3,
 			cols: 2,
 			11: {
-				title: "-",
+				title: "X",
 				unlocked() { return player.ba.unlocked },
 				canClick() { return player.ba.allotted>0 },
 				onClick() { player.ba.allotted = Math.max(player.ba.allotted-0.05, 0) },
 				style: {"height": "50px", "width": "50px", "background-color": "rgb(235, 64, 52)"},
 			},
 			12: {
-				title: "+",
+				title: "Y",
 				unlocked() { return player.ba.unlocked },
 				canClick() { return player.ba.allotted<1 },
 				onClick() { player.ba.allotted = Math.min(player.ba.allotted+0.05, 1) },
@@ -5230,7 +5230,7 @@ addLayer("ps", {
         color: "#b38fbf",
         requires() { return new Decimal("1e16000") }, // Can be a function that takes requirement increases into account
         resource: "幽魂", // Name of prestige currency
-        baseResource: "QE", // Name of resource prestige is based on
+        baseResource: "IE", // Name of resource prestige is based on
         baseAmount() {return player.q.energy}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(1.5), // Prestige currency exponent
