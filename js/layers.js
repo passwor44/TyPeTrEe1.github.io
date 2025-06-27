@@ -5250,7 +5250,7 @@ addLayer("ps", {
 		canBuyMax() { return hasMilestone("hn", 9) },
         row: 4, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "P", description: "按 Shift+P 进行幽魂重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "D", description: "按 D 进行结构重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return hasMilestone("hn", 6) },
         doReset(resettingLayer){ 
@@ -5290,8 +5290,8 @@ addLayer("ps", {
 			let gain = tmp.ps.soulGain;
 			let display = "";
 			if (gain.eq(0)) display = "0"
-			else if (gain.gte(1)) display = "每 OoM 障碍灵魂生成" + format(gain)
-			else display = "每 "+format(gain.pow(-1))+" OoM 障碍灵魂生成 1 个"
+			else if (gain.gte(1)) display = "每 OoM 对虚粒子生成" + format(gain)
+			else display = "每 "+format(gain.pow(-1))+" OoM 对虚粒子生成 1 个"
 			return display;
 		},
 		soulEffExp() {
@@ -5312,21 +5312,21 @@ addLayer("ps", {
 					"prestige-button",
 					"resource-display",
 					"blank",
-					["display-text", function() { return "你有 "+formatWhole(player.ps.souls)+" 恶魂 "+(tmp.nerdMode?("(公式: ("+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("ps"):false)?(format(tmp.ps.soulGainExp)+"^PS"):("PS^"+format(tmp.ps.soulGainExp)))+")*"+format(tmp.ps.soulGainMult.div(10))+")"):("(获得: "+tmp.ps.gainDisplay+")"))+": 将诡异改良需求除以 "+format(tmp.ps.soulEff)+(tmp.nerdMode?(" (x+1)^("+formatWhole(tmp.ps.soulEffExp)+")"):"") }],
+					["display-text", function() { return "你有 "+formatWhole(player.ps.souls)+" 分离 "+(tmp.nerdMode?("(公式: ("+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("ps"):false)?(format(tmp.ps.soulGainExp)+"^PS"):("PS^"+format(tmp.ps.soulGainExp)))+")*"+format(tmp.ps.soulGainMult.div(10))+")"):("(获得: "+tmp.ps.gainDisplay+")"))+": 将透析改良需求除以 "+format(tmp.ps.soulEff)+(tmp.nerdMode?(" (x+1)^("+formatWhole(tmp.ps.soulEffExp)+")"):"") }],
 					"blank",
 					["buyable", 11],
 				],
 			},
 			Boosters: {
 				unlocked() { return hasMilestone("hn", 7) },
-				buttonStyle() { return {'background-color': '#b38fbf'} },
+				buttonStyle() { return {'background-color': '#96bcff'} },
 				content: [
 					"main-display",
 					"blank",
 					["buyable", 21],
 					"blank",
 					["display-text",
-						function() {return '你有 ' + formatWhole(player.ps.power)+' 魂力'+(tmp.nerdMode?(" (获取公式: (damned+1), 指数公式: sqrt(ps))"):" (+"+format(tmp.ps.powerGain)+"/sec (基于恶魂)， 然后提升至 "+format(tmp.ps.powerExp)+" 次幂(基于幽魂))")+'，提供了下面的幽魂增幅器 (下一个在 '+format(tmp.ps.impr.overallNextImpr)+')'},
+						function() {return '你有 ' + formatWhole(player.ps.power)+' 离合'+(tmp.nerdMode?(" (获取公式: (damned+1), 指数公式: sqrt(ps))"):" (+"+format(tmp.ps.powerGain)+"/sec (基于解构)， 然后提升至 "+format(tmp.ps.powerExp)+" 次幂(基于解构))")+'，提供了下面的解构增幅器 (下一个在 '+format(tmp.ps.impr.overallNextImpr)+')'},
 							{}],
 					"blank",
 					"improvements"],
@@ -5336,7 +5336,7 @@ addLayer("ps", {
 			rows: 2,
 			cols: 1,
 			11: {
-				title: "幽灵",
+				title: "构层",
 				scaleSlow() {
 					let speed = new Decimal(1);
 					if ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false) speed = speed.times(2);
@@ -5357,7 +5357,7 @@ addLayer("ps", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = ((tmp.nerdMode?("价格公式: 2*x+1 幽魂, (x+1)^4*174+200 恶魂"):("价格: " + formatWhole(data.cost.phantom) + " 幽魂， "+formatWhole(data.cost.damned)+" 恶魂"))+"\n\
+                    let display = ((tmp.nerdMode?("价格公式: 2*x+1 解构, (x+1)^4*174+200 分离"):("价格: " + formatWhole(data.cost.phantom) + " 解构， "+formatWhole(data.cost.damned)+" 分离"))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+"\n\
 					效果: ")
 					let curr = data.effects;
@@ -5365,18 +5365,18 @@ addLayer("ps", {
 					if (Object.keys(next).length>0) {
 						if (next.hindr) {
 							display += "\n"
-							if (curr.hindr) display += curr.hindr+" 新的障碍"+(curr.hindr>=3?" (已满)":"")
-							else display += "<b>下一个: 解锁一个新的障碍</b>"
+							if (curr.hindr) display += curr.hindr+" 新的合成粒子"+(curr.hindr>=3?" (已满)":"")
+							else display += "<b>下一个: 解锁一个新的合成粒子</b>"
 						}
 						if (next.damned) {
 							display += "\n"
-							if (curr.damned) display += "将恶魂获取和效果指数乘以 "+format(curr.damned)+(tmp.nerdMode?" ((x-1)*0.5+1)":"");
-							else display += "<b>下一个: 加成恶魂获取和效果指数</b>"
+							if (curr.damned) display += "将分离获取和效果指数乘以 "+format(curr.damned)+(tmp.nerdMode?" ((x-1)*0.5+1)":"");
+							else display += "<b>下一个: 加成分离获取和效果指数</b>"
 						}
 						if (next.quirkImpr) {
 							display += "\n"
-							if (curr.quirkImpr) display += curr.quirkImpr+" 新诡异改良"+(curr.quirkImpr>=3?" (已满)":"")
-							else if (next.quirkImpr>(curr.quirkImpr||0)) display += "<b>下一个: 解锁一个新的诡异改良</b>"
+							if (curr.quirkImpr) display += curr.quirkImpr+" 新透析改良"+(curr.quirkImpr>=3?" (已满)":"")
+							else if (next.quirkImpr>(curr.quirkImpr||0)) display += "<b>下一个: 解锁一个新的透析改良</b>"
 						}
 					} else display += "None"
 					return display;
@@ -5400,7 +5400,7 @@ addLayer("ps", {
 				autoed() { return hasMilestone("hn", 5) && player.ps.autoW },
 			},
 			21: {
-				title: "灵魂",
+				title: "构系",
 				scaleSlow() {
 					let slow = new Decimal(1);
 					if (hasUpgrade("hn", 51)) slow = slow.times(2);
@@ -5423,7 +5423,7 @@ addLayer("ps", {
                     let data = tmp[this.layer].buyables[this.id]
                     let display = ((tmp.nerdMode?("价格公式: (10^(2^x))*1e22"):("价格: " + formatWhole(data.cost) + " 魂力"))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+"\n\
-					效果: "+(tmp.nerdMode?("公式 1: (x/25+1)^2, 公式 2: (x/10+1)"):("加成魂力获取 "+format(tmp.ps.buyables[this.id].effect)+"，并增幅幽魂增幅器效果 "+format(tmp.ps.buyables[this.id].effect2.sub(1).times(100))+"%")))
+					效果: "+(tmp.nerdMode?("公式 1: (x/25+1)^2, 公式 2: (x/10+1)"):("加成分解获取 "+format(tmp.ps.buyables[this.id].effect)+"，并增幅解构增幅器效果 "+format(tmp.ps.buyables[this.id].effect2.sub(1).times(100))+"%")))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked }, 
@@ -5463,15 +5463,15 @@ addLayer("ps", {
 				return Decimal.pow(10, impr.pow(1.5).times(4)).sub(1).times(this.baseReq());
 			},
 			power() { return tmp.ps.buyables[21].effect2.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.1:1) },
-			resName: "魂力",
+			resName: "分解",
 			rows: 3,
 			cols: 2,
 			activeRows: 2,
 			activeCols: 2,
 			11: {
 				num: 1,
-				title: "幽魂增幅器 I",
-				description: "增幅太阳能。",
+				title: "解构增幅器 I",
+				description: "增幅控制光能。",
 				unlocked() { return hasMilestone("hn", 7) },
 				effect() { return getImprovements("ps", 11).times(tmp.ps.impr.power).div(20).plus(1).sqrt() },
 				effectDisplay() { return "+"+format(tmp.ps.impr[11].effect.sub(1).times(100))+"% (累乘)" },
@@ -5480,8 +5480,8 @@ addLayer("ps", {
 			},
 			12: {
 				num: 2,
-				title: "幽魂增幅器 II",
-				description: "增幅妖术获取。",
+				title: "解构增幅器 II",
+				description: "增幅效果获取。",
 				unlocked() { return hasMilestone("hn", 7) },
 				effect() { return Decimal.pow(10, getImprovements("ps", 11).times(tmp.ps.impr.power).pow(2.5)) },
 				effectDisplay() { return format(tmp.ps.impr[12].effect)+"x" },
@@ -5490,8 +5490,8 @@ addLayer("ps", {
 			},
 			21: {
 				num: 3,
-				title: "幽魂增幅器 III",
-				description: "加成魔法效果。",
+				title: "解构增幅器 III",
+				description: "加成能效效果。",
 				unlocked() { return hasMilestone("hn", 7) },
 				effect() { return getImprovements("ps", 21).times(tmp.ps.impr.power).div(10).plus(1) },
 				effectDisplay() { return format(tmp.ps.impr[21].effect.sub(1).times(100))+"% 增强" },
@@ -5500,8 +5500,8 @@ addLayer("ps", {
 			},
 			22: {
 				num: 4,
-				title: "幽魂增幅器 IV",
-				description: "减缓诡异改良价格增长。",
+				title: "解构增幅器 IV",
+				description: "减缓透析改良价格增长。",
 				unlocked() { return hasMilestone("hn", 7) },
 				effect() { return getImprovements("ps", 22).times(tmp.ps.impr.power).div(20).plus(1) },
 				effectDisplay() { return format(tmp.ps.impr[22].effect)+"x 减缓" },
@@ -5510,8 +5510,8 @@ addLayer("ps", {
 			},
 			31: {
 				num: 1500,
-				title: "幽魂增幅器 V",
-				description: "灵魂价格缩放减缓。",
+				title: "解构增幅器 V",
+				description: "解构价格缩放减缓。",
 				unlocked() { return hasMilestone("hn", 7) && player.i.buyables[14].gte(1) },
 				effect() { return getImprovements("ps", 31).times(tmp.ps.impr.power).plus(1).log10().div(25).plus(1) },
 				effectDisplay() { return "减缓 " + format(Decimal.sub(1, tmp.ps.impr[31].effect.pow(-1)).times(100))+"%" },
@@ -5520,8 +5520,8 @@ addLayer("ps", {
 			},
 			32: {
 				num: 1751,
-				title: "幽魂增幅器 VI",
-				description: "幽魂降低幽魂价格底数。",
+				title: "解构增幅器 VI",
+				description: "解构降低解构价格底数。",
 				unlocked() { return hasMilestone("hn", 7) && player.i.buyables[14].gte(2) },
 				effect() { return getImprovements("ps", 31).times(tmp.ps.impr.power).pow(2).times(player.ps.points).plus(1).log10().plus(1).pow(1.2) },
 				effectDisplay() { return "降低至 "+format(tmp.ps.impr[32].effect)+" 次根" },
@@ -5574,7 +5574,7 @@ addLayer("hn", {
         }},
         resource: "机器", // Name of prestige currency
         type: "custom", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-		baseResource: "魔法和平衡",
+		baseResource: "能效和氦核",
 		baseAmount() { return new Decimal(0) },
 		req: {m: new Decimal(1e150), ba: new Decimal(1e179)},
 		requires() { return this.req },
@@ -5619,18 +5619,18 @@ addLayer("hn", {
 		},
 		prestigeButtonText() {
 			if (tmp.nerdMode) return "获取公式: "+tmp.hn.dispGainFormula;
-			else return `${ player.hn.points.lt(1e3) ? (tmp.hn.resetDescription !== undefined ? tmp.hn.resetDescription : "重置获得 ") : ""}+<b>${formatWhole(tmp.hn.getResetGain)}</b> ${tmp.hn.resource} ${tmp.hn.resetGain.lt(100) && player.hn.points.lt(1e3) ? `<br><br>下一个需要 ${ ('魔法: '+format(tmp.hn.nextAt.m)+'，平衡: '+format(tmp.hn.nextAt.ba))}` : ""}`
+			else return `${ player.hn.points.lt(1e3) ? (tmp.hn.resetDescription !== undefined ? tmp.hn.resetDescription : "重置获得 ") : ""}+<b>${formatWhole(tmp.hn.getResetGain)}</b> ${tmp.hn.resource} ${tmp.hn.resetGain.lt(100) && player.hn.points.lt(1e3) ? `<br><br>下一个需要 ${ ('能效: '+format(tmp.hn.nextAt.m)+'，氦核: '+format(tmp.hn.nextAt.ba))}` : ""}`
 		},
 		prestigeNotify() {
 			if (!canReset("hn")) return false;
 			if (tmp.hn.getResetGain.gte(player.hn.points.times(0.1).max(1)) && !tmp.hn.passiveGeneration) return true;
 			else return false;
 		},
-		tooltip() { return formatWhole(player.hn.points)+" 荣耀" },
-		tooltipLocked() { return "达到 "+formatWhole(tmp.hn.req.m)+" 魔法 & "+formatWhole(tmp.hn.req.ba)+" 平衡解锁 (你有 "+formatWhole(player.m.points)+" 魔法 & "+formatWhole(player.ba.points)+" 平衡)" },
+		tooltip() { return formatWhole(player.hn.points)+" 机器" },
+		tooltipLocked() { return "达到 "+formatWhole(tmp.hn.req.m)+" 能效 & "+formatWhole(tmp.hn.req.ba)+" 氦核解锁 (你有 "+formatWhole(player.m.points)+" 能效 & "+formatWhole(player.ba.points)+" 氦核)" },
         row: 5, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "H", description: "按 Shift+H 进行荣耀重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "M", description: "按 Shift+M 进行机器重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         doReset(resettingLayer){ 
 			let keep = [];
@@ -5653,57 +5653,57 @@ addLayer("hn", {
 		],
 		milestones: {
 			0: {
-				requirementDescription: "1 总荣耀",
+				requirementDescription: "常态能量--1 总机器",
 				done() { return player.hn.total.gte(1) },
-				effectDescription: "永远保留所有魔法和平衡里程碑。",
+				effectDescription: "永远保留所有能效和碰撞里程碑。",
 			},
 			1: {
-				requirementDescription: "2 总荣耀",
+				requirementDescription: "能量密钥核--2 总机器",
 				done() { return player.hn.total.gte(2) },
-				effectDescription: "每秒获得 100% 魔法和平衡。",
+				effectDescription: "每秒获得 100% 能效和氦核。",
 			},
 			2: {
-				requirementDescription: "3 总荣耀",
+				requirementDescription: "两边神存--3 总机器",
 				done() { return player.hn.total.gte(3) },
-				effectDescription: "平衡滑条以认为其同时处在两边的方式运作，解锁自动施法。",
+				effectDescription: "碰撞滑条以认为其同时处在两边的方式运作，解锁自动施效。",
 				toggles: [["m", "auto"]],
 			},
 			3: {
-				requirementDescription: "4 总荣耀",
+				requirementDescription: "最大购买--4 总荣耀",
 				done() { return player.hn.total.gte(4) },
-				effectDescription: "解锁最大购买子空间能量，对所有重置保留平衡升级。",
+				effectDescription: "解锁最大购买第二空间能量，对所有重置保留碰撞升级。",
 			},
 			4: {
-				requirementDescription: "5 总荣耀",
+				requirementDescription: "自动化--5 总机器",
 				done() { return player.hn.total.gte(5) },
-				effectDescription: "购买幽灵不再消耗恶魂和幽魂，解锁自动幽魂。",
+				effectDescription: "购买构系不再消耗解构和分离，解锁自动分离。",
 				toggles: [["ps", "auto"]],
 			},
 			5: {
-				requirementDescription: "6 总荣耀",
+				requirementDescription: "自动化2--6 总机器",
 				done() { return player.hn.total.gte(6) },
-				effectDescription: "解锁自动幽灵。",
+				effectDescription: "解锁自动构系。",
 				toggles: [["ps", "autoW"]],
 			},
 			6: {
-				requirementDescription: "10 总荣耀",
+				requirementDescription: "不再重置--10 总机器",
 				done() { return player.hn.total.gte(10) },
 				effectDescription: "幽魂不再重置任何东西。",
 			},
 			7: {
-				requirementDescription: "100,000 总荣耀 & e11,000,000 声望",
+				requirementDescription: "更多东西--100,000 总机器 & e11,000,000 子串级",
 				unlocked() { return hasMilestone("hn", 6) },
 				done() { return player.hn.total.gte(1e5) && player.p.points.gte("e11000000") },
 				effectDescription: "解锁幽魂增幅器和更多荣耀升级。",
 			},
 			8: {
-				requirementDescription: "1e30 总荣耀",
+				requirementDescription: "同时激活--1e30 总机器",
 				unlocked() { return hasMilestone("hn", 7) && hasUpgrade("hn", 15) },
 				done() { return player.hn.total.gte(1e30) },
 				effectDescription: "你可以同时激活 3 个二级星尘。",
 			},
 			9: {
-				requirementDescription: "1e300 总荣耀",
+				requirementDescription: "最大购买2--1e300 总机器",
 				unlocked() { return hasMilestone("hn", 8) },
 				done() { return player.hn.total.gte(1e300) },
 				effectDescription: "允许最大购买幽魂。",
@@ -6266,7 +6266,7 @@ addLayer("n", {
 			"prestige-button",
 			"resource-display",
 			"blank",
-			["column", 
+			["column", \
 				[(second?["clickable", 14]:[]),
 				
 				"blank",
@@ -6285,7 +6285,7 @@ addLayer("n", {
 				
 				["row", [["display-text", ("<span style='color: #6131ff; font-size: 24px'>"+format(player.n.orangeDust)+"</span> purple spec"+(tmp.nerdMode?" (获取公式: (x^0.2)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 加成所有阳光购买项数量 <span style='color: #9831ff; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(135, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 				
-				(second?["column", [["clickable", 13], ["display-text", ("加成时间层面上限底数 <span style='color: #2effb1; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.6)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
+				(second?["column", [["clickable", 13], ["display-text", ("加成时间层面上限底数 <span style='color: #bf31ff; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.6)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 			]],
 			"blank", "blank", ["buyable", 11], "blank", "blank",
 		]},
@@ -6392,7 +6392,7 @@ addLayer("n", {
 				unlocked() { return tmp.n.secondariesAvailable>0 },
 				canClick() { return (layers.n.secondariesActive()<layers.n.secondariesAvailable()) },
 				onClick() { player.n.activeSecondaries[this.name] = true },
-				style: {"height": "50px", "width": "50px", "background-color": "#ee82ee"},
+				style: {"height": "50px", "width": "50px", "background-color": "#bbe3ff"},
 			},
 			12: {
 				name: "blueOrange",
@@ -6400,7 +6400,7 @@ addLayer("n", {
 				unlocked() { return tmp.n.secondariesAvailable>0 },
 				canClick() { return (layers.n.secondariesActive()<layers.n.secondariesAvailable()) },
 				onClick() { player.n.activeSecondaries[this.name] = true },
-				style: {"height": "50px", "width": "50px", "background-color": "#ba9397"},
+				style: {"height": "50px", "width": "50px", "background-color": "#d3bbff"},
 			},
 			13: {
 				name: "orangePurple",
@@ -6408,7 +6408,7 @@ addLayer("n", {
 				unlocked() { return tmp.n.secondariesAvailable>0 },
 				canClick() { return (layers.n.secondariesActive()<layers.n.secondariesAvailable()) },
 				onClick() { player.n.activeSecondaries[this.name] = true },
-				style: {"height": "50px", "width": "50px", "background-color": "#94de95"},
+				style: {"height": "50px", "width": "50px", "background-color": "#eabbff"},
 			},
 			14: {
 				display: "重置二级星尘效果（会进行一次星云重置）",
