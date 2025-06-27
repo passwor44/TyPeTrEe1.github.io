@@ -768,7 +768,7 @@ button > * {
 }
 
 .hn.grad:not(.locked):not(.bought) {
-        background: radial-gradient(#91fff7, #00faff, #91fff7, #00faff);
+        background: radial-gradient(#1a3cff, #3b5aff, #1a3cff, #3b5aff);
         background-size: 50% 100%;
 }
 
@@ -781,7 +781,7 @@ button > * {
 }
 
 .ma.grad:not(.locked):not(.bought) {
-        background: radial-gradient(circle, rgba(100,255,211,1) 0%, rgba(12,23,255,1) 50%);
+        background: radial-gradient(circle, rgba(108,100,255,1) 0%, rgba(12,23,255,1) 50%);
         background-size: 200%;
         background-position: center;
 }
@@ -856,19 +856,19 @@ button > * {
 
 @keyframes nebula {
         0% {
-                background-color: #0cff89;
+                background-color: #0cb3ff;
         }
         25% {
-                background-color: #0cffc4;
+                background-color: #0c75ff;
         }
         50% {
-                background-color: #0cffdf;
+                background-color: #0c57ff;
         }
         75% {
-                background-color: #0cffc4;
+                background-color: #0c75ff;
         }
         100% {
-                background-color: #0cff89;
+                background-color: #0cb3ff;
         }
 }
 
