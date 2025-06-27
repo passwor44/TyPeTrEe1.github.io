@@ -7201,8 +7201,8 @@ mmmmmm   mmmmmm   mmmmmm  aaaaaaaaaa  aaaa
                                           
 */
 addLayer("ma", {
-		name: "mastery", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "MA", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "history", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "HI", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -7213,9 +7213,9 @@ addLayer("ma", {
 			selectionActive: false,
 			current: null,
         }},
-        color: "#ff9f7f",
+        color: "#0c6bff",
         requires() { return new Decimal(100) }, // Can be a function that takes requirement increases into account
-        resource: "专精", // Name of prestige currency
+        resource: "历史", // Name of prestige currency
         baseResource: "幽魂", // Name of resource prestige is based on
         baseAmount() {return player.ps.points}, // Get the current amount of baseResource
 		roundUpCost: true,
@@ -7462,8 +7462,8 @@ g:::::gg   gg:::::g
        gggggg                           
 */
 addLayer("ge", {
-		name: "gears", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "GE", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "inputs", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "IN", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -7480,15 +7480,15 @@ addLayer("ge", {
 			auto: false,
 			autoTime: new Decimal(0),
         }},
-        color: "#bfbfbf",
+        color: "#303a53",
 		nodeStyle() { return {
-			background: (player.ge.unlocked||canReset("ge"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #bfbfbf 0%, #838586 100%)":"#838586"):"#bf8f8f",
+			background: (player.ge.unlocked||canReset("ge"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #303a53 0%, #606b80 100%)":"#606b80"):"#ceeaff",
 		}},
 		componentStyles: {
-			background() { return (player.ge.unlocked||canReset("ge"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #bfbfbf 0%, #838586 100%)":"#bfbfbf"):"#bf8f8f" },
+			background() { return (player.ge.unlocked||canReset("ge"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #303a53 0%, #606b80 100%)":"#303a53"):"#ceeaff" },
 		},
         requires: new Decimal(1e256), // Can be a function that takes requirement increases into account
-        resource: "齿轮", // Name of prestige currency 
+        resource: "输入", // Name of prestige currency 
         baseResource: "尘积", // Name of resource prestige is based on
         baseAmount() {return tmp.n.dustProduct}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -7821,8 +7821,8 @@ mmmmmm   mmmmmm   mmmmmm    cccccccccccccccc
                                             
 */
 addLayer("mc", {
-		name: "machines", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "MC", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "Electronic", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "EL", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -7834,17 +7834,17 @@ addLayer("mc", {
 			autoSE: false,
 			auto: false,
         }},
-        color: "#c99a6b",
+        color: "#2da4ff",
 		nodeStyle() { return {
-			background: (player.mc.unlocked||canReset("mc"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #c99a6b 0%, #706d6d 100%)":"#c99a6b"):"#bf8f8f",
+			background: (player.mc.unlocked||canReset("mc"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #2da4ff 0%, #56b6ff 100%)":"#56b6ff"):"#ceeaff",
 		}},
 		componentStyles: {
 			"prestige-button": {
-				background() { return (canReset("mc"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #c99a6b 0%, #706d6d 100%)":"#c99a6b"):"#bf8f8f" },
+				background() { return (canReset("mc"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #2da4ff 0%, #56b6ff 100%)":"#56b6ff"):"#ceeaff" },
 			},
 		},
         requires: new Decimal(128000), // Can be a function that takes requirement increases into account
-        resource: "组件", // Name of prestige currency 
+        resource: "电子", // Name of prestige currency 
         baseResource: "星云砖", // Name of resource prestige is based on
         baseAmount() {return player.i.hb}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -8166,9 +8166,9 @@ addLayer("en", {
 			mw: new Decimal(0),
 			first: 0,
         }},
-        color: "#fbff05",
+        color: "#003bff",
 		nodeStyle() {return {
-			"background-color": (((player.en.unlocked||canReset("en"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer)))?"#fbff05":"#bf8f8f"),
+			"background-color": (((player.en.unlocked||canReset("en"))&&!(Array.isArray(tmp.ma.canBeMastered)&&player.ma.selectionActive&&tmp[this.layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(this.layer)))?"#003bff":"#ceeaff"),
         }},
         resource: "能量", // Name of prestige currency
         type: "custom", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -8383,8 +8383,8 @@ nn:::::::::::::::ne::::::e     e:::::e
                                       
 */
 addLayer("ne", {
-		name: "neurons", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "NE", // This appears on the layer's node. Default is the id with the first letter capitalized
+		name: "impending", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "IP", // This appears on the layer's node. Default is the id with the first letter capitalized
         position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
@@ -8396,10 +8396,10 @@ addLayer("ne", {
 			auto: false,
 			autoNN: false,
         }},
-        color: "#ded9ff",
+        color: "#003bff",
         requires() { return (player[this.layer].unlockOrder>0&&!player.ne.unlocked)?new Decimal("1e1160000"):new Decimal("1e1000000") }, // Can be a function that takes requirement increases into account
 		increaseUnlockOrder: ["en"],
-        resource: "神经元", // Name of prestige currency
+        resource: "悬空", // Name of prestige currency
         baseResource: "子空间", // Name of resource prestige is based on
         baseAmount() {return player.ss.subspace}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -8646,7 +8646,7 @@ addLayer("id", {
 			first: 0,
 			auto: false,
         }},
-        color: "#fad682",
+        color: "#8290fa",
         requires() { 
 			let req = new Decimal(44);
 			if (player.ai.unlocked && tmp.ai) req = req.div(tmp.ai.conscEff2);
