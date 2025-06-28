@@ -6287,7 +6287,11 @@ addLayer("n", {
 				
 				(second?["column", [["clickable", 13], ["display-text", ("加成时间层面上限底数 <span style='color: #bf31ff; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.6)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 				
-				["row", [["display-text", ("<span style='color: #d1ffbc; font-size: 24px'>"+format(player.n.orangeDust)+"</span> ？？？"+(tmp.nerdMode?" (获取公式: (x^0.1)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 没用，只有装饰 <span style='color: #afffbc; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(175, 255, 160, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
+				["row", [["display-text", ("<span style='color: #d1ffbc; font-size: 24px'>"+format(player.n.greenDust)+"</span> ？？？"+(tmp.nerdMode?" (获取公式: (x^0.1)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 没用，只有装饰 <span style='color: #afffbc; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(175, 255, 160, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
+				
+				["row", [["display-text", ("<span style='color: #afbda0; font-size: 24px'>"+ "114514" +"</span> tesfity"+(tmp.nerdMode?" (获取公式: (114514)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 看来你是真的要加成，好吧，在下面 <span style='color: #c1ff65; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(198, 255, 101, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
+				
+				(second?["column", [["clickable", 13], ["display-text", ("你必须牺牲一个二层星尘来加成能量获取 <span style='color: #bfff93; font-size: 24px'>"+format(tmp.n.dustEffs2.APurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.3)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 			]],
 			"blank", "blank", ["buyable", 11], "blank", "blank",
 		]},
@@ -6325,6 +6329,7 @@ addLayer("n", {
 				purpleBlue: player.n.purpleDust.times(player.n.blueDust).plus(1).pow(10).pow(exp),
 				blueOrange: player.n.blueDust.times(player.n.orangeDust).plus(1).pow(5).pow(exp),
 				orangePurple: player.n.orangeDust.times(player.n.purpleDust).plus(1).pow(0.6).pow(exp),
+				APurple: player.n.orangeDust.times(player.n.purpleDust).plus(1).pow(0.3).pow(exp),
 			}
 		},
 		realDustEffs2() {
