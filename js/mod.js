@@ -74,6 +74,14 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
+	function () {
+		return `<div style="
+		width: calc(100% - 50px);
+		background-color: rgba(255,255,255,0.2);
+		margin: 5px auto;
+		border: solid 3px rgba(0,0,0,0.5);
+		"><span style="opacity: ${news.opacity};">${news.text}</span></div>`;
+	}
 ]
 
 // Determines when the game "ends"
@@ -133,14 +141,3 @@ function adjustNotificationTime(diff) {
 		}
 	}
 }
-
-var displayNews = [
-    function () {
-        return `<div style="
-        width: calc(100% - 50px);
-        background-color: rgba(255,255,255,0.2);
-        margin: 5px auto;
-        border: solid 3px rgba(0,0,0,0.5);
-        "><span style="opacity: ${news.opacity};">${news.text}</span></div>`;
-    }
-];
