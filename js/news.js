@@ -16,7 +16,7 @@ const TrueFocus = ({
   const [lastActiveIndex, setLastActiveIndex] = useState(null);
   const containerRef = useRef(null);
   const wordRefs = useRef([]);
-  const [focusRect, setFocusRect] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [focusRect, setFocusRect] = useState({ x: 128, y: 138, width: 5, height: 10 });
 
   useEffect(() => {
     if (!manualMode) {
