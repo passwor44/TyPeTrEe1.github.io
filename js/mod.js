@@ -133,3 +133,14 @@ function adjustNotificationTime(diff) {
 		}
 	}
 }
+
+var displayNews = [
+    function () {
+        return `<div style="
+        width: calc(100% - 50px);
+        background-color: rgba(255,255,255,0.2);
+        margin: 5px auto;
+        border: solid 3px rgba(0,0,0,0.5);
+        "><span style="opacity: ${news.opacity};">${news.text}</span></div>`;
+    }
+];
