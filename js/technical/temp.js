@@ -21,7 +21,6 @@ function setupTemp() {
 	tmp.pointGen = {}
 	tmp.row1to6spd = new Decimal(1)
 	tmp.displayThings = []
-        tmp.displayNews = []
 
 	setupTempData(layers, tmp)
 	for (layer in layers){
