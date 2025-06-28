@@ -21,7 +21,7 @@ function setupTemp() {
 	tmp.pointGen = {}
 	tmp.row1to6spd = new Decimal(1)
 	tmp.displayThings = []
- tmp.displayNews = []
+      tmp.displayNews = []
     function () {
         return `<div style="
         width: calc(100% - 50px);
