@@ -6286,6 +6286,8 @@ addLayer("n", {
 				["row", [["display-text", ("<span style='color: #6131ff; font-size: 24px'>"+format(player.n.orangeDust)+"</span> purple spec"+(tmp.nerdMode?" (获取公式: (x^0.2)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 加成所有阳光购买项数量 <span style='color: #9831ff; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(135, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 				
 				(second?["column", [["clickable", 13], ["display-text", ("加成时间层面上限底数 <span style='color: #bf31ff; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.6)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
+				
+				["row", [["display-text", ("<span style='color: #d1ffbc; font-size: 24px'>"+format(player.n.orangeDust)+"</span> ？？？"+(tmp.nerdMode?" (获取公式: (x^0.1)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 没用，只有装饰 <span style='color: #afffbc; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(175, 255, 160, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 			]],
 			"blank", "blank", ["buyable", 11], "blank", "blank",
 		]},
@@ -6933,7 +6935,7 @@ addLayer("i", {
         color: "#0b276c",
         requires() { return new Decimal("1e11750") }, // Can be a function that takes requirement increases into account
         resource: "版本", // Name of prestige currency
-        baseResource: "子空间", // Name of resource prestige is based on
+        baseResource: "第二空间", // Name of resource prestige is based on
         baseAmount() {return player.ss.subspace}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(1.8), // Prestige currency exponent
@@ -6948,7 +6950,7 @@ addLayer("i", {
 		canBuyMax() { return hasMilestone("ma", 1) },
         row: 5, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "i", description: "按 I 进行帝国重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "r", description: "按 R 进行版本重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return hasMilestone("ma", 1) },
         doReset(resettingLayer){ 
@@ -6985,8 +6987,8 @@ addLayer("i", {
 		tabFormat: ["main-display",
 			"prestige-button",
 			"resource-display",
-			["display-text", function() { return player.i.unlocked?("你有 "+formatWhole(player.i.nb)+" 星云砖 "+(tmp.nerdMode?"(公式: log(N/2e3+1)^0.8)":("(下一个在 "+format(tmp.i.nextNB)+" 星云)"))):"" }],
-			["display-text", function() { return player.i.unlocked?("你有 "+formatWhole(player.i.hb)+" 超空间砖 "+(tmp.nerdMode?"(公式: log(HS/1e6+1)^0.74)":("(下一个在 "+format(tmp.i.nextHB)+" 超空间能量)"))):"" }],
+			["display-text", function() { return player.i.unlocked?("你有 "+formatWhole(player.i.nb)+" 天星版本 "+(tmp.nerdMode?"(公式: log(N/2e3+1)^0.8)":("(下一个在 "+format(tmp.i.nextNB)+" 天星)"))):"" }],
+			["display-text", function() { return player.i.unlocked?("你有 "+formatWhole(player.i.hb)+" 超空间版本 "+(tmp.nerdMode?"(公式: log(HS/1e6+1)^0.74)":("(下一个在 "+format(tmp.i.nextHB)+" 超空间能量)"))):"" }],
 			"blank",
 			["display-text", function() { return (player.ma.current=="i"&&player.i.unlocked)?"注意: 在镀金砖石的时候，帝国建筑会使对方更贵！":"" }],
 			"blank",
@@ -6996,7 +6998,7 @@ addLayer("i", {
 			rows: 1,
 			cols: 4,
 			11: {
-				title: "帝国建筑 I",
+				title: "版本补丁 Alpha",
 				cap() { return new Decimal(5) },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                     let cost = { ib: x.times(1.4).pow(1.2).plus(1).pow(player.ma.current=="i"?player.i.buyables[12].div(4).plus(1):1).floor(), nb: x.pow(1.4).times(2).plus(4).pow(player.ma.current=="i"?player.i.buyables[12].div(6).plus(1):1).floor() }
@@ -7010,9 +7012,9 @@ addLayer("i", {
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
-                    let display = ((player[this.layer].buyables[this.id].gte(data.cap)?"已满":((cost.ib?("价格: "+formatWhole(cost.ib)+" 砖石"+(tmp.nerdMode?(" (公式: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("价格: "+formatWhole(cost.nb)+" 星云砖"+(tmp.nerdMode?(" (公式: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("价格: "+formatWhole(cost.hb)+" 超空间砖"+(tmp.nerdMode?(" (公式: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
+                    let display = ((player[this.layer].buyables[this.id].gte(data.cap)?"已满":((cost.ib?("价格: "+formatWhole(cost.ib)+" 版本"+(tmp.nerdMode?(" (公式: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("价格: "+formatWhole(cost.nb)+" 天星版本"+(tmp.nerdMode?(" (公式: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("价格: "+formatWhole(cost.hb)+" 超空间版本"+(tmp.nerdMode?(" (公式: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+" / "+formatWhole(data.cap)+"\n\
-					解锁 "+formatWhole(player[this.layer].buyables[this.id])+" 新建筑 （不受额外建筑影响）")
+					解锁 "+formatWhole(player[this.layer].buyables[this.id])+" 新通道 （不受额外通道影响）")
 					return display;
                 },
                 unlocked() { return unl(this.layer) }, 
@@ -7033,7 +7035,7 @@ addLayer("i", {
 				autoed() { return false },
 			},
 			12: {
-				title: "帝国建筑 II",
+				title: "版本补丁 beta",
 				cap() { return new Decimal(6) },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                     let cost = { ib: x.pow(1.2).plus(1).pow(player.ma.current=="i"?player.i.buyables[11].div(2).plus(1):1).floor(), hb: x.pow(1.6).plus(5).pow(player.ma.current=="i"?player.i.buyables[11].div(5).plus(1):1).floor() }
@@ -7047,12 +7049,12 @@ addLayer("i", {
 				displayData() {
 					let amt = player[this.layer].buyables[this.id];
 					let disp = ""
-					if (amt.gte(1)) disp += "3 个增幅器升级\n";
-					if (amt.gte(2)) disp += "5 个生成器升级\n";
-					if (amt.gte(3)) disp += "5 个增强升级\n";
+					if (amt.gte(1)) disp += "3 个UN器升级\n";
+					if (amt.gte(2)) disp += "5 个键软升级\n";
+					if (amt.gte(3)) disp += "5 个弱秒升级\n";
 					if (amt.gte(4)) disp += "6 个时间升级\n";
 					if (amt.gte(5)) disp += "5 个空间升级\n";
-					if (amt.gte(6)) disp += "4 个诡异升级\n";
+					if (amt.gte(6)) disp += "4 个透析升级\n";
 					if (disp=="") disp = "啥都没"
 					return disp;
 				},
@@ -7060,7 +7062,7 @@ addLayer("i", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = ((amt.gte(data.cap)?"已满":((cost.ib?("价格: "+formatWhole(cost.ib)+" 砖石"+(tmp.nerdMode?(" (公式: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("价格: "+formatWhole(cost.nb)+" 星云砖"+(tmp.nerdMode?(" (公式: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("价格: "+formatWhole(cost.hb)+" 超空间砖"+(tmp.nerdMode?(" (公式: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
+                    let display = ((amt.gte(data.cap)?"已满":((cost.ib?("价格: "+formatWhole(cost.ib)+" 版本"+(tmp.nerdMode?(" (公式: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("价格: "+formatWhole(cost.nb)+" 天星版本"+(tmp.nerdMode?(" (公式: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("价格: "+formatWhole(cost.hb)+" 超空间版本"+(tmp.nerdMode?(" (公式: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
                     数量: " + formatWhole(amt)+" / "+formatWhole(data.cap)+"\n\
 					解锁: \n"
 					+data.displayData)
@@ -8172,7 +8174,7 @@ addLayer("en", {
         }},
         resource: "能量", // Name of prestige currency
         type: "custom", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-		baseResource: "阳光",
+		baseResource: "阳光辐射",
 		baseAmount() { return player.o.points },
 		req() { return (player[this.layer].unlockOrder>0&&!player.en.unlocked)?new Decimal("1e15825"):new Decimal("1e15000") },
 		requires() { return this.req() },
@@ -8217,7 +8219,7 @@ addLayer("en", {
 			else return false;
 		},
 		tooltip() { return formatWhole(player.en.points)+" 能量" },
-		tooltipLocked() { return "达到 "+formatWhole(tmp.en.req)+" 阳光解锁（你有 "+formatWhole(player.o.points)+" 阳光）" },
+		tooltipLocked() { return "达到 "+formatWhole(tmp.en.req)+" 阳光辐射解锁（你有 "+formatWhole(player.o.points)+" 阳光辐射）" },
         row: 4, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
             {key: "y", description: "按 Y 进行能量重置", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
@@ -8282,9 +8284,9 @@ addLayer("en", {
 			"clickables",
 			"blank", "blank",
 			["row", [
-				["column", [["display-text", function() { return "<h3 style='color: "+(player.en.target==1?"#e1ffde;":"#8cfa82;")+"'>"+(player.en.target==1?"时间能量":"时间能量")+"</h3>" }], ["display-text", function() { return "<h4 style='color: #8cfa82;'>"+formatWhole(player.en.tw)+"</h4><br><br>增强非扩展时空胶囊 <span style='color: #8cfa82; font-weight: bold; font-size: 20px;'>"+format(tmp.en.twEff.sub(1).times(100))+"</span>%" }]], {width: "100%"}],
+				["column", [["display-text", function() { return "<h3 style='color: "+(player.en.target==1?"#39ff58;":"#8cfa82;")+"'>"+(player.en.target==1?"时间能量":"时间能量")+"</h3>" }], ["display-text", function() { return "<h4 style='color: #8cfa82;'>"+formatWhole(player.en.tw)+"</h4><br><br>增强非扩展时空胶囊 <span style='color: #8cfa82; font-weight: bold; font-size: 20px;'>"+format(tmp.en.twEff.sub(1).times(100))+"</span>%" }]], {width: "100%"}],
 				]], "blank", "blank", ["row", [
-				["column", [["display-text", function() { return "<h3 style='color: "+(player.en.target==2?"#fff0d9":"#ffd187;")+"'>"+(player.en.target==2?"太阳能量":"太阳能量")+"</h3>" }], ["display-text", function() { return "<h4 style='color: #ffd187;'>"+formatWhole(player.en.ow)+"</h4><br><br>对阳光获取指数增加 <span style='color: #ffd187; font-weight: bold; font-size: 20px;'>"+format(tmp.en.owEff)+"</span>" }]], {width: "50%"}],
+				["column", [["display-text", function() { return "<h3 style='color: "+(player.en.target==2?"#39ffbc":"#ffd187;")+"'>"+(player.en.target==2?"太阳能量":"太阳能量")+"</h3>" }], ["display-text", function() { return "<h4 style='color: #ffd187;'>"+formatWhole(player.en.ow)+"</h4><br><br>对阳光获取指数增加 <span style='color: #ffd187; font-weight: bold; font-size: 20px;'>"+format(tmp.en.owEff)+"</span>" }]], {width: "50%"}],
 				["column", [["display-text", function() { return "<h3 style='color: "+(player.en.target==3?"#dbfcff":"#8cf5ff;")+"'>"+(player.en.target==3?"超级能量":"超级能量")+"</h3>" }], ["display-text", function() { return "<h4 style='color: #8cf5ff;'>"+formatWhole(player.en.sw)+"</h4><br><br>增强超级增幅器 <span style='color: #8cf5ff; font-weight: bold: font-size: 20px;'>"+format(tmp.en.swEff.sub(1).times(100))+"</span>%" }]], {width: "50%"}],
 				]], "blank", "blank", ["row", [
 				["column", [["display-text", function() { return hasMilestone("en", 3)?("<h3 style='color: "+(player.en.target==4?"#f4deff;":"#d182ff;")+"'>"+(player.en.target==4?"思维能量":"思维能量")+"</h3>"):"" }], ["display-text", function() { return hasMilestone("en", 3)?("<h4 style='color: #d182ff;'>"+formatWhole(player.en.mw)+"</h4><br><br>增强思考效果 <span style='color: #d182ff; font-weight: bold; font-size: 20px;'>"+format(tmp.en.mwEff.sub(1).times(100))+"</span>%，并且增幅信号获取 <span style='color: #d182ff; font-weight: bold; font-size: 20px;'>"+format(tmp.en.mwEff.pow(40))+"</span>x"):"" }]], {width: "75%"}],
@@ -8400,7 +8402,7 @@ addLayer("ne", {
         requires() { return (player[this.layer].unlockOrder>0&&!player.ne.unlocked)?new Decimal("1e1160000"):new Decimal("1e1000000") }, // Can be a function that takes requirement increases into account
 		increaseUnlockOrder: ["en"],
         resource: "悬空", // Name of prestige currency
-        baseResource: "子空间", // Name of resource prestige is based on
+        baseResource: "第二空间", // Name of resource prestige is based on
         baseAmount() {return player.ss.subspace}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(2.5), // Prestige currency exponent
@@ -8412,7 +8414,7 @@ addLayer("ne", {
 		canBuyMax() { return false },
         row: 4, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "u", description: "按 U 进行神经元重置", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "p", description: "按 P 进行悬空重置", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return player.ne.auto },
         doReset(resettingLayer){ 
@@ -8431,7 +8433,7 @@ addLayer("ne", {
 			if (hasMilestone("id", 1)) eff = eff.pow(2).times(player[this.layer].buyables[11].max(1));
 			return eff;
 		},
-		effectDescription() { return "将信号获取速度乘以 <h2 style='color: #ded9ff; text-shadow: #ded9ff 0px 0px 10px;'>"+format(tmp[this.layer].effect)+"</h2>。" },
+		effectDescription() { return "将磁获取速度乘以 <h2 style='color: #1a009c; text-shadow: #1a009 0px 0px 10px;'>"+format(tmp[this.layer].effect)+"</h2>。" },
 		autoPrestige() { return player.ne.auto },
         layerShown(){return player.mc.unlocked},
         branches: ["ss", "sg"],
@@ -8474,10 +8476,10 @@ addLayer("ne", {
 			cols: 1,
 			11: {
 				name: "大脑",
-				challengeDescription: "声望升级 2、增幅器、生成器禁用。<br>",
+				challengeDescription: "子串级升级 2、UN器、键软禁用。<br>",
 				unlocked() { return player.ne.unlocked && player.ne.points.gt(0) },
 				goal() { return new Decimal(1/0) },
-				currencyDisplayName: "",
+				currencyDisplayName: "字符",
 				currencyInternalName: "points",
 				gainMult() { 
 					let mult = tmp.ne.effect.times(player.ne.signals.plus(1).log10().plus(1));
@@ -8499,10 +8501,10 @@ addLayer("ne", {
 					return a;
 				},
 				next() { return Decimal.pow(10, Decimal.pow(10, new Decimal((player.ne.activeChallenge==11||hasAchievement("a", 151))?tmp.ne.challenges[11].amt:0).plus(1).div(tmp.ne.challenges[11].gainMult).root(tmp.ne.buyables[11].effect).log10().root(3).times(11)).sub(1)).sub(1) },
-				rewardDescription() { return "<br>信号: <h3 style='color: #ded9ff'>"+formatWhole(player.ne.signals)+"/"+formatWhole(tmp.ne.signalLim)+"</h3> "+(tmp.nerdMode?("(获取公式: 10^((log(log(points+1)+1)/11)^3)*"+format(tmp.ne.challenges[11].gainMult)+")"):("(+"+formatWhole((player.ne.activeChallenge==11||hasAchievement("a", 151))?tmp.ne.challenges[11].amt:0)+"/s"+(tmp.ne.challenges[11].amt.lt(1e3)?(", 下一个获取于 "+format(tmp.ne.challenges[11].next)+" 点数)"):")")))+"<br><br><br>思考: <h3 style='color: #ffbafa'>"+formatWhole(player.ne.thoughts)+"</h3> (下一个位于 "+formatWhole(tmp.ne.signalLim)+" 信号)<br><br>效果"+(tmp.ne.thoughtPower.eq(1)?"":(" (力量: "+format(tmp.ne.thoughtPower.times(100))+"%)"))+"<br>降低子空间能量价格 "+(tmp.nerdMode?" (公式: (log(思考+1)+1)"+(hasMilestone("ne", 1)?"^2":"")+")":(format(tmp.ne.thoughtEff1)+"x"))+"<br>子空间和超级生成器底数乘以 "+(tmp.nerdMode?" (公式: (1e800^(思考^0.75))"+(hasMilestone("ne", 2)?"^2":"")+")":format(tmp.ne.thoughtEff2)+"x")+(hasMilestone("ne", 5)?("<br>能量获取乘以 "+(tmp.nerdMode?" (公式: (1.2^sqrt(思考)))":(format(tmp.ne.thoughtEff3)+"x"))):"") },
-				style() { return {'background-color': "#484659", filter: "brightness("+(100+player.ne.signals.plus(1).log10().div(tmp.ne.signalLim.plus(1).log10()).times(50).toNumber())+"%)", color: "white", 'border-radius': "25px", height: "400px", width: "400px"}},
+				rewardDescription() { return "<br>磁: <h3 style='color: #c5fbff'>"+formatWhole(player.ne.signals)+"/"+formatWhole(tmp.ne.signalLim)+"</h3> "+(tmp.nerdMode?("(获取公式: 10^((log(log(points+1)+1)/11)^3)*"+format(tmp.ne.challenges[11].gainMult)+")"):("(+"+formatWhole((player.ne.activeChallenge==11||hasAchievement("a", 151))?tmp.ne.challenges[11].amt:0)+"/s"+(tmp.ne.challenges[11].amt.lt(1e3)?(", 下一个获取于 "+format(tmp.ne.challenges[11].next)+" 字符)"):")")))+"<br><br><br>电磁: <h3 style='color: #b4adff'>"+formatWhole(player.ne.thoughts)+"</h3> (下一个位于 "+formatWhole(tmp.ne.signalLim)+" 磁)<br><br>效果"+(tmp.ne.thoughtPower.eq(1)?"":(" (磁力: "+format(tmp.ne.thoughtPower.times(100))+"%)"))+"<br>降低第二空间能量价格 "+(tmp.nerdMode?" (公式: (log(+1)+1)"+(hasMilestone("ne", 1)?"^2":"")+")":(format(tmp.ne.thoughtEff1)+"x"))+"<br>子空间和超级生成器底数乘以 "+(tmp.nerdMode?" (公式: (1e800^(思考^0.75))"+(hasMilestone("ne", 2)?"^2":"")+")":format(tmp.ne.thoughtEff2)+"x")+(hasMilestone("ne", 5)?("<br>能量获取乘以 "+(tmp.nerdMode?" (公式: (1.2^sqrt(思考)))":(format(tmp.ne.thoughtEff3)+"x"))):"") },
+				style() { return {'background-color': "#402eff", filter: "brightness("+(100+player.ne.signals.plus(1).log10().div(tmp.ne.signalLim.plus(1).log10()).times(50).toNumber())+"%)", color: "white", 'border-radius': "25px", height: "400px", width: "400px"}},
 				onStart(testInput=false) {
-					if (testInput && player.ne.auto) {
+					if (testInput && player.ne.auto) {  
 						doReset("m", true);
 						player.ne.activeChallenge = 11;
 						updateTemp();
@@ -8514,7 +8516,7 @@ addLayer("ne", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "神经网络",
+				title: "电子磁力",
 				ss() { return hasMilestone("id", 0)?12:10 },
 				cost(x=player[this.layer].buyables[this.id]) {
 					if (x.gte(tmp[this.layer].buyables[this.id].ss)) x = Decimal.pow(tmp[this.layer].buyables[this.id].ss, x.log(tmp[this.layer].buyables[this.id].ss).pow(hasMilestone("id", 0)?Math.sqrt(2):2));
@@ -8535,7 +8537,7 @@ addLayer("ne", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = "价格: "+format(cost)+" 信号"+(tmp.nerdMode?(" (价格公式: 4^("+(amt.gte(data.ss)?(formatWhole(data.ss)+"^(log"+formatWhole(data.ss)+"(x)^"+format(hasMilestone("id", 0)?Math.sqrt(2):2)+")"):"x")+"^1.2)*2e4)"):"")+".<br><br>等级: "+formatWhole(amt)+"<br><br>效果: 从点数获取的信号提高到 "+format(data.effect)+(tmp.nerdMode?" 次幂 (公式: x/3+1)":" 次幂");
+                    let display = "价格: "+format(cost)+" 磁"+(tmp.nerdMode?(" (价格公式: 4^("+(amt.gte(data.ss)?(formatWhole(data.ss)+"^(log"+formatWhole(data.ss)+"(x)^"+format(hasMilestone("id", 0)?Math.sqrt(2):2)+")"):"x")+"^1.2)*2e4)"):"")+".<br><br>等级: "+formatWhole(amt)+"<br><br>效果: 从字符获取的磁提高到 "+format(data.effect)+(tmp.nerdMode?" 次幂 (公式: x/3+1)":" 次幂");
 					return display;
                 },
                 unlocked() { return unl(this.layer) && hasMilestone("ne", 0) }, 
@@ -8548,7 +8550,7 @@ addLayer("ne", {
 					player.ne.buyables[this.id] = player.ne.buyables[this.id].plus(1);
                 },
 				buyMax() { player.ne.buyables[this.id] = player.ne.buyables[this.id].max(tmp.ne.buyables[11].bulk) },
-                style: {'height':'250px', 'width':'250px', 'background-color'() { return tmp.ne.buyables[11].canAfford?'#a2cade':'#bf8f8f' }, "border-color": "#a2cade"},
+                style: {'height':'250px', 'width':'250px', 'background-color'() { return tmp.ne.buyables[11].canAfford?'#3966ff':'#ceeaff' }, "border-color": "#3966ff"},
 				autoed() { return hasMilestone("ne", 7)&&player.ne.autoNN },
 			},
 		},
