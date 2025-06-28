@@ -117,6 +117,7 @@ var systemComponents = {
 		<span v-if="player.devSpeed && player.devSpeed != 1" class="overlayThing">
 			<br>Dev Speed: {{format(player.devSpeed)}}x<br>
 		</span>
+   <div v-for="thing in tmp.displayNews" class="overlayThing"><span v-if="thing" v-html="thing"></span></div>
 		<span v-if="player.offTime !== undefined && player.offTime !== null"  class="overlayThing">
 			<br>离线时间: {{formatTime(player.offTime?player.offTime.remain:0)}}<br>
 		</span>
