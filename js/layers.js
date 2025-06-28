@@ -5688,39 +5688,39 @@ addLayer("hn", {
 			6: {
 				requirementDescription: "不再重置--10 总机器",
 				done() { return player.hn.total.gte(10) },
-				effectDescription: "幽魂不再重置任何东西。",
+				effectDescription: "构系不再重置任何东西。",
 			},
 			7: {
 				requirementDescription: "更多东西--100,000 总机器 & e11,000,000 子串级",
 				unlocked() { return hasMilestone("hn", 6) },
 				done() { return player.hn.total.gte(1e5) && player.p.points.gte("e11000000") },
-				effectDescription: "解锁幽魂增幅器和更多荣耀升级。",
+				effectDescription: "解锁构系增幅器和更多机器升级。",
 			},
 			8: {
 				requirementDescription: "同时激活--1e30 总机器",
 				unlocked() { return hasMilestone("hn", 7) && hasUpgrade("hn", 15) },
 				done() { return player.hn.total.gte(1e30) },
-				effectDescription: "你可以同时激活 3 个二级星尘。",
+				effectDescription: "你可以同时激活 3 个二级尘粒。",
 			},
 			9: {
 				requirementDescription: "最大购买2--1e300 总机器",
 				unlocked() { return hasMilestone("hn", 8) },
 				done() { return player.hn.total.gte(1e300) },
-				effectDescription: "允许最大购买幽魂。",
+				effectDescription: "允许最大购买构系。",
 			},
 		},
 		upgrades: {
 			rows: 5,
 			cols: 5,
 			11: {
-				title: "重新开始",
-				description: "解锁新的声望升级",
+				title: "新分支",
+				description: "解锁新的子串级升级",
 				multiRes: [
 					{
 						cost() { return new Decimal(player.ma.current=="hn"?"1e1000":4) },
 					},
 					{
-						currencyDisplayName: "声望",
+						currencyDisplayName: "子串级",
 						currencyInternalName: "points",
 						currencyLayer: "p",
 						cost() { return new Decimal(player.ma.current=="hn"?"ee10":"1e4000000") },
@@ -5729,14 +5729,14 @@ addLayer("hn", {
 				unlocked() { return player.hn.unlocked && hasUpgrade("p", 11) },
 			},
 			12: {
-				title: "荣耀增益",
-				description: "总荣耀推迟 <b>声望增益</b> 软上限。",
+				title: "机器增益",
+				description: "总机器推迟 <b>子串级增益</b> 软上限。",
 				multiRes: [
 					{
 						cost() { return new Decimal(player.ma.current=="hn"?"1e6800":1) },
 					},
 					{
-						currencyDisplayName: "声望",
+						currencyDisplayName: "子串级",
 						currencyInternalName: "points",
 						currencyLayer: "p",
 						cost() { return new Decimal(player.ma.current=="hn"?"e4.175e10":"1e1000000") },
@@ -6287,11 +6287,7 @@ addLayer("n", {
 				
 				(second?["column", [["clickable", 13], ["display-text", ("加成时间层面上限底数 <span style='color: #bf31ff; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.6)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 				
-				["row", [["display-text", ("<span style='color: #d1ffbc; font-size: 24px'>"+format(player.n.greenDust)+"</span> ？？？"+(tmp.nerdMode?" (获取公式: (x^0.1)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 没用，只有装饰 <span style='color: #afffbc; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(175, 255, 160, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
-				
-				["row", [["display-text", ("<span style='color: #afbda0; font-size: 24px'>"+ "114514" +"</span> tesfity"+(tmp.nerdMode?" (获取公式: (114514)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 看来你是真的要加成，好吧，在下面 <span style='color: #c1ff65; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(198, 255, 101, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
-				
-				(second?["column", [["clickable", 13], ["display-text", ("你必须牺牲一个二层星尘来加成能量获取 <span style='color: #bfff93; font-size: 24px'>"+format(tmp.n.dustEffs2.APurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (purple*cyan+1)^0.3)":" (基于purple blue)"))]], {"background-color": "rgba(186, 49, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
+				["row", [["display-text", ("<span style='color: #d1ffbc; font-size: 24px'>"+format(player.n.orangeDust)+"</span> ？？？"+(tmp.nerdMode?" (获取公式: (x^0.1)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 没用，只有装饰 <span style='color: #afffbc; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(175, 255, 160, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 			]],
 			"blank", "blank", ["buyable", 11], "blank", "blank",
 		]},
@@ -6329,7 +6325,6 @@ addLayer("n", {
 				purpleBlue: player.n.purpleDust.times(player.n.blueDust).plus(1).pow(10).pow(exp),
 				blueOrange: player.n.blueDust.times(player.n.orangeDust).plus(1).pow(5).pow(exp),
 				orangePurple: player.n.orangeDust.times(player.n.purpleDust).plus(1).pow(0.6).pow(exp),
-				APurple: player.n.orangeDust.times(player.n.purpleDust).plus(1).pow(0.3).pow(exp),
 			}
 		},
 		realDustEffs2() {
@@ -9713,6 +9708,213 @@ addLayer("c", {
 		autoPrestige() { return false },
         layerShown(){return player.ai.unlocked},
         branches: [["i", 2], "id"],
+		update(diff) {
+			if (!player.c.unlocked) return;
+			for (let i=0;i<5;i++) player.c.gainedPower[i] = Decimal.pow(2, player.c.gainedPower[i]).pow(3).plus(Decimal.pow(2, player.c.assigned[i]).sub(1).max(0).times(diff/100)).cbrt().log2();
+		},
+		power() {
+			let data = [];
+			for (let i=1;i<=5;i++) data[i] = player.c.points.sub(i).div(5).plus(1).floor().max(0).sqrt().plus(player.c.gainedPower[i-1]);
+			return data;
+		},
+		totalAssigned() { return player.c.assigned.reduce((a,c) => Decimal.add(a, c)) },
+		minAssigned() { return player.c.assigned.reduce((a,c) => Decimal.min(a, c)) },
+		eff1() { return tmp.c.power[1].times(50) },
+		eff2() { return Decimal.pow(1e20, tmp.c.power[2]) },
+		eff3() { return Decimal.pow(1e15, tmp.c.power[3]) },
+		eff4() { return Decimal.pow("1e1000", tmp.c.power[4]) },
+		eff5() { return tmp.c.power[5].plus(1).log(4).plus(1) },
+		tabFormat: ["main-display",
+			"prestige-button",
+			"resource-display", "blank",
+			["row", [
+				["column", [
+					["display-text", "<h3>文明<sub>1</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[0].gt(0)?("人口: "+formatWhole(player.c.assigned[0])+"<br>"):"")+"力量: "+format(tmp.c.power[1].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: +"+format(tmp.c.eff1.times(100))+"% 超建筑增益" }],
+					"blank", ["clickable", 11],
+				], function() { return {width: "9em", visibility: player.c.points.gte(1)?"visible":"hidden"}}],
+				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(2)?"visible":"hidden"}}],
+				["column", [
+					["display-text", "<h3>文明<sub>2</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[1].gt(0)?("人口: "+formatWhole(player.c.assigned[1])+"<br>"):"")+"力量: "+format(tmp.c.power[2].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 将思考需求除以 "+format(tmp.c.eff2) }],
+					"blank", ["clickable", 12],
+				], function() { return {width: "9em", visibility: player.c.points.gte(2)?"visible":"hidden"}}],
+				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(3)?"visible":"hidden"}}],
+				["column", [
+					["display-text", "<h3>文明<sub>3</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[2].gt(0)?("人口: "+formatWhole(player.c.assigned[2])+"<br>"):"")+"力量: "+format(tmp.c.power[3].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 将信号获取乘以 "+format(tmp.c.eff3) }],
+					"blank", ["clickable", 13],
+				], function() { return {width: "9em", visibility: player.c.points.gte(3)?"visible":"hidden"}}],
+				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(4)?"visible":"hidden"}}],
+				["column", [
+					["display-text", "<h3>文明<sub>4</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[3].gt(0)?("人口: "+formatWhole(player.c.assigned[3])+"<br>"):"")+"力量: "+format(tmp.c.power[4].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 恶魂和机械能量获取乘以 "+format(tmp.c.eff4) }],
+					"blank", ["clickable", 14],
+				], function() { return {width: "9em", visibility: player.c.points.gte(4)?"visible":"hidden"}}],
+				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(5)?"visible":"hidden"}}],
+				["column", [
+					["display-text", "<h3>文明<sub>5</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[4].gt(0)?("人口: "+formatWhole(player.c.assigned[4])+"<br>"):"")+"力量: "+format(tmp.c.power[5].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 超级增幅器和神经网络增强 "+format(tmp.c.eff5.sub(1).times(100))+"%" }],
+					"blank", ["clickable", 15],
+				], function() { return {width: "9em", visibility: player.c.points.gte(5)?"visible":"hidden"}}],
+			], function() { return {visibility: player.c.unlocked?"visible":"hidden"} }], "blank", "blank",
+			"buyables",
+		],
+		buyables: {
+			showRespec() { return player.c.points.gte(6) },
+            respec() {
+                player[this.layer].points = player[this.layer].points.add(player[this.layer].spentOnBuyables);
+				player.c.assigned = [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)];
+				player.c.gainedPower = [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)];
+                doReset(this.layer, true);
+            },
+			respecText: "重置人口",
+			rows: 1,
+			cols: 1,
+			11: {
+				title: "人口",
+				cost(x=player[this.layer].buyables[this.id]) {
+					return Decimal.pow(1.5, x.pow(1.1)).times(4e5).round();
+				},
+				cap() { 
+					let cap = player.c.points.sub(4).max(0);
+					cap = cap.plus(player.c.points.div(5).sub(1).max(0).floor().times(2));
+					cap = cap.plus(player.c.points.div(12).max(0).floor());
+					return cap;
+				},
+				display() { // Everything else displayed in the buyable button after the title
+                    let data = tmp[this.layer].buyables[this.id];
+					let cost = data.cost;
+					let amt = player[this.layer].buyables[this.id];
+                    let display = formatWhole(player.ai.points)+" / "+formatWhole(cost)+" 超级智能"+(tmp.nerdMode?(" (1.5^(x^1.1))*400,000"):"")+"<br><br>人口: "+formatWhole(amt)+" / "+formatWhole(data.cap);
+					return display;
+                },
+                unlocked() { return unl(this.layer) && player.c.points.gte(6) }, 
+                canAfford() {
+					if (!tmp[this.layer].buyables[this.id].unlocked) return false;
+					let cost = layers[this.layer].buyables[this.id].cost();
+                    return player[this.layer].unlocked && player.ai.points.gte(cost) && player.c.buyables[this.id].lt(tmp[this.layer].buyables[this.id].cap);
+				},
+                buy() { 
+					let cost = tmp[this.layer].buyables[this.id].cost;
+					player.ai.points = player.ai.points.sub(cost);
+					player.c.buyables[this.id] = player.c.buyables[this.id].plus(1);
+                },
+                style: {'height':'140px', 'width':'140px'},
+				autoed() { return false },
+			},
+		},
+		clickables: {
+			rows: 1,
+			cols: 5,
+			11: {
+				title: "+1 人口",
+				display: "",
+				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
+				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[0]) },
+				onClick() { 
+					player.c.assigned[0] = player.c.assigned[0].plus(1);
+				},
+				style: {width: "120px", height: "50px", "border-radius": "0px"},
+			},
+			12: {
+				title: "+1 人口",
+				display: "",
+				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
+				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[1]) },
+				onClick() { 
+					player.c.assigned[1] = player.c.assigned[1].plus(1);
+				},
+				style: {width: "120px", height: "50px", "border-radius": "0px"},
+			},
+			13: {
+				title: "+1 人口",
+				display: "",
+				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
+				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[2]) },
+				onClick() { 
+					player.c.assigned[2] = player.c.assigned[2].plus(1);
+				},
+				style: {width: "120px", height: "50px", "border-radius": "0px"},
+			},
+			14: {
+				title: "+1 人口",
+				display: "",
+				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
+				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[3]) },
+				onClick() { 
+					player.c.assigned[3] = player.c.assigned[3].plus(1);
+				},
+				style: {width: "120px", height: "50px", "border-radius": "0px"},
+			},
+			15: {
+				title: "+1 人口",
+				display: "",
+				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
+				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[4]) },
+				onClick() { 
+					player.c.assigned[4] = player.c.assigned[4].plus(1);
+				},
+				style: {width: "120px", height: "50px", "border-radius": "0px"},
+			},
+		},
+})
+
+/*
+ur
+ur
+ur
+ur
+ur
+ur
+ur
+*/
+
+addLayer("ur", {
+		name: "URL", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "UR", // This appears on the layer's node. Default is the id with the first letter capitalized
+        position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+        startData() { return {
+            unlocked: false,
+			points: new Decimal(0),
+			assigned: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
+			gainedPower: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
+			first: 0,
+        }},
+        color: "#929dff",
+        requires() { return Decimal.sub(108, hasAchievement("a", 164)?player.c.buyables[11].times(2):0).max(8) }, // Can be a function that takes requirement increases into account
+        resource: "网址", // Name of prestige currency
+        baseResource: "最终字符", // Name of resource prestige is based on
+        baseAmount() {return player.i.points}, // Get the current amount of baseResource
+		roundUpCost: true,
+        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        exponent: new Decimal(1.2), // Prestige currency exponent
+		base: new Decimal(1.025),
+        gainMult() { // Calculate the multiplier for main currency from bonuses
+            mult = new Decimal(1)
+            return mult
+        },
+        gainExp() { // Calculate the exponent on main currency from bonuses
+            return new Decimal(1)
+        },
+		canBuyMax() { return false },
+        row: 7, // Row the layer is in on the tree (0 is the first row)
+        hotkeys: [
+            {key: "C", description: "按 Shift+C 进行文明重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        ],
+		resetsNothing() { return false },
+        doReset(resettingLayer){ 
+			let keep = [];
+            if (layers[resettingLayer].row > this.row) layerDataReset(this.layer, keep)
+        },
+		autoPrestige() { return false },
+        layerShown(){return player.ai.unlocked},
+        branches: ["ge", "c", "n"],
 		update(diff) {
 			if (!player.c.unlocked) return;
 			for (let i=0;i<5;i++) player.c.gainedPower[i] = Decimal.pow(2, player.c.gainedPower[i]).pow(3).plus(Decimal.pow(2, player.c.assigned[i]).sub(1).max(0).times(diff/100)).cbrt().log2();
