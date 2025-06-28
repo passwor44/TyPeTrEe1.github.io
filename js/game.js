@@ -111,6 +111,8 @@ function shouldNotify(layer){
 		return false
 }
 
+   updateNewsDisplay();
+
 function canReset(layer)
 {
 	if(tmp[layer].type == "normal")
