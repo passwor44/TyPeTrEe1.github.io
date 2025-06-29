@@ -9878,7 +9878,7 @@ ur
 addLayer("ur", {
 		name: "URL", // This is optional, only used in a few places, If absent it just uses the layer id.
         symbol: "UR", // This appears on the layer's node. Default is the id with the first letter capitalized
-        position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+        position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
 			points: new Decimal(0),
@@ -9886,13 +9886,13 @@ addLayer("ur", {
 			gainedPower: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
 			first: 0,
         }},
-        color: "#929dff",
+        color: "#ff9aa4",
         requires() { return Decimal.sub(108, hasAchievement("a", 164)?player.c.buyables[11].times(2):0).max(8) }, // Can be a function that takes requirement increases into account
         resource: "网址", // Name of prestige currency
         baseResource: "最终字符", // Name of resource prestige is based on
-        baseAmount() {return player.i.points}, // Get the current amount of baseResource
+        baseAmount() {return player.c.points}, // Get the current amount of baseResource
 		roundUpCost: true,
-        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(1.2), // Prestige currency exponent
 		base: new Decimal(1.025),
         gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -9905,7 +9905,7 @@ addLayer("ur", {
 		canBuyMax() { return false },
         row: 7, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "C", description: "按 Shift+C 进行文明重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "U", description: "按 Shift+C 进行网址重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return false },
         doReset(resettingLayer){ 
@@ -9914,7 +9914,7 @@ addLayer("ur", {
         },
 		autoPrestige() { return false },
         layerShown(){return player.ai.unlocked},
-        branches: ["ge", "c", "n"],
+        branches: ["ge", "c"],
 		update(diff) {
 			if (!player.c.unlocked) return;
 			for (let i=0;i<5;i++) player.c.gainedPower[i] = Decimal.pow(2, player.c.gainedPower[i]).pow(3).plus(Decimal.pow(2, player.c.assigned[i]).sub(1).max(0).times(diff/100)).cbrt().log2();
@@ -10071,6 +10071,29 @@ addLayer("ur", {
 			},
 		},
 })
+
+/*
+wa wa wa wa wa wa
+wa wa wa wa wa wa
+wa wa wa wa wa wa
+*/
+
+addLayer("wa", {
+        name: "war", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "WA", // This appears on the layer's node. Default is the id with the first letter capitalized
+        position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+        color: "#ba3144",
+        requires() { return new Decimal(27).times((player.wa.unlockOrder&&!player.wa.unlocked)?5000:1) }, // Can be a function that takes requirement increases into account
+        resource: "战争", // Name of prestige currency
+        baseResource: "输入", // Name of resource prestige is based on
+        baseAmount() {return player.points}, // Get the current amount of baseResource
+        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+		branches: ["ma", "mc"],
+		canBuyMax() { return hasMilestone("wa", 1) },
+        row: 1, // Row the layer is in on the tree (0 is the first row)
+        hotkeys: [
+            {key: "w", description: "按 W 进行战争重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        ],
 /*
                   
                   
@@ -10102,7 +10125,7 @@ addLayer("a", {
         startData() { return {
             unlocked: true,
         }},
-        color: "yellow",
+        color: "#3cc6ff",
         row: "side",
         layerShown() {return true}, 
         tooltip() { // Optional, tooltip displays when the layer is locked
@@ -10646,7 +10669,7 @@ addLayer("a", {
 */
 addLayer("sc", {
 	startData() { return {unlocked: true}},
-	color: "#e6ff69",
+	color: "#3cadff",
 	symbol: "SC",
 	row: "side",
 	layerShown() { return hasAchievement("a", 21) && player.scShown },
@@ -10928,4 +10951,11 @@ addLayer("ab", {
 			style: {"background-color"() { return player.id.auto?"#98b9fe":"#666666" }},
 		},
 	},
+})
+
+addLayer("td", {
+	startData() { return {unlocked: true}},
+	color: "#8eff3c",
+	symbol: "TD",
+	row: "side",
 })
