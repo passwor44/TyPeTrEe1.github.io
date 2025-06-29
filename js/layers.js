@@ -10110,6 +10110,7 @@ addLayer("a", {
             unlocked: true,
         }},
         color: "#3cc6ff",
+        symbol: "★",
         row: "side",
         layerShown() {return true}, 
         tooltip() { // Optional, tooltip displays when the layer is locked
@@ -10654,7 +10655,7 @@ addLayer("a", {
 addLayer("sc", {
 	startData() { return {unlocked: true}},
 	color: "#3cadff",
-	symbol: "SC",
+	symbol: "▲",
 	row: "side",
 	layerShown() { return hasAchievement("a", 21) && player.scShown },
 	tooltip: "软上限",
@@ -10703,7 +10704,7 @@ a:::::aaaa::::::a  b::::::::::::::::b
 addLayer("ab", {
 	startData() { return {unlocked: true}},
 	color: "#c2c9ff",
-	symbol: "AU",
+	symbol: "■",
 	row: "side",
 	layerShown() { return player.t.unlocked || player.s.unlocked },
 	tooltip: "自动购买",
