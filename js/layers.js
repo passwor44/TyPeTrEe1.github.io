@@ -10655,7 +10655,7 @@ addLayer("a", {
 addLayer("sc", {
 	startData() { return {unlocked: true}},
 	color: "#3cadff",
-	symbol: "&#9922",
+	symbol: "&#10022",
 	row: "side",
 	layerShown() { return hasAchievement("a", 21) && player.scShown },
 	tooltip: "软上限",
@@ -10703,7 +10703,7 @@ a:::::aaaa::::::a  b::::::::::::::::b
 */
 addLayer("ab", {
 	startData() { return {unlocked: true}},
-	color: "#c2c9ff",
+	color: "#3c70ff",
 	symbol: "&#10038",
 	row: "side",
 	layerShown() { return player.t.unlocked || player.s.unlocked },
@@ -10943,4 +10943,4 @@ addLayer("td", {
 	color: "#8eff3c",
 	symbol: "TD",
 	row: "side",
-})
+})>
