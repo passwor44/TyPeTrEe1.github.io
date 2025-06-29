@@ -10078,22 +10078,6 @@ wa wa wa wa wa wa
 wa wa wa wa wa wa
 */
 
-addLayer("wa", {
-        name: "war", // This is optional, only used in a few places, If absent it just uses the layer id.
-        symbol: "WA", // This appears on the layer's node. Default is the id with the first letter capitalized
-        position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-        color: "#ba3144",
-        requires() { return new Decimal(27).times((player.wa.unlockOrder&&!player.wa.unlocked)?5000:1) }, // Can be a function that takes requirement increases into account
-        resource: "战争", // Name of prestige currency
-        baseResource: "输入", // Name of resource prestige is based on
-        baseAmount() {return player.points}, // Get the current amount of baseResource
-        type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-		branches: ["ma", "mc"],
-		canBuyMax() { return hasMilestone("wa", 1) },
-        row: 1, // Row the layer is in on the tree (0 is the first row)
-        hotkeys: [
-            {key: "w", description: "按 W 进行战争重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-        ],
 /*
                   
                   
